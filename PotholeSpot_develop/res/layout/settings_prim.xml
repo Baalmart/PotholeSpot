@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:padding="@dimen/pad_10dp" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settings" style="@style/lbl_setting1" />
+        <View android:id="@+id/view1" android:background="@color/side_menu_divider" android:layout_width="fill_parent" android:layout_height="@dimen/pad_1dp" android:layout_marginTop="@dimen/pad_3dp" android:layout_marginBottom="@dimen/pad_10dp" />
+        <TextView android:id="@+id/lbl1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/account" style="@style/lbl_setting2" />
+        <TextView android:textSize="@dimen/txt_12sp" android:textStyle="normal" android:id="@id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Martin Bbaale" style="@style/lbl_setting1" />
+        <View android:id="@+id/view2" android:background="@color/side_menu_divider" android:layout_width="fill_parent" android:layout_height="@dimen/divider" android:layout_marginTop="@dimen/pad_10dp" android:layout_marginBottom="@dimen/pad_10dp" />
+        <TextView android:id="@+id/lbl2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/acc_pos" style="@style/lbl_setting2" />
+        <View android:id="@+id/view3" android:background="@color/side_menu_divider" android:layout_width="fill_parent" android:layout_height="@dimen/divider" android:layout_marginTop="@dimen/pad_10dp" android:layout_marginBottom="@dimen/pad_10dp" />
+        <Switch android:id="@+id/switch2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:checked="true" android:text="@string/push_notif" style="@style/switch_custom" />
+        <View android:id="@+id/view4" android:background="@color/side_menu_divider" android:layout_width="fill_parent" android:layout_height="@dimen/divider" android:layout_marginTop="@dimen/pad_10dp" android:layout_marginBottom="@dimen/pad_10dp" />
+        <Switch android:id="@+id/switch3" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/email_notif" style="@style/switch_custom" />
+        <TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/pad_20dp" android:text="@string/help" style="@style/lbl_setting1" />
+        <View android:id="@+id/view5" android:background="@color/side_menu_divider" android:layout_width="fill_parent" android:layout_height="@dimen/pad_1dp" android:layout_marginTop="@dimen/pad_3dp" android:layout_marginBottom="@dimen/pad_10dp" />
+        <TextView android:id="@+id/lbl3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/help1" style="@style/lbl_setting2" />
+        <View android:id="@+id/view6" android:background="@color/side_menu_divider" android:layout_width="fill_parent" android:layout_height="@dimen/divider" android:layout_marginTop="@dimen/pad_10dp" android:layout_marginBottom="@dimen/pad_10dp" />
+        <TextView android:id="@+id/lbl4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/faq" style="@style/lbl_setting2" />
+        <View android:id="@+id/view7" android:background="@color/side_menu_divider" android:layout_width="fill_parent" android:layout_height="@dimen/divider" android:layout_marginTop="@dimen/pad_10dp" android:layout_marginBottom="@dimen/pad_10dp" />
+        <TextView android:id="@+id/lbl5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/tnc" style="@style/lbl_setting2" />
+        <View android:id="@+id/view8" android:background="@color/side_menu_divider" android:layout_width="fill_parent" android:layout_height="@dimen/divider" android:layout_marginTop="@dimen/pad_10dp" android:layout_marginBottom="@dimen/pad_10dp" />
+    </LinearLayout>
+</ScrollView>

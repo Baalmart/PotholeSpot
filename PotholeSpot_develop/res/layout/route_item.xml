@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingLeft="10.0dip" android:paddingTop="5.0dip" android:paddingRight="10.0dip" android:paddingBottom="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/imageView3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/map" />
+    <TextView android:textStyle="bold" android:textColor="@color/tab_bg_yellow" android:id="@id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="Hyper Park, London W3 3UH" />
+    <LinearLayout android:gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="3.0dip">
+        <TextView android:textSize="13.0sp" android:textColor="@color/gray" android:gravity="center_vertical" android:id="@id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Distance 8.92km" android:drawableLeft="@drawable/ic_walk_small" android:drawablePadding="5.0dip" android:layout_weight="1.0" />
+        <TextView android:textSize="13.0sp" android:textColor="@color/gray" android:gravity="center_vertical" android:id="@id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Best time: 1:08:36" android:drawableLeft="@drawable/ic_star" android:drawablePadding="5.0dip" />
+    </LinearLayout>
+</LinearLayout>
