@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    
+    <string name="app_name">PostholeSpot</string>
+    <string name="settings">Settings</string>
+    <string name="new_actvity">New activity</string>
+    <string name="routes">Routes</string>
+    <string name="workouts">Workouts</string>
+    <string name="history">History</string>
+    <string name="slider">Slider</string>
+    <string name="progress">Progress</string>
+    <string name="slide_btn">Slide Button</string>
+    <string name="radio_btn">Radio</string>
+    <string name="checkbox">Checkbox</string>
+    <string name="selected">Selected</string>
+    <string name="tab">Tab</string>
+    <string name="button">Button</string>
+    
+</resources>
