@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    android:gravity="center_vertical" 
+    android:orientation="horizontal" 
+    android:id="@+id/header" 
+    android:padding="@dimen/pad_20dp" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <ImageView 
+        android:id="@+id/imageView1" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:src="@drawable/ic_person_white" />
+    
+    <LinearLayout 
+        android:orientation="vertical" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="10.0dip">
+        
+        <TextView 
+            android:textSize="@dimen/txt_16sp" 
+            android:textColor="@color/white" 
+            android:id="@+id/textView1" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:text="Martin Bbaale" />
+        
+        <TextView 
+            android:textSize="@dimen/txt_12sp" 
+            android:textColor="@color/side_menu_divider" 
+            android:id="@+id/textView2" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:text="bbaalmart@gmail.com" />
+    </LinearLayout>
+</LinearLayout>

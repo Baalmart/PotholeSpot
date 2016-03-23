@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout 
+    android:orientation="vertical" 
+    android:id="@+id/view" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <ListView 
+        android:id="@+id/list" 
+        android:paddingTop="10.0dip" 
+        android:paddingBottom="5.0dip" 
+        android:layout_width="fill_parent" 
+        android:layout_height="0.0dip" 
+        android:divider="@color/white_smoke" 
+        android:dividerHeight="0.0dip" 
+        android:layout_weight="1.0" />
+    
+    <LinearLayout 
+        android:orientation="horizontal" 
+        android:background="@color/theme_dark" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        
+        <Button 
+            android:enabled="false" 
+            android:id="@+id/tabNear" 
+            android:layout_width="0.0dip" 
+            android:layout_height="wrap_content" 
+            android:text="Nearby" 
+            android:layout_weight="1.0" 
+            style="@style/tab_btn_bottom" />
+        
+        <View 
+            android:id="@+id/view1" 
+            android:background="@color/white" 
+            android:layout_width="1.0dip" 
+            android:layout_height="fill_parent" 
+            android:layout_marginTop="10.0dip" 
+            android:layout_marginBottom="10.0dip" />
+        
+        <Button 
+            android:id="@+id/tabFav"
+            android:layout_width="0.0dip" 
+            android:layout_height="wrap_content" 
+            android:text="Fovourites" 
+            android:layout_weight="1.0" 
+            style="@style/tab_btn_bottom" />
+    </LinearLayout>
+</LinearLayout>

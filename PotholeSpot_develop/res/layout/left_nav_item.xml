@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout 
+    android:id="@+id/v" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <View 
+        android:id="@+id/bar" 
+        android:background="@color/main_red" 
+        android:layout_width="@dimen/pad_3dp" 
+        android:layout_height="fill_parent" />
+    
+    <TextView 
+        android:textSize="@dimen/txt_18sp" 
+        android:textColor="@color/white" 
+        android:gravity="center_vertical" 
+        android:id="@+id/lbl" 
+        android:paddingLeft="@dimen/pad_20dp" 
+        android:paddingTop="@dimen/pad_10dp" 
+        android:paddingRight="@dimen/pad_20dp" 
+        android:paddingBottom="@dimen/pad_10dp" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:text="@string/app_name" 
+        android:drawableLeft="@drawable/ic_nav1" 
+        android:drawablePadding="@dimen/pad_15dp" />
+    
+</LinearLayout>
