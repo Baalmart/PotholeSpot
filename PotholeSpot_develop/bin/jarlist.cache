@@ -1,0 +1,11 @@
+# cache for current jar dependency. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1450109039000 58160 4216af16d38465bbab0f3dff8efa14204f7a399a /home/baalmart/workspace_potholespot/httpclient/libs/commons-codec-1.4.jar
+1450109040000 58160 4216af16d38465bbab0f3dff8efa14204f7a399a /home/baalmart/workspace_potholespot/signpost-core/libs/commons-codec-1.4.jar
+1450109040000 58160 4216af16d38465bbab0f3dff8efa14204f7a399a /home/baalmart/workspace_potholespot/signpost-commonshttp4/libs/commons-codec-1.4.jar
+1450109040000 60686 5043bfebc3db072ed80fbd362e7caf00e885d8ae /home/baalmart/workspace_potholespot/signpost-commonshttp4/libs/commons-logging-1.1.1.jar
+1450109039000 60686 5043bfebc3db072ed80fbd362e7caf00e885d8ae /home/baalmart/workspace_potholespot/httpclient/libs/commons-logging-1.1.1.jar
+1450109040000 60686 5043bfebc3db072ed80fbd362e7caf00e885d8ae /home/baalmart/workspace_potholespot/signpost-core/libs/commons-logging-1.1.1.jar
+1450109038000 1184670 fde22d8d2ef6363324a3d79a1dd16c8645c25564 /home/baalmart/workspace_potholespot/android-support-v7-appcompat/libs/android-support-v4.jar
+1450109040000 1184670 fde22d8d2ef6363324a3d79a1dd16c8645c25564 /home/baalmart/workspace_potholespot/signpost-core/libs/android-support-v4.jar
