@@ -9,7 +9,6 @@ import android.graphics.Point;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
-
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
@@ -20,11 +19,12 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
 {
    private static final int OFFSET = 20;
 
-   private static final String TAG = "GG.AsyncOverlay";
+   private static final String TAG = "PS.AsyncOverlay";
 
    /**
     * Handler provided by the MapActivity to recalculate graphics
     */
+   
    private Handler mHandler;
 
    private GeoPoint mGeoTopLeft;
@@ -104,7 +104,7 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
    }
 
    protected void considerRedrawOffscreen()
-   {
+  {
       int oldZoomLevel = mActiveZoomLevel;
       mActiveZoomLevel = mLoggerMap.getZoomLevel();
 

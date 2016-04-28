@@ -13,13 +13,13 @@ import java.util.TimeZone;
 
 import dev.baalmart.potholespot.R;
 import dev.ugasoft.android.gps.actions.utils.ProgressListener;
-import dev.ugasoft.android.gps.db.Prim;
-import dev.ugasoft.android.gps.db.Prim.Labels;
-import dev.ugasoft.android.gps.db.Prim.Media;
-import dev.ugasoft.android.gps.db.Prim.Segments;
-import dev.ugasoft.android.gps.db.Prim.Tracks;
-import dev.ugasoft.android.gps.db.Prim.Waypoints;
-import dev.ugasoft.android.gps.db.Prim.Xyz;
+import dev.ugasoft.android.gps.db.Pspot;
+import dev.ugasoft.android.gps.db.Pspot.Labels;
+import dev.ugasoft.android.gps.db.Pspot.Media;
+import dev.ugasoft.android.gps.db.Pspot.Segments;
+import dev.ugasoft.android.gps.db.Pspot.Tracks;
+import dev.ugasoft.android.gps.db.Pspot.Waypoints;
+import dev.ugasoft.android.gps.db.Pspot.Xyz;
 import dev.ugasoft.android.gps.util.Constants;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -33,12 +33,14 @@ import android.util.Log;
 import android.util.Xml;
 
 public class GpxCreator extends XmlCreator
+
 {
    public static final String NS_SCHEMA = "http://www.w3.org/2001/XMLSchema-instance";
    public static final String NS_GPX_11 = "http://www.topografix.com/GPX/1/1";
    public static final String NS_GPX_10 = "http://www.topografix.com/GPX/1/0";
    public static final String NS_OGT_10 = "http://www.ugandasoft.ug";
-   public static final SimpleDateFormat ZULU_DATE_FORMATER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+   public static final SimpleDateFormat ZULU_DATE_FORMATER = new 
+         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
    static
    {
       TimeZone utc = TimeZone.getTimeZone("UTC");
@@ -165,7 +167,8 @@ public class GpxCreator extends XmlCreator
       return Uri.fromFile(new File(resultFilename));
    }
 
-   private void serializeTrack(Uri trackUri, XmlSerializer serializer) throws IllegalArgumentException, IllegalStateException, IOException
+   private void serializeTrack(Uri trackUri, XmlSerializer serializer) throws 
+   IllegalArgumentException, IllegalStateException, IOException
    {
       if (isCancelled())
       {
@@ -513,7 +516,7 @@ public class GpxCreator extends XmlCreator
                }
                else if (mediaUri.getScheme().equals("content"))
                {
-                  if ((Prim.AUTHORITY + ".string").equals(mediaUri.getAuthority()))
+                  if ((Pspot.AUTHORITY + ".string").equals(mediaUri.getAuthority()))
                   {
                      quickTag(serializer, "", "name", mediaUri.getLastPathSegment());
                   }

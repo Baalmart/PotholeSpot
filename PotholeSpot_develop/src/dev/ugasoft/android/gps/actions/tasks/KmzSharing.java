@@ -1,7 +1,7 @@
 package dev.ugasoft.android.gps.actions.tasks;
 
 import dev.baalmart.potholespot.R;
-import dev.ugasoft.android.gps.actions.ShareTrack;
+import dev.ugasoft.android.gps.actions.ShareRoute;
 import dev.ugasoft.android.gps.actions.utils.ProgressListener;
 import android.content.Context;
 import android.net.Uri;
@@ -24,7 +24,7 @@ public class KmzSharing extends KmzCreator
    protected void onPostExecute(Uri resultFilename)
    {
       super.onPostExecute(resultFilename);
-      ShareTrack.sendFile(mContext, resultFilename, mContext.getString(R.string.email_kmzbody), getContentType());
+      ShareRoute.sendFile(mContext, resultFilename, mContext.getString(R.string.email_kmzbody), getContentType());
    }
    
 }

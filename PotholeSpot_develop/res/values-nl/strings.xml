@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Open GPS Tracker</string>
+	<string name="app_name">Pothole Spot</string>
     <string name="service_start">Opstarten opname service</string>
 	<string name="service_gpsstatus">Loggen: %1$s (%2$s met %3$d satellieten)</string>
 	<string name="service_gpsnostatus">Logging: %1$s (Nauwkeurigheid %2$s)</string>

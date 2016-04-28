@@ -1,8 +1,8 @@
 package dev.ugasoft.android.gps.actions.utils;
 
-import dev.ugasoft.android.gps.db.Prim.Segments;
-import dev.ugasoft.android.gps.db.Prim.Tracks;
-import dev.ugasoft.android.gps.db.Prim.Waypoints;
+import dev.ugasoft.android.gps.db.Pspot.Segments;
+import dev.ugasoft.android.gps.db.Pspot.Tracks;
+import dev.ugasoft.android.gps.db.Pspot.Waypoints;
 import dev.ugasoft.android.gps.util.Constants;
 import dev.ugasoft.android.gps.util.UnitsI18n;
 import android.content.ContentResolver;

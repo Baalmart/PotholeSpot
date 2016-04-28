@@ -4,7 +4,7 @@ import dev.baalmart.potholespot.R;
 import dev.ugasoft.android.gps.actions.utils.GraphCanvas;
 import dev.ugasoft.android.gps.actions.utils.StatisticsCalulator;
 import dev.ugasoft.android.gps.actions.utils.StatisticsDelegate;
-import dev.ugasoft.android.gps.db.Prim.Tracks;
+import dev.ugasoft.android.gps.db.Pspot.Tracks;
 import dev.ugasoft.android.gps.util.UnitsI18n;
 import dev.ugasoft.android.gps.viewer.TrackList;
 import android.app.Activity;
@@ -252,9 +252,18 @@ public class Statistics extends Activity implements StatisticsDelegate
    public boolean onCreateOptionsMenu( Menu menu )
    {
       boolean result = super.onCreateOptionsMenu( menu );
-      menu.add( ContextMenu.NONE, MENU_GRAPHTYPE, ContextMenu.NONE, R.string.menu_graphtype ).setIcon( R.drawable.ic_menu_picture ).setAlphabeticShortcut( 't' );
-      menu.add( ContextMenu.NONE, MENU_TRACKLIST, ContextMenu.NONE, R.string.menu_tracklist ).setIcon( R.drawable.ic_menu_show_list ).setAlphabeticShortcut( 'l' );
-      menu.add( ContextMenu.NONE, MENU_SHARE, ContextMenu.NONE, R.string.menu_shareTrack ).setIcon( R.drawable.ic_menu_share ).setAlphabeticShortcut( 's' );
+      menu.add( ContextMenu.NONE, MENU_GRAPHTYPE, 
+            ContextMenu.NONE, R.string.menu_graphtype ).setIcon( R.drawable.ic_menu_picture ).
+            setAlphabeticShortcut( 't' );
+      
+      menu.add( ContextMenu.NONE, MENU_TRACKLIST, 
+            ContextMenu.NONE, R.string.menu_tracklist ).setIcon( R.drawable.ic_menu_show_list ).
+            setAlphabeticShortcut( 'l' );
+      
+      menu.add( ContextMenu.NONE, MENU_SHARE, 
+            ContextMenu.NONE, R.string.menu_shareTrack ).setIcon( R.drawable.ic_menu_share ).
+            setAlphabeticShortcut( 's' );
+      
       return result;
    }
 
@@ -279,7 +288,7 @@ public class Statistics extends Activity implements StatisticsDelegate
             intent.setDataAndType( mTrackUri, Tracks.CONTENT_ITEM_TYPE );
             intent.addFlags( Intent.FLAG_GRANT_READ_URI_PERMISSION );
             Bitmap bm = mViewFlipper.getDrawingCache();
-            Uri screenStreamUri = ShareTrack.storeScreenBitmap(bm);
+            Uri screenStreamUri = ShareRoute.storeScreenBitmap(bm);
             intent.putExtra(Intent.EXTRA_STREAM, screenStreamUri);
             startActivityForResult(Intent.createChooser( intent, getString( R.string.share_track ) ), MENU_SHARE);
             handled = true;
@@ -317,7 +326,7 @@ public class Statistics extends Activity implements StatisticsDelegate
             }
             break;
          case MENU_SHARE:
-            ShareTrack.clearScreenBitmap();
+            ShareRoute.clearScreenBitmap();
             break;
          default:
             Log.w( TAG, "Unknown activity result request code" );

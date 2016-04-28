@@ -8,7 +8,7 @@
     <string name="auth_client_play_services_err_notification_msg">Google Play services error</string>
     <string name="auth_client_requested_by_msg">Requested by %1$s</string>
     
-    <string name="app_name">Pothole Spot</string>
+    <string name="app_name">PotholeSpot</string>
     <string name= "description">Description</string>
     <string name= "log">Log Issue</string>
     <string name="drawer_open">Open navigation drawer</string>
@@ -70,7 +70,10 @@
     <string name="logcontrol_pause">Pause</string>
     <string name="logcontrol_resume">Resume</string>
     <string name="logcontrol_stop">Stop</string>
-    <string name="layer_regular">Normal map</string>
+    
+    <!-- the different layers... -->
+    
+ <!--    <string name="layer_regular">Normal map</string>
     <string name="layer_satellite">Satellite</string>
     <string name="layer_traffic">Traffic</string>
     <string name="layer_speed">Speed</string>
@@ -80,7 +83,23 @@
     <string name="layer_location">My Location</string>
     <string name="layer_cloudmade">CloudMade maps</string>
     <string name="layer_maknik">Mapnik</string>
-    <string name="layer_bicycle">OpenCycleMap</string>
+    <string name="layer_bicycle">OpenCycleMap</string> -->
+    
+   <!--  duplicates. -->
+    
+    <string name="layer_regular">Normal Map</string>
+    <string name="layer_satellite">Satellite</string>
+    <string name="layer_traffic">Gravel</string>
+    <string name="layer_speed">Potholes</string>
+    <string name="layer_altitude">Uneven Roads</string>
+    <string name="layer_distance">Road Humps</string>
+    <string name="layer_compass">Finished Repairs</string>
+    <string name="layer_location">My Location</string>
+    <string name="layer_cloudmade">CloudMade maps</string>
+    <string name="layer_maknik">Mapnik</string>
+    <string name="layer_bicycle">CycleMap</string>
+   
+    
     <string name="dialog_vacuum_title">Crop data</string>
     <string name="dialog_vacuum_message">Returns space lost due to fragmentation by a rebuilding the database.</string>
     <string name="dialog_import_title">GPX import</string>

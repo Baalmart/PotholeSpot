@@ -14,7 +14,7 @@ import dev.ugasoft.android.gps.actions.tasks.GpxCreator;
 import dev.ugasoft.android.gps.actions.tasks.XmlCreator;
 import dev.ugasoft.android.gps.actions.utils.ProgressListener;
 import dev.ugasoft.android.gps.adapter.BreadcrumbsAdapter;
-import dev.ugasoft.android.gps.db.Prim.MetaData;
+import dev.ugasoft.android.gps.db.Pspot.MetaData;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;

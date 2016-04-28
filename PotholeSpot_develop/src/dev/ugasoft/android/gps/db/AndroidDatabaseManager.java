@@ -31,8 +31,8 @@ import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AndroidDatabaseManager extends Activity implements OnItemClickListener {
-
+public class AndroidDatabaseManager extends Activity implements OnItemClickListener 
+{
 //a static class to save cursor,table values etc which is used by functions to share data in the program.
 	static class indexInfo
     {
@@ -65,7 +65,8 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 	
 	indexInfo info = new indexInfo();
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 	
 		dbm = new DatabaseHelper(AndroidDatabaseManager.this);
@@ -196,8 +197,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 				customQuery.setVisibility(View.GONE);
 			}
 		});
-		
-		
+				
 		//when user enter a custom query in text view and clicks on submit query button
 		//display results in tablelayout
 		submitQuery.setOnClickListener(new OnClickListener() 
@@ -283,8 +283,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 
                         v.setBackgroundColor(Color.WHITE);
                         TextView adap =(TextView)v;
-                        adap.setTextSize(20);
-                        
+                        adap.setTextSize(20);                        
                         return adap;
                 }
 

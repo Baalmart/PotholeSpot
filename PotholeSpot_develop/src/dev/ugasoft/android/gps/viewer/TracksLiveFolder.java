@@ -1,7 +1,7 @@
 package dev.ugasoft.android.gps.viewer;
 
 import dev.baalmart.potholespot.R;
-import dev.ugasoft.android.gps.db.Prim;
+import dev.ugasoft.android.gps.db.Pspot;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -21,9 +21,9 @@ public class TracksLiveFolder extends Activity
 
       if( LiveFolders.ACTION_CREATE_LIVE_FOLDER.equals( action ) )
       {
-         final Intent baseAction = new Intent( Intent.ACTION_VIEW, Prim.Tracks.CONTENT_URI );
+         final Intent baseAction = new Intent( Intent.ACTION_VIEW, Pspot.Tracks.CONTENT_URI );
          
-         Uri liveData = Uri.withAppendedPath( Prim.CONTENT_URI, "live_folders/tracks" );
+         Uri liveData = Uri.withAppendedPath( Pspot.CONTENT_URI, "live_folders/tracks" );
          final Intent createLiveFolder = new Intent();
          createLiveFolder.setData( liveData );
          createLiveFolder.putExtra( LiveFolders.EXTRA_LIVE_FOLDER_NAME, getString(R.string.track_list) );

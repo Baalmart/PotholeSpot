@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Öppna GPS Tracker</string>
+	<string name="app_name">Pothole Spot</string>
     <string name="service_start">Aktiverar loggningstjänsten</string>
 	<string name="service_gpsstatus">Loggar: %1$s (%2$s med %3$d satelliter)</string>
 	<string name="service_gpsnostatus">Loggar: %1$s (Precision %2$s)</string>

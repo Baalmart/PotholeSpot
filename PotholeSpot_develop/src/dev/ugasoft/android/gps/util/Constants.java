@@ -2,7 +2,7 @@ package dev.ugasoft.android.gps.util;
 
 import java.io.File;
 
-import dev.ugasoft.android.gps.db.Prim;
+import dev.ugasoft.android.gps.db.Pspot;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
@@ -48,7 +48,7 @@ public class Constants
    public static final String SDDIR_DIR             = "SDDIR_DIR";
    public static final String DEFAULT_EXTERNAL_DIR  = "/PRIM/";
    public static final String TMPICTUREFILE_SUBPATH = "media_tmp.tmp";
-   public static final Uri NAME_URI = Uri.parse( "content://" + Prim.AUTHORITY+".string" );
+   public static final Uri NAME_URI = Uri.parse( "content://" + Pspot.AUTHORITY+".string" );
    public static final int GOOGLE = 0;
    public static final int OSM = 1;
    public static final int MAPQUEST = 2;

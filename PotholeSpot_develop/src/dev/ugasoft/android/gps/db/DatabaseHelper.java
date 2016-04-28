@@ -3,19 +3,19 @@ package dev.ugasoft.android.gps.db;
 import java.util.ArrayList;
 import java.util.Date;
 
-import dev.ugasoft.android.gps.db.Prim.Labels;
-import dev.ugasoft.android.gps.db.Prim.LabelsColumns;
-import dev.ugasoft.android.gps.db.Prim.Locations;
-import dev.ugasoft.android.gps.db.Prim.LocationsColumns;
-import dev.ugasoft.android.gps.db.Prim.Media;
-import dev.ugasoft.android.gps.db.Prim.MediaColumns;
-import dev.ugasoft.android.gps.db.Prim.MetaData;
-import dev.ugasoft.android.gps.db.Prim.Segments;
-import dev.ugasoft.android.gps.db.Prim.Tracks;
-import dev.ugasoft.android.gps.db.Prim.TracksColumns;
-import dev.ugasoft.android.gps.db.Prim.Waypoints;
-import dev.ugasoft.android.gps.db.Prim.WaypointsColumns;
-import dev.ugasoft.android.gps.db.Prim.Xyz;
+import dev.ugasoft.android.gps.db.Pspot.Labels;
+import dev.ugasoft.android.gps.db.Pspot.LabelsColumns;
+import dev.ugasoft.android.gps.db.Pspot.Locations;
+import dev.ugasoft.android.gps.db.Pspot.LocationsColumns;
+import dev.ugasoft.android.gps.db.Pspot.Media;
+import dev.ugasoft.android.gps.db.Pspot.MediaColumns;
+import dev.ugasoft.android.gps.db.Pspot.MetaData;
+import dev.ugasoft.android.gps.db.Pspot.Segments;
+import dev.ugasoft.android.gps.db.Pspot.Tracks;
+import dev.ugasoft.android.gps.db.Pspot.TracksColumns;
+import dev.ugasoft.android.gps.db.Pspot.Waypoints;
+import dev.ugasoft.android.gps.db.Pspot.WaypointsColumns;
+import dev.ugasoft.android.gps.db.Pspot.Xyz;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
    public DatabaseHelper(Context context)
    {
-      super(context, Prim.DATABASE_NAME, null, Prim.DATABASE_VERSION);
+      super(context, Pspot.DATABASE_NAME, null, Pspot.DATABASE_VERSION);
       this.mContext = context;
    }
 
@@ -80,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     * 
     * @see android.database.sqlite.SQLiteOpenHelper#onUpgrade(android.database.sqlite.SQLiteDatabase,
     *      int, int)
-    * @see Prim.DATABASE_VERSION
+    * @see Pspot.DATABASE_VERSION
     */
    
    

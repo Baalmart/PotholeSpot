@@ -13,7 +13,7 @@ import dev.ugasoft.android.gps.viewer.map.LoggerMap;
 
 public class BitmapSegmentsOverlay extends AsyncOverlay
 {
-   private static final String TAG = "GG.BitmapSegmentsOverlay";
+   private static final String TAG = "PS.BitmapSegmentsOverlay";
 
    List<SegmentRendering> mOverlays;
    Handler mOverlayHandler;
@@ -57,7 +57,7 @@ public class BitmapSegmentsOverlay extends AsyncOverlay
       }
       return handled;
    }
-
+//used to add segments on the map
    synchronized public void addSegment(SegmentRendering segment)
    {
       segment.setBitmapHolder(this);
@@ -74,6 +74,7 @@ public class BitmapSegmentsOverlay extends AsyncOverlay
       reset();
    }
 
+   //set the color of using the setTrackColorMethod
    synchronized public void setTrackColoringMethod(int color, double speed, double height)
    {
       for (SegmentRendering segment : mOverlays)
@@ -82,7 +83,7 @@ public class BitmapSegmentsOverlay extends AsyncOverlay
       }
       scheduleRecalculation();
    }
-
+//size of the arrayList
    public int size()
    {
       return mOverlays.size();

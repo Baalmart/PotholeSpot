@@ -3,14 +3,14 @@ package dev.ugasoft.android.gps.viewer.map;
 import java.util.concurrent.Semaphore;
 
 import dev.baalmart.potholespot.R;
-import dev.ugasoft.android.gps.actions.ControlTracking;
-import dev.ugasoft.android.gps.actions.InsertNote;
-import dev.ugasoft.android.gps.actions.ShareTrack;
+import dev.ugasoft.android.gps.actions.ControlLogging;
+import dev.ugasoft.android.gps.actions.ManualMode;
+import dev.ugasoft.android.gps.actions.ShareRoute;
 import dev.ugasoft.android.gps.actions.Statistics;
-import dev.ugasoft.android.gps.db.Prim.Media;
-import dev.ugasoft.android.gps.db.Prim.Segments;
-import dev.ugasoft.android.gps.db.Prim.Tracks;
-import dev.ugasoft.android.gps.db.Prim.Waypoints;
+import dev.ugasoft.android.gps.db.Pspot.Media;
+import dev.ugasoft.android.gps.db.Pspot.Segments;
+import dev.ugasoft.android.gps.db.Pspot.Tracks;
+import dev.ugasoft.android.gps.db.Pspot.Waypoints;
 import dev.ugasoft.android.gps.logger.GPSLoggerServiceManager;
 import dev.ugasoft.android.gps.util.Constants;
 import dev.ugasoft.android.gps.util.SlidingIndicatorView;
@@ -66,7 +66,7 @@ import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
 import com.potholespot.MainActivity;
-/*import com.prim.MainActivity;*/
+
 
 public class LoggerMapHelper
 {
@@ -235,7 +235,8 @@ public class LoggerMapHelper
      localActionBar.setNavigationMode(0);
      localActionBar.setDisplayUseLogoEnabled(true);
      localActionBar.setLogo(R.drawable.ic_car_white);
-     localActionBar.setBackgroundDrawable(mLoggerMap.getActivity().getResources().getDrawable(R.drawable.action_bar_bg));
+     localActionBar.setBackgroundDrawable(mLoggerMap.getActivity().
+           getResources().getDrawable(R.drawable.action_bar_bg));
      localActionBar.setDisplayHomeAsUpEnabled(true);
      localActionBar.setHomeButtonEnabled(true);
      //localActionBar.setTitle(updateTitleBar());
@@ -301,7 +302,8 @@ public class LoggerMapHelper
    protected void onRestoreInstanceState(Bundle load)
    {
       Uri data = mLoggerMap.getActivity().getIntent().getData();
-      if (load != null && load.containsKey(INSTANCE_TRACK)) // 1st method: track from a previous instance of this activity
+      if (load != null && load.containsKey(INSTANCE_TRACK)) 
+         // 1st method: track from a previous instance of this activity
       {
          long loadTrackId = load.getLong(INSTANCE_TRACK);
          moveToTrack(loadTrackId, false);
@@ -537,11 +539,10 @@ public class LoggerMapHelper
          }
       };
       
-      
-      
       /*******************************************************
        * 8 Various dialog listeners
        */
+      
       mGalerySelectListener = new AdapterView.OnItemSelectedListener()
       {
          @Override
@@ -750,6 +751,8 @@ public class LoggerMapHelper
             }
          }
       };
+      
+      
       mUnitsChangeListener = new UnitsI18n.UnitsChangeListener()
       {
          @Override
@@ -790,14 +793,14 @@ public class LoggerMapHelper
       menu.add(ContextMenu.NONE, MENU_ABOUT, ContextMenu.NONE, R.string.menu_about).
       setIcon(R.drawable.ic_menu_info_details).setAlphabeticShortcut('A');
       
-      // More
-
-      /*menu.add(ContextMenu.NONE, MENU_TRACKLIST, ContextMenu.NONE, R.string.menu_tracklist).
-      setIcon(R.drawable.ic_menu_show_list).setAlphabeticShortcut('P');
-      
       menu.add(ContextMenu.NONE, MENU_SETTINGS, ContextMenu.NONE, R.string.menu_settings).
       setIcon(R.drawable.ic_menu_preferences).setAlphabeticShortcut('C');
       
+      // More
+
+      /*menu.add(ContextMenu.NONE, MENU_TRACKLIST, ContextMenu.NONE, R.string.menu_tracklist).
+      setIcon(R.drawable.ic_menu_show_list).setAlphabeticShortcut('P');    
+    
       menu.add(ContextMenu.NONE, MENU_ABOUT, ContextMenu.NONE, R.string.menu_about).
       setIcon(R.drawable.ic_menu_info_details).setAlphabeticShortcut('A');
       
@@ -805,15 +808,18 @@ public class LoggerMapHelper
       setIcon(R.drawable.ic_menu_allfriends);*/
    }
 
+   //the class below is used to prepare some options to become active only after
+   // some conditions are met as seen below
    public void onPrepareOptionsMenu(Menu menu)
    {
-      MenuItem noteMenu = menu.findItem(MENU_NOTE);
-      noteMenu.setEnabled(mLoggerServiceManager.isMediaPrepared());
+      /*MenuItem noteMenu = menu.findItem(MENU_NOTE);
+      noteMenu.setEnabled(mLoggerServiceManager.isMediaPrepared());*/
 
       MenuItem shareMenu = menu.findItem(MENU_SHARE);
       shareMenu.setEnabled(mTrackId >= 0);
    }
 
+   @SuppressWarnings("deprecation")
    public boolean onOptionsItemSelected(MenuItem item)
    {
       boolean handled = false;
@@ -823,7 +829,7 @@ public class LoggerMapHelper
       switch (item.getItemId())
       {
          case MENU_TRACKING:
-            intent = new Intent(mLoggerMap.getActivity(), ControlTracking.class);
+            intent = new Intent(mLoggerMap.getActivity(), ControlLogging.class);
             mLoggerMap.getActivity().startActivityForResult(intent, MENU_TRACKING);
             handled = true;
             break;
@@ -838,8 +844,9 @@ public class LoggerMapHelper
             mLoggerMap.getActivity().showDialog(DIALOG_LAYERS);
             handled = true;
             break;
+            
          case MENU_NOTE:
-            intent = new Intent(mLoggerMap.getActivity(), InsertNote.class);
+            intent = new Intent(mLoggerMap.getActivity(), ManualMode.class);
             mLoggerMap.getActivity().startActivityForResult(intent, MENU_NOTE);
             handled = true;
             break;
@@ -879,7 +886,7 @@ public class LoggerMapHelper
             intent.setDataAndType(trackUri, Tracks.CONTENT_ITEM_TYPE);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             Bitmap bm = mLoggerMap.getDrawingCache();
-            Uri screenStreamUri = ShareTrack.storeScreenBitmap(bm);
+            Uri screenStreamUri = ShareRoute.storeScreenBitmap(bm);
             intent.putExtra(Intent.EXTRA_STREAM, screenStreamUri);
             mLoggerMap.getActivity().startActivityForResult(Intent.createChooser(intent, mLoggerMap.getActivity().getString(R.string.share_track)), MENU_SHARE);
             handled = true;
@@ -940,7 +947,7 @@ public class LoggerMapHelper
                   .setNegativeButton(R.string.btn_cancel, null).setPositiveButton(R.string.btn_okay, mNoteSelectDialogListener).setView(view);
             dialog = builder.create();
             return dialog;
-         case DIALOG_CONTRIB:
+         /*case DIALOG_CONTRIB:
             builder = new AlertDialog.Builder(mLoggerMap.getActivity());
             factory = LayoutInflater.from(mLoggerMap.getActivity());
             view = factory.inflate(R.layout.contrib, null);
@@ -949,7 +956,7 @@ public class LoggerMapHelper
             builder.setTitle(R.string.dialog_contrib_title).setView(view).setIcon(android.R.drawable.ic_dialog_email)
                   .setPositiveButton(R.string.btn_okay, null);
             dialog = builder.create();
-            return dialog;
+            return dialog;*/
          default:
             return null;
       }
@@ -985,20 +992,25 @@ public class LoggerMapHelper
             ((CheckBox) dialog.findViewById(R.id.layer_compass)).setChecked(mSharedPreferences.getBoolean(Constants.COMPASS, false));
             ((CheckBox) dialog.findViewById(R.id.layer_location)).setChecked(mSharedPreferences.getBoolean(Constants.LOCATION, false));
             int provider = Integer.valueOf(mSharedPreferences.getString(Constants.MAPPROVIDER, "" + Constants.GOOGLE)).intValue();
+            
             switch (provider)
             {
+               
+               //so this is where I get to state the kind of layers we shall be using in each instance of maps.
                case Constants.GOOGLE:
-                  dialog.findViewById(R.id.google_backgrounds).setVisibility(View.INVISIBLE);
+                  dialog.findViewById(R.id.google_backgrounds).setVisibility(View.VISIBLE);
                   dialog.findViewById(R.id.osm_backgrounds).setVisibility(View.GONE);
-                  dialog.findViewById(R.id.shared_layers).setVisibility(View.INVISIBLE);
-                  dialog.findViewById(R.id.google_overlays).setVisibility(View.INVISIBLE);
+                  dialog.findViewById(R.id.shared_layers).setVisibility(View.VISIBLE);
+                  dialog.findViewById(R.id.google_overlays).setVisibility(View.VISIBLE);
                   break;
+                  
                case Constants.OSM:
                   dialog.findViewById(R.id.osm_backgrounds).setVisibility(View.VISIBLE);
                   dialog.findViewById(R.id.google_backgrounds).setVisibility(View.GONE);
                   dialog.findViewById(R.id.shared_layers).setVisibility(View.VISIBLE);
                   dialog.findViewById(R.id.google_overlays).setVisibility(View.GONE);
                   break;
+                  
                default:
                   dialog.findViewById(R.id.osm_backgrounds).setVisibility(View.GONE);
                   dialog.findViewById(R.id.google_backgrounds).setVisibility(View.GONE);
@@ -1042,7 +1054,7 @@ public class LoggerMapHelper
             }
             break;
          case MENU_SHARE:
-            ShareTrack.clearScreenBitmap();
+            ShareRoute.clearScreenBitmap();
             break;
          default:
             Log.e(TAG, "Returned form unknow activity: " + requestCode);
@@ -1284,7 +1296,7 @@ public class LoggerMapHelper
 
    private void updateCompassDisplayVisibility()
    {
-      boolean compass = mSharedPreferences.getBoolean(Constants.COMPASS, false);
+      boolean compass = mSharedPreferences.getBoolean(Constants.COMPASS, true);
       if (compass)
       {
          mLoggerMap.enableCompass();
@@ -1297,7 +1309,7 @@ public class LoggerMapHelper
 
    private void updateLocationDisplayVisibility()
    {
-      boolean location = mSharedPreferences.getBoolean(Constants.LOCATION, false);
+      boolean location = mSharedPreferences.getBoolean(Constants.LOCATION, true);
       if (location)
       {
          mLoggerMap.enableMyLocation();

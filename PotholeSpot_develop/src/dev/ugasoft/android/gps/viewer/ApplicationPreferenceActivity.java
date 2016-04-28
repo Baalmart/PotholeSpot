@@ -30,12 +30,13 @@ public class ApplicationPreferenceActivity extends PreferenceActivity
    private EditTextPreference streambroadcast_distance;
    private EditTextPreference custumupload_backlog;
 
+   @SuppressWarnings("deprecation")
    @Override
    protected void onCreate(Bundle savedInstanceState)
    {
       super.onCreate(savedInstanceState);
 
-      addPreferencesFromResource(R.layout.settings);
+      addPreferencesFromResource(R.layout.settings_gps);
 
       ListPreference precision = (ListPreference) findPreference(PRECISION_PREFERENCE);
       time = (EditTextPreference) findPreference(CUSTOMPRECISIONTIME_PREFERENCE);

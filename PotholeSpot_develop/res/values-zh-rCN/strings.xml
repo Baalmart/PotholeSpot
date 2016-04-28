@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">开放式 GPS 追踪器</string>
+	<string name="app_name">Pothole Sport</string>
     <string name="service_start">启动日志服务中</string>
 	<string name="service_gpsstatus">日志： %1$s (%2$s 使用 %3$d 个卫星)</string>
 	<string name="service_gpsnostatus">日志： %1$s (精确度 %2$s)</string>

@@ -14,8 +14,8 @@ import java.util.concurrent.Executor;
 
 import dev.baalmart.potholespot.R;
 import dev.ugasoft.android.gps.actions.utils.ProgressListener;
-import dev.ugasoft.android.gps.db.Prim.Tracks;
-import dev.ugasoft.android.gps.db.Prim.Waypoints;
+import dev.ugasoft.android.gps.db.Pspot.Tracks;
+import dev.ugasoft.android.gps.db.Pspot.Waypoints;
 import dev.ugasoft.android.gps.util.ProgressFilterInputStream;
 import dev.ugasoft.android.gps.util.UnicodeReader;
 

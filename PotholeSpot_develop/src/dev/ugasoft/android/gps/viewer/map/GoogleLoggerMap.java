@@ -50,16 +50,22 @@ public class GoogleLoggerMap extends MapActivity implements LoggerMap
       mMylocation = new FixedMyLocationOverlay(this, mMapView);
       mMapView.setBuiltInZoomControls(true);
       
-      TextView[] speeds = { (TextView) findViewById(R.id.speedview05), (TextView) findViewById(R.id.speedview04), (TextView) findViewById(R.id.speedview03),
-            (TextView) findViewById(R.id.speedview02), (TextView) findViewById(R.id.speedview01), (TextView) findViewById(R.id.speedview00) };
+      TextView[] speeds = 
+         { 
+            (TextView) findViewById(R.id.speedview05), 
+            (TextView) findViewById(R.id.speedview04), 
+            (TextView) findViewById(R.id.speedview03),
+            (TextView) findViewById(R.id.speedview02), 
+            (TextView) findViewById(R.id.speedview01), 
+            (TextView) findViewById(R.id.speedview00) 
+         };
+      
       mSpeedtexts = speeds;
       mLastGPSSpeedView = (TextView) findViewById(R.id.currentSpeed);
       
       //stuff to do with altitude and all.
       mLastGPSAltitudeView = (TextView) findViewById(R.id.currentAltitude);
-      mDistanceView = (TextView) findViewById(R.id.currentDistance);      
-    
-      
+      mDistanceView = (TextView) findViewById(R.id.currentDistance);     
       mHelper.onCreate(load);
    }
    
@@ -69,9 +75,7 @@ public class GoogleLoggerMap extends MapActivity implements LoggerMap
       super.onResume();
       mHelper.onResume();
    }
-   
-
-   
+ 
    @Override
    protected void onPause()
    {
@@ -208,7 +212,8 @@ public class GoogleLoggerMap extends MapActivity implements LoggerMap
    @Override
    protected boolean isRouteDisplayed()
    {
-      return true;
+      //return true;
+      return false;
    }
    
    @Override
@@ -224,6 +229,7 @@ public class GoogleLoggerMap extends MapActivity implements LoggerMap
    
    @Override
    public void updateOverlays()
+   
    {
       SharedPreferences sharedPreferences = mHelper.getPreferences();
       GoogleLoggerMap.this.mMapView.setSatellite(sharedPreferences.getBoolean(Constants.SATELLITE, false));
@@ -471,9 +477,5 @@ public class GoogleLoggerMap extends MapActivity implements LoggerMap
    {
       return (SlidingIndicatorView) findViewById(R.id.scaleindicator);
    }
-   
-  
-   
-   
    
 }

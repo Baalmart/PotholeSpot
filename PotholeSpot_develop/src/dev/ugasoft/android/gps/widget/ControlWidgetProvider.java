@@ -1,8 +1,8 @@
 package dev.ugasoft.android.gps.widget;
 
 import dev.baalmart.potholespot.R;
-import dev.ugasoft.android.gps.actions.ControlTracking;
-import dev.ugasoft.android.gps.actions.InsertNote;
+import dev.ugasoft.android.gps.actions.ControlLogging;
+import dev.ugasoft.android.gps.actions.ManualMode;
 import dev.ugasoft.android.gps.util.Constants;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -29,8 +29,10 @@ public class ControlWidgetProvider extends AppWidgetProvider
    private static final String TAG = "OGT.ControlWidgetProvider";
 
    static final ComponentName THIS_APPWIDGET = new ComponentName
-         ("nl.sogeti.android.gpstracker", 
-               "nl.sogeti.android.gpstracker.widget.ControlWidgetProvider");
+         ("dev.baalmart.potholespot", 
+               "dev.ugasoft.android.gps.widget.ControlWidgetProvider");
+   
+   //dev.ugasoft.android.gps.widget
    private static int mState;
 
    public ControlWidgetProvider()
@@ -163,13 +165,13 @@ public class ControlWidgetProvider extends AppWidgetProvider
          int buttonId = Integer.parseInt(data.getSchemeSpecificPart());
          if (buttonId == BUTTON_TRACKINGCONTROL)
          {
-            Intent controlIntent = new Intent( context, ControlTracking.class );
+            Intent controlIntent = new Intent( context, ControlLogging.class );
             controlIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(controlIntent);
          }
          else if (buttonId == BUTTON_INSERTNOTE)
          {
-            Intent noteIntent = new Intent( context, InsertNote.class );
+            Intent noteIntent = new Intent( context, ManualMode.class );
             noteIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity( noteIntent );
          }

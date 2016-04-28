@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">PRIM GPS</string>
+	<string name="app_name">Pothole Spot</string>
     <string name="service_start">Activando servicio de registro</string>
 	<string name="service_gpsstatus">Registrando: %1$s (%2$s con %3$d satélites)</string>
 	<string name="service_gpsnostatus">Registrando: %1$s (Precisión %2$s)</string>

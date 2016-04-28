@@ -12,11 +12,11 @@ import java.util.TimeZone;
 
 import dev.baalmart.potholespot.R;
 import dev.ugasoft.android.gps.actions.utils.ProgressListener;
-import dev.ugasoft.android.gps.db.Prim;
-import dev.ugasoft.android.gps.db.Prim.Media;
-import dev.ugasoft.android.gps.db.Prim.Segments;
-import dev.ugasoft.android.gps.db.Prim.Tracks;
-import dev.ugasoft.android.gps.db.Prim.Waypoints;
+import dev.ugasoft.android.gps.db.Pspot;
+import dev.ugasoft.android.gps.db.Pspot.Media;
+import dev.ugasoft.android.gps.db.Pspot.Segments;
+import dev.ugasoft.android.gps.db.Pspot.Tracks;
+import dev.ugasoft.android.gps.db.Pspot.Waypoints;
 import dev.ugasoft.android.gps.util.Constants;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -491,7 +491,7 @@ public class KmzCreator extends XmlCreator
                }
                else if (mediaUri.getScheme().equals("content"))
                {
-                  if (mediaUri.getAuthority().equals(Prim.AUTHORITY + ".string"))
+                  if (mediaUri.getAuthority().equals(Pspot.AUTHORITY + ".string"))
                   {
                      serializer.text("\n");
                      serializer.startTag("", "Placemark");

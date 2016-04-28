@@ -1,7 +1,7 @@
 package dev.ugasoft.android.gps.viewer;
 
 import dev.baalmart.potholespot.R;
-import dev.ugasoft.android.gps.actions.DescribeTrack;
+import dev.ugasoft.android.gps.actions.DescribeRoute;
 import dev.ugasoft.android.gps.actions.Statistics;
 import dev.ugasoft.android.gps.actions.tasks.GpxParser;
 import dev.ugasoft.android.gps.actions.utils.ProgressListener;
@@ -10,8 +10,8 @@ import dev.ugasoft.android.gps.adapter.SectionedListAdapter;
 import dev.ugasoft.android.gps.breadcrumbs.BreadcrumbsService;
 import dev.ugasoft.android.gps.breadcrumbs.BreadcrumbsService.LocalBinder;
 import dev.ugasoft.android.gps.db.DatabaseHelper;
-import dev.ugasoft.android.gps.db.Prim;
-import dev.ugasoft.android.gps.db.Prim.Tracks;
+import dev.ugasoft.android.gps.db.Pspot;
+import dev.ugasoft.android.gps.db.Pspot.Tracks;
 import dev.ugasoft.android.gps.util.Constants;
 import dev.ugasoft.android.gps.util.Pair;
 import dev.ugasoft.android.gps.viewer.map.CommonLoggerMap;
@@ -532,7 +532,7 @@ public class TrackList extends ListActivity implements ProgressListener
       else if (Intent.ACTION_VIEW.equals(queryAction))
       {
          final Uri uri = intent.getData();
-         if ("content".equals(uri.getScheme()) && Prim.AUTHORITY.equals(uri.getAuthority()))
+         if ("content".equals(uri.getScheme()) && Pspot.AUTHORITY.equals(uri.getAuthority()))
          {
             // Got to VIEW a single track, instead hand it of to the LoggerMap
             Intent notificationIntent = new Intent(this, LoggerMap.class);
@@ -615,7 +615,7 @@ public class TrackList extends ListActivity implements ProgressListener
                               if (isChecked)
                               {
                                  // Start a description of the track
-                                 Intent namingIntent = new Intent(TrackList.this, DescribeTrack.class);
+                                 Intent namingIntent = new Intent(TrackList.this, DescribeRoute.class);
                                  namingIntent.setData(ContentUris.withAppendedId(Tracks.CONTENT_URI, trackId));
                                  namingIntent.putExtra(Constants.NAME, trackName);
                                  mExportListener = new ProgressListener()

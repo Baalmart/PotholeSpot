@@ -7,9 +7,9 @@ import java.util.Vector;
 
 import dev.baalmart.potholespot.BuildConfig;
 import dev.baalmart.potholespot.R;
-import dev.ugasoft.android.gps.db.Prim;
-import dev.ugasoft.android.gps.db.Prim.Media;
-import dev.ugasoft.android.gps.db.Prim.Waypoints;
+import dev.ugasoft.android.gps.db.Pspot;
+import dev.ugasoft.android.gps.db.Pspot.Media;
+import dev.ugasoft.android.gps.db.Pspot.Waypoints;
 import dev.ugasoft.android.gps.util.UnitsI18n;
 import dev.ugasoft.android.gps.viewer.map.LoggerMap;
 import android.content.ContentResolver;
@@ -64,7 +64,7 @@ public class SegmentRendering
    public static final int DRAW_CALCULATED = 3;
    public static final int DRAW_DOTS = 4;
    public static final int DRAW_HEIGHT = 5;
-   private static final String TAG = "OGT.SegmentRendering";
+   private static final String TAG = "PS.SegmentRendering";
    private static final float MINIMUM_PX_DISTANCE = 15;
 
    private static SparseArray<Bitmap> sBitmapCache = new SparseArray<Bitmap>();;
@@ -148,6 +148,7 @@ public class SegmentRendering
     * @param avgSpeed
     * @param handler
     */
+   
    public SegmentRendering(LoggerMap loggermap, Uri segmentUri, int color, double avgSpeed, double avgHeight, Handler handler)
    {
       super();
@@ -671,7 +672,7 @@ public class SegmentRendering
       }
       else if (uri.getScheme().equals("content"))
       {
-         if (uri.getAuthority().equals(Prim.AUTHORITY + ".string"))
+         if (uri.getAuthority().equals(Pspot.AUTHORITY + ".string"))
          {
             drawable = R.drawable.media_mark;
          }
@@ -1217,7 +1218,7 @@ public class SegmentRendering
       }
       else if (mediaUri.getScheme().equals("content"))
       {
-         if (mediaUri.getAuthority().equals(Prim.AUTHORITY + ".string"))
+         if (mediaUri.getAuthority().equals(Pspot.AUTHORITY + ".string"))
          {
             String text = mediaUri.getLastPathSegment();
             Toast toast = Toast.makeText(ctx, text, Toast.LENGTH_LONG);

@@ -4,7 +4,7 @@
     package="dev.baalmart.potholespot"
     android:installLocation="auto"
     android:versionCode="1"
-    android:versionName="2015.10.26" >
+    android:versionName="2016.03.26" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -39,7 +39,7 @@
         android:icon="@drawable/ph3" 
         android:allowBackup="true"         
         >
-        <uses-library android:name="com.google.android.maps" />
+        <uses-library android:required="true" android:name="com.google.android.maps" />
 
         <meta-data
             android:name="android.app.default_searchable"
@@ -130,16 +130,16 @@
             android:name="dev.ugasoft.android.gps.viewer.ApplicationPreferenceActivity"
             android:label="@string/menu_settings" />
         <activity
-            android:name="dev.ugasoft.android.gps.actions.NameTrack"
+            android:name="dev.ugasoft.android.gps.actions.NameRoute"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name="dev.ugasoft.android.gps.actions.DescribeTrack"
+            android:name="dev.ugasoft.android.gps.actions.DescribeRoute"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name="dev.ugasoft.android.gps.actions.ControlTracking"
+            android:name="dev.ugasoft.android.gps.actions.ControlLogging"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name="dev.ugasoft.android.gps.actions.InsertNote"
+            android:name="dev.ugasoft.android.gps.actions.ManualMode"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="dev.ugasoft.android.gps.viewer.TrackList"
@@ -189,7 +189,7 @@
             android:label="@string/menu_statistics" >
         </activity>
         <activity
-            android:name="dev.ugasoft.android.gps.actions.ShareTrack"
+            android:name="dev.ugasoft.android.gps.actions.ShareRoute"
             android:exported="false"
             android:label="@string/share_track"
             android:windowSoftInputMode="stateUnchanged" >
@@ -250,11 +250,13 @@
         <service android:name="dev.ugasoft.android.gps.breadcrumbs.BreadcrumbsService" />
 
         <provider
-            android:name="dev.ugasoft.android.gps.db.PrimProvider"
-            android:authorities="nl.sogeti.android.gpstracker"
+            android:name="dev.ugasoft.android.gps.db.PspotProvider"
+            android:authorities="dev.baalmart.potholespot"
             android:enabled="true"
             android:permission="android.permission.ACCESS_FINE_LOCATION" >
             <grant-uri-permission android:pathPrefix="/tracks/" />
+            
+            <!-- nl.sogeti.android.gpstracker -->
 
             <path-permission
                 android:path="/search_suggest_query"

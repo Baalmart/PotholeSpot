@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Open GPS Tracker</string>
+	<string name="app_name">Pothole Spot</string>
     <string name="service_start">Aktywuję usługę zapisywania</string>
 	<string name="service_gpsstatus">Zapisywanie: %1$s (%2$s z %3$d satelitami)</string>
 	<string name="service_gpsnostatus">Zapisywanie: %1$s (Precyzja - %2$s)</string>

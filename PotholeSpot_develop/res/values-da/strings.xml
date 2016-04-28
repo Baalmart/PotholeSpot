@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">PRIM GPS</string>
+	<string name="app_name">Pothole Spot</string>
     <string name="service_start">Activating logging service</string>
 	<string name="service_gpsstatus">Logging: %1$s (%2$s with %3$d satellites)</string>
 	<string name="service_gpsnostatus">Logging: %1$s (Precision %2$s)</string>

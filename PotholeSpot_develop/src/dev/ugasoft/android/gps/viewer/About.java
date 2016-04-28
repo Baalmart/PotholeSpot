@@ -1,15 +1,3 @@
-/*------------------------------------------------------------------------------
- **     Ident: Delivery Center Java
- **    Author: rene
- ** Copyright: (c) Feb 25, 2012 Sogeti Nederland B.V. All Rights Reserved.
- **------------------------------------------------------------------------------
- ** Sogeti Nederland B.V.            |  No part of this file may be reproduced  
- ** Distributed Software Engineering |  or transmitted in any form or by any        
- ** Lange Dreef 17                   |  means, electronic or mechanical, for the      
- ** 4131 NJ Vianen                   |  purpose, without the express written    
- ** The Netherlands                  |  permission of the copyright holder.
- *------------------------------------------------------------------------------
- */
 package dev.ugasoft.android.gps.viewer;
 
 import java.io.BufferedReader;

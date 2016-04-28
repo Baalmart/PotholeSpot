@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Open GPS Tracker</string>
+	<string name="app_name">Pothole Spot</string>
     <string name="service_start">Запуск сервиса записи трека</string>
 	<string name="service_gpsstatus">Трек: %1$s (%2$s по %3$d спутникам)</string>
 	<string name="service_gpsnostatus">Трек: %1$s (точность %2$s)</string>

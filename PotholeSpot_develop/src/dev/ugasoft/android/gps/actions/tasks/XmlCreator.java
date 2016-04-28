@@ -21,9 +21,9 @@ import java.util.zip.ZipOutputStream;
 import org.xmlpull.v1.XmlSerializer;
 
 import dev.ugasoft.android.gps.actions.utils.ProgressListener;
-import dev.ugasoft.android.gps.db.Prim.Media;
-import dev.ugasoft.android.gps.db.Prim.Tracks;
-import dev.ugasoft.android.gps.db.Prim.Waypoints;
+import dev.ugasoft.android.gps.db.Pspot.Media;
+import dev.ugasoft.android.gps.db.Pspot.Tracks;
+import dev.ugasoft.android.gps.db.Pspot.Waypoints;
 import dev.ugasoft.android.gps.util.Constants;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -37,7 +37,7 @@ import android.view.Window;
 
 public abstract class XmlCreator extends AsyncTask<Void, Integer, Uri>
 {
-   private String TAG = "PRIM.XmlCreator";
+   private String TAG = "PS.XmlCreator";
    private String mExportDirectoryPath;
    private boolean mNeedsBundling;
 

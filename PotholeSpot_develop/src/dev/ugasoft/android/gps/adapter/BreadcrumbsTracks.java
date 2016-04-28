@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import dev.baalmart.potholespot.R;
-import dev.ugasoft.android.gps.db.Prim.MetaData;
+import dev.ugasoft.android.gps.db.Pspot.MetaData;
 import dev.ugasoft.android.gps.util.Constants;
 import dev.ugasoft.android.gps.util.Pair;
 import android.content.ContentResolver;

@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import dev.baalmart.potholespot.R;
-import dev.ugasoft.android.gps.actions.ShareTrack;
+import dev.ugasoft.android.gps.actions.ShareRoute;
 import dev.ugasoft.android.gps.actions.utils.ProgressListener;
-import dev.ugasoft.android.gps.db.Prim;
-import dev.ugasoft.android.gps.db.Prim.Media;
-import dev.ugasoft.android.gps.db.Prim.MetaData;
+import dev.ugasoft.android.gps.db.Pspot;
+import dev.ugasoft.android.gps.db.Pspot.Media;
+import dev.ugasoft.android.gps.db.Pspot.MetaData;
 import dev.ugasoft.android.gps.oauth.PrepareRequestTokenActivity;
 import dev.ugasoft.android.gps.util.Constants;
 import dev.ugasoft.android.gps.viewer.map.LoggerMapHelper;
@@ -136,7 +136,7 @@ public class OsmSharing extends GpxCreator
          // Build the multipart body with the upload data
          MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
          entity.addPart("file", new FileBody(gpxFile));
-         entity.addPart("description", new StringBody( ShareTrack.queryForTrackName(mContext.getContentResolver(), mTrackUri)));
+         entity.addPart("description", new StringBody( ShareRoute.queryForTrackName(mContext.getContentResolver(), mTrackUri)));
          entity.addPart("tags", new StringBody(tags));
          entity.addPart("visibility", new StringBody(visibility));
          method.setEntity(entity);
@@ -250,7 +250,7 @@ public class OsmSharing extends GpxCreator
             do
             {
                Uri noteUri = Uri.parse(mediaCursor.getString(0));
-               if (noteUri.getScheme().equals("content") && noteUri.getAuthority().equals(Prim.AUTHORITY + ".string"))
+               if (noteUri.getScheme().equals("content") && noteUri.getAuthority().equals(Pspot.AUTHORITY + ".string"))
                {
                   String tag = noteUri.getLastPathSegment().trim();
                   if (!tag.contains(" "))
