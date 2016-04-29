@@ -42,7 +42,7 @@ public class ManualMode extends Activity
 {
    private static final int DIALOG_INSERTNOTE = 27;
 
-   private static final String TAG = "PRIM.InsertNote";
+   private static final String TAG = "pspot.ManualMode";
 
    private static final int MENU_PICTURE = 9;
    private static final int MENU_VOICE = 11;
@@ -381,12 +381,20 @@ public class ManualMode extends Activity
       switch (id)
       {
          case DIALOG_INSERTNOTE:
-            boolean prepared = mLoggerServiceManager.isMediaPrepared() && mLoggerServiceManager.getLoggingState() == Constants.LOGGING;
+            
+            /* boolean value for check the availability of the media and the
+             *logging state*/
+            
+            boolean prepared = mLoggerServiceManager.isMediaPrepared() && 
+            mLoggerServiceManager.getLoggingState() == Constants.LOGGING;
+            
+            /*preparing the view for each manual mode item*/
             name = (Button) dialog.findViewById(R.id.noteinsert_name);
             text = (Button) dialog.findViewById(R.id.noteinsert_text);
             voice = (Button) dialog.findViewById(R.id.noteinsert_voice);
             picture = (Button) dialog.findViewById(R.id.noteinsert_picture);
             video = (Button) dialog.findViewById(R.id.noteinsert_video);
+            
             name.setEnabled(prepared);
             text.setEnabled(prepared);
             voice.setEnabled(prepared);

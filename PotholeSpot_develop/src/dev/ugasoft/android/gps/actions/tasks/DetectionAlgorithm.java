@@ -21,7 +21,8 @@ public class DetectionAlgorithm
     * @param query         
     * @param templete     
     */
-   public DetectionAlgorithm(double[] sample, double[] templete) {
+   public DetectionAlgorithm(double[] sample, double[] templete) 
+   {
          seq1 = sample;
          seq2 = templete;
          

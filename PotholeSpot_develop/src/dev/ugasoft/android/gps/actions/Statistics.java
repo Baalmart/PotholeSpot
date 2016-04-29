@@ -6,7 +6,7 @@ import dev.ugasoft.android.gps.actions.utils.StatisticsCalulator;
 import dev.ugasoft.android.gps.actions.utils.StatisticsDelegate;
 import dev.ugasoft.android.gps.db.Pspot.Tracks;
 import dev.ugasoft.android.gps.util.UnitsI18n;
-import dev.ugasoft.android.gps.viewer.TrackList;
+import dev.ugasoft.android.gps.viewer.RouteList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -279,7 +279,7 @@ public class Statistics extends Activity implements StatisticsDelegate
             handled = true;
             break;
          case MENU_TRACKLIST:
-            intent = new Intent( this, TrackList.class );
+            intent = new Intent( this, RouteList.class );
             intent.putExtra( Tracks._ID, mTrackUri.getLastPathSegment() );
             startActivityForResult( intent, MENU_TRACKLIST );
             break;

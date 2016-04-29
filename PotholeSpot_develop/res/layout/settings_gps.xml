@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<!-- <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent" 
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"> -->
     
-<PreferenceScreen     
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"     
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:title="@string/app_name" >
@@ -234,4 +235,4 @@
       </PreferenceCategory>
    </PreferenceScreen>
 </PreferenceScreen>
-</ScrollView>
+<!-- </ScrollView> -->

@@ -3,8 +3,8 @@ package dev.ugasoft.android.gps.logger;
 import android.net.Uri;
 import android.location.Location;
 
-interface IGPSLoggerServiceRemote {
-
+interface IGPSLoggerServiceRemote 
+{
 	int loggingState();
     long startLogging();
     void pauseLogging();

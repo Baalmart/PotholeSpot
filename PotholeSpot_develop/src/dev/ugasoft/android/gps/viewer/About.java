@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class About extends Activity
 {
 
-   private static final String TAG = "PRIM.About";
+   private static final String TAG = "psot.About";
 
    @Override
    protected void onCreate(Bundle savedInstanceState)
@@ -43,8 +43,8 @@ public class About extends Activity
       license.loadUrl("file:///android_asset/license_short.html");
       WebView contributions = (WebView) findViewById(R.id.contribution_body);
       contributions.loadUrl("file:///android_asset/contributions.html");
-      WebView notice = (WebView) findViewById(R.id.notices_body);
-      notice.loadUrl("file:///android_asset/notices.html");
+     /* WebView notice = (WebView) findViewById(R.id.notices_body);
+      notice.loadUrl("file:///android_asset/notices.html");*/
    }
 
    public static String readRawTextFile(Context ctx, int resId)

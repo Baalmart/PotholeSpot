@@ -4,7 +4,7 @@
     package="dev.baalmart.potholespot"
     android:installLocation="auto"
     android:versionCode="1"
-    android:versionName="2016.03.26" >
+    android:versionName="2016.04.29" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -141,8 +141,14 @@
         <activity
             android:name="dev.ugasoft.android.gps.actions.ManualMode"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        
+         <activity
+            android:name="dev.ugasoft.android.gps.viewer.About"
+            />
+         <!-- android:theme="@android:style/Theme.Translucent.NoTitleBar"  -->
+                 
         <activity
-            android:name="dev.ugasoft.android.gps.viewer.TrackList"
+            android:name="dev.ugasoft.android.gps.viewer.RouteList"
             android:label="@string/track_list"
             android:launchMode="singleTop" >
             <intent-filter>
@@ -175,7 +181,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="dev.ugasoft.android.gps.viewer.TracksLiveFolder"
+            android:name="dev.ugasoft.android.gps.viewer.RoutesLiveFolder"
             android:icon="@drawable/icon"
             android:label="@string/track_list" >
             <intent-filter>

@@ -17,7 +17,7 @@ import dev.ugasoft.android.gps.util.SlidingIndicatorView;
 import dev.ugasoft.android.gps.util.UnitsI18n;
 import dev.ugasoft.android.gps.viewer.About;
 import dev.ugasoft.android.gps.viewer.ApplicationPreferenceActivity;
-import dev.ugasoft.android.gps.viewer.TrackList;
+import dev.ugasoft.android.gps.viewer.RouteList;
 import dev.ugasoft.android.gps.viewer.map.overlay.BitmapSegmentsOverlay;
 import dev.ugasoft.android.gps.viewer.map.overlay.SegmentRendering;
 import android.app.ActionBar;
@@ -630,7 +630,7 @@ public class LoggerMapHelper
          public void onClick(DialogInterface dialog, int which)
          {
                        Log.d( TAG, "mNoTrackDialogListener" + which);
-            Intent tracklistIntent = new Intent(mLoggerMap.getActivity(), TrackList.class);
+            Intent tracklistIntent = new Intent(mLoggerMap.getActivity(), RouteList.class);
             tracklistIntent.putExtra(Tracks._ID, mTrackId);
             mLoggerMap.getActivity().startActivityForResult(tracklistIntent, MENU_TRACKLIST);
          }
@@ -793,11 +793,8 @@ public class LoggerMapHelper
       menu.add(ContextMenu.NONE, MENU_ABOUT, ContextMenu.NONE, R.string.menu_about).
       setIcon(R.drawable.ic_menu_info_details).setAlphabeticShortcut('A');
       
-      menu.add(ContextMenu.NONE, MENU_SETTINGS, ContextMenu.NONE, R.string.menu_settings).
-      setIcon(R.drawable.ic_menu_preferences).setAlphabeticShortcut('C');
-      
+          
       // More
-
       /*menu.add(ContextMenu.NONE, MENU_TRACKLIST, ContextMenu.NONE, R.string.menu_tracklist).
       setIcon(R.drawable.ic_menu_show_list).setAlphabeticShortcut('P');    
     
@@ -850,18 +847,19 @@ public class LoggerMapHelper
             mLoggerMap.getActivity().startActivityForResult(intent, MENU_NOTE);
             handled = true;
             break;
+            
          case MENU_SETTINGS:
             intent = new Intent(mLoggerMap.getActivity(), ApplicationPreferenceActivity.class);
             mLoggerMap.getActivity().startActivity(intent);
             handled = true;
             break;
          case MENU_TRACKLIST:
-            intent = new Intent(mLoggerMap.getActivity(), TrackList.class);
+            intent = new Intent(mLoggerMap.getActivity(), RouteList.class);
             intent.putExtra(Tracks._ID, this.mTrackId);
             mLoggerMap.getActivity().startActivityForResult(intent, MENU_TRACKLIST);
             handled = true;
             break;
-         case MENU_STATS:
+     /*    case MENU_STATS:
             if (this.mTrackId >= 0)
             {
                intent = new Intent(mLoggerMap.getActivity(), Statistics.class);
@@ -875,7 +873,7 @@ public class LoggerMapHelper
                mLoggerMap.getActivity().showDialog(DIALOG_NOTRACK);
             }
             handled = true;
-            break;
+            break;*/
          case MENU_ABOUT:
             intent = new Intent(mLoggerMap.getActivity(), About.class);
             mLoggerMap.getActivity().startActivity(intent);
