@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="drawable" name="theme_black">#ff393939</item>
+    <item type="drawable" name="theme_yellow">#ffffdc00</item>
+    <item type="drawable" name="white">#ffffffff</item>
+    <item type="drawable" name="trans_draw">#00000000</item>
+    <item type="drawable" name="main_red_lt">#fffaa2ac</item>
+</resources>
