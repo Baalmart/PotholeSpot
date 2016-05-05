@@ -52,6 +52,7 @@ import com.prim.ui.Settings;
 import dev.baalmart.gps.R;
 import dev.ugasoft.android.gps.actions.ControlTracking;
 import dev.ugasoft.android.gps.actions.NameTrack;
+import dev.ugasoft.android.gps.actions.PotholeSpotLabel;
 import dev.ugasoft.android.gps.actions.ShareTrack;
 import dev.ugasoft.android.gps.db.AndroidDatabaseManager;
 import dev.ugasoft.android.gps.db.DatabaseHelper;
@@ -92,7 +93,8 @@ public class MainActivity extends CustomActivity implements SensorEventListener,
 	   private SensorManager mSensorManager;
 	   String TAG_IT = "Main Activity";
 	   
-	   long startTime = 0;	   
+	   long startTime = 0;	
+	   PotholeSpotLabel potholeSpot;
 	    //runs without a timer by reposting this handler at the end of the runnable
 	  /*  Handler timerHandler = new Handler();	    
 	    Runnable timerRunnable = new Runnable() 
@@ -429,6 +431,7 @@ private Activity mActivity;
     setupDrawer();
     setupContainer(1);
     //startLogging();
+    potholeSpot = new PotholeSpotLabel(mDbHelper);
     mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
     mSensorManager.registerListener(this, mSensorManager.getDefaultSensor
@@ -544,7 +547,7 @@ public void onSensorChanged(SensorEvent event)
                 Log.d("z:", "" + z );*/
                 
                 currentTime = System.currentTimeMillis();
-           
+                potholeSpot.segmentStream(event.values[0], event.values[1], event.values[2]);
                 //new Storing_xyz().execute();
                 
            // callAsynchronousTask();

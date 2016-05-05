@@ -11,6 +11,7 @@ import dev.ugasoft.android.gps.db.Prim.LocationsColumns;
 import dev.ugasoft.android.gps.db.Prim.Media;
 import dev.ugasoft.android.gps.db.Prim.MediaColumns;
 import dev.ugasoft.android.gps.db.Prim.MetaData;
+import dev.ugasoft.android.gps.db.Prim.PotholeSpotDtw;
 import dev.ugasoft.android.gps.db.Prim.Segments;
 import dev.ugasoft.android.gps.db.Prim.Tracks;
 import dev.ugasoft.android.gps.db.Prim.TracksColumns;
@@ -65,8 +66,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
       db.execSQL(Segments.CREATE_STATMENT);
       db.execSQL(Tracks.CREATE_STATEMENT);
       db.execSQL(Media.CREATE_STATEMENT);
-      db.execSQL(MetaData.CREATE_STATEMENT);      
-     
+      db.execSQL(MetaData.CREATE_STATEMENT);  
+      db.execSQL(PotholeSpotDtw.CREATE_STATEMENT); 
    }
    
    
@@ -306,6 +307,25 @@ public class DatabaseHelper extends SQLiteOpenHelper
       db.delete("labels", "_id = ?", new String[] { String.valueOf(id) });
       db.close();
   }
+   
+   public long insert_PotholeSpotDtw(float x, float y, float z,String tag, double longtude, double latitude)
+   {
+     
+      SQLiteDatabase sqldb = getWritableDatabase();
+
+      ContentValues args = new ContentValues();
+      args.put(PotholeSpotDtw.X, x);
+      args.put(PotholeSpotDtw.Y, y);
+      args.put(PotholeSpotDtw.Z, z);
+      args.put(PotholeSpotDtw.TAG, tag);
+      args.put(PotholeSpotDtw.LATITUDE, latitude);
+      args.put(PotholeSpotDtw.LONGITUDE, longtude);
+      long dtwId = sqldb.insert(PotholeSpotDtw.TABLE, null, args);
+      sqldb.close();
+          Log.d( TAG, "Road Event Spotted, and stored");
+      return dtwId;
+   }
+   
    
    public long insert_xyz(float x, float y, float z, Location location)
    {
@@ -943,12 +963,11 @@ public class DatabaseHelper extends SQLiteOpenHelper
       SQLiteDatabase db = this.getWritableDatabase();
       
        ContentValues values = new ContentValues();
-       values.put(Xyz.Tag, label.getTag());
-       values.put(Xyz._ID, label.getID());
+       //values.put(Xyz.Tag, label.getTag());
+      // values.put(Xyz._ID, label.getID());
     
        // updating row
-        db.update(Labels.TABLE, values, Xyz._ID + " = ?",
-               new String[] { String.valueOf(label.getID()) });  
+       // db.update(Labels.TABLE, values, Xyz._ID + " = ?",new String[] { String.valueOf(label.getID()) });  
    }
    
    }

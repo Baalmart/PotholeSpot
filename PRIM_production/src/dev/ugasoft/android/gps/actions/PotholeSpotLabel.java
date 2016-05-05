@@ -9,14 +9,10 @@ import dev.ugasoft.android.gps.db.*;
 
 public class PotholeSpotLabel
 {
-
-   private String tag;
-   private long id;
-
    private DatabaseHelper dbm;
 
-   private double[] seq1;
-   private double[] seq2;
+   private double[] roadEventSequence;
+   private double[] templateSequence;
    private int[][] warpingPath;
 
    private int n;
@@ -24,7 +20,8 @@ public class PotholeSpotLabel
    private int K;
 
    private double warpingDistance;
-   private ArrayList<Template> templates;
+   private ArrayList<RoadEventTemplate> templates;
+   private double[] segmentedInputStream;
 
    /**
     * Constructor
@@ -33,56 +30,57 @@ public class PotholeSpotLabel
     */
    public PotholeSpotLabel(DatabaseHelper dbh)
    {
-      Template template;
-      templates = new ArrayList<Template>();
+      RoadEventTemplate template;
+      templates = new ArrayList<RoadEventTemplate>();
+      segmentedInputStream = new double[10];
       dbm = dbh;
       //Pothole Templates
-      template = new Template();
+      template = new RoadEventTemplate();
       template.name = "Template-1-Pothole";
       template.sequence = new double[] { 0.00, 0.00, 0.00, 0.00 };
       template.labelName = "Pothole";
       templates.add(template);
 
-      template = new Template();
+      template = new RoadEventTemplate();
       template.name = "Template-2-Pothole";
       template.sequence = new double[] { 0.00, 0.00, 0.00, 0.00 };
       template.labelName = "Pothole";
       templates.add(template);
 
       //Roadhump Templates
-      template = new Template();
+      template = new RoadEventTemplate();
       template.name = "Template-1-Roadhump";
       template.sequence = new double[] { 0.00, 0.00, 0.00, 0.00 };
       template.labelName = "Roadhump";
       templates.add(template);
 
-      template = new Template();
+      template = new RoadEventTemplate();
       template.name = "Template-2-Roadhump";
       template.sequence = new double[] { 0.00, 0.00, 0.00, 0.00 };
       template.labelName = "Roadhump";
       templates.add(template);
 
-      template = new Template();
+      template = new RoadEventTemplate();
       template.name = "Template-3-Roadhump";
       template.sequence = new double[] { 0.00, 0.00, 0.00, 0.00 };
       template.labelName = "Roadhump";
       templates.add(template);
 
       //UnevenRoad Templates
-      template = new Template();
+      template = new RoadEventTemplate();
       template.name = "Template-1-UnevenRoad";
       template.sequence = new double[] { 0.00, 0.00, 0.00, 0.00 };
       template.labelName = "UnevenRoad";
       templates.add(template);
 
-      template = new Template();
+      template = new RoadEventTemplate();
       template.name = "Template-2-UnevenRoad";
       template.sequence = new double[] { 0.00, 0.00, 0.00, 0.00 };
       template.labelName = "UnevenRoad";
       templates.add(template);
    }
 
-   public void match()
+   private void match()
    {
       double accumulatedDistance = 0.0;
 
@@ -93,7 +91,7 @@ public class PotholeSpotLabel
       {
          for (int j = 0; j < m; j++)
          {
-            d[i][j] = distanceBetween(seq1[i], seq2[j]);
+            d[i][j] = distanceBetween(roadEventSequence[i], templateSequence[j]);
          }
       }
 
@@ -239,23 +237,28 @@ public class PotholeSpotLabel
       {
          retVal += "(" + warpingPath[i][0] + ", " + warpingPath[i][1] + ")";
          retVal += (i == K - 1) ? "}" : ", ";
-
       }
       return retVal;
    }
 
-   public Template match(double[] inputSequence)
+   /**
+    * Matches the an Incoming input stream to several templates stored.
+    * @return a template whose matching with Incoming stream resulted into the minimum distance 
+    * @param roadEventStream , an incoming stream of 10 values in total.
+    * @author Judas Tadeo, PotholeSpot-Uganda Project
+    * */
+   private RoadEventTemplate match(double[] roadEventStream)
    {
-      seq1 = inputSequence;
-      Template template = null;
-      Template matchedTemplate = null;
+      roadEventSequence = roadEventStream;
+      RoadEventTemplate template = null;
+      RoadEventTemplate matchedTemplate = null;
       for (int i = 0; i < templates.size(); i++)
       {
          template = templates.get(i);
-         seq2 = template.sequence;
+         templateSequence = template.sequence;
 
-         n = seq1.length;
-         m = seq2.length;
+         n = roadEventSequence.length;
+         m = templateSequence.length;
          K = 1;
 
          warpingPath = new int[n + m][2]; // max(n, m) <= K < n + m
@@ -273,97 +276,71 @@ public class PotholeSpotLabel
          if (i >= 1)
          {
             if (matchedTemplate.minimumDistance > templates.get(i - 1).minimumDistance)
+            {
                matchedTemplate = templates.get(i - 1);
+               TagSpotLabel(matchedTemplate);
+            }
          }
       }
-
       return matchedTemplate;
    }
 
-   public double[] segmentSequece(double[] inputSequence)
+   /**
+    * @category The method receives streams of xyz values and segments them into a sequence of 10. 
+    * Further analyzes them to remove stream due to noise
+    * @param x, accelerometer value X.
+    * @param y, accelerometer value Y.
+    * @param z, Accelerometer value z.
+    * @return void.
+    * @author Judas Tadeo, PotholeSpot-Uganda Project.
+    * */
+   public void segmentStream(double x, double y, double z)
    {
-
-      double[] segmentedSq = null;
-
-      return segmentedSq;
-   }
-
-   private ArrayList<PotholeSpotLabel> LoadUnTaggedLabels()
-   {
-
-      ArrayList<PotholeSpotLabel> labels = this.dbm.getUntaggedLabels();
-      return labels;
-   }
-
-   public void TagSpotLabel(DatabaseHelper dbm)
-   {
-      this.dbm = dbm;
-
-      ArrayList<PotholeSpotLabel> labels = LoadUnTaggedLabels();
-
-      for (Iterator<PotholeSpotLabel> lbl = labels.iterator(); lbl.hasNext();)
+      int count = segmentedInputStream.length;
+      if (count == 10)
       {
-         PotholeSpotLabel lable = lbl.next();
-         //TagSpotLabel(lable);
+         match(segmentedInputStream);
+         //segmentedInputStream
+         segmentStream(x, y, z);
       }
-      updateSpotLabelTag(labels);
+      else if (count < 10)
+         segmentedInputStream[count] = x;
    }
 
-   public void TagSpotLabel(SensorEvent event)
+   /**
+    * @category, The method saves a matched or an identified Road Event to SQLlite Database with its label also called tag
+    * @param template, is the matched Template whose location must also be found.
+    * @return, void.
+    * @author Judas Tadeo, PotholeSpot-Uganda Project
+    * */
+   private void TagSpotLabel(RoadEventTemplate template)
    {
-      //this.dbm = dbm;
+      float x, y, z;
+      double longtude, latitude;
+      double[] location;
+      long logtime = 000;
+      String tag;
 
-      //mLastRecordedEvent = ((MainActivity)getActivity()).getmLastRecordedEvent();
-
-      ArrayList<PotholeSpotLabel> labels = LoadUnTaggedLabels();
-
-      for (Iterator<PotholeSpotLabel> lbl = labels.iterator(); lbl.hasNext();)
-      {
-         PotholeSpotLabel lable = lbl.next();
-         // TagSpotLabel(lable);
-      }
-      updateSpotLabelTag(labels);
+      tag = template.labelName;
+      location = searchLocation(logtime);
+      longtude = location[0];
+      latitude = location[1];
+      x = 0; y = 0; z = 0;
+      this.dbm.insert_PotholeSpotDtw(x, y, z, tag, longtude, latitude);
    }
 
-   public void TagSpotLabel(Template template)
+   /**
+    * @category The method  location of a Road Event based on the time the event was logged
+    * @param logtime, the time at which the event was logged
+    * @return void.
+    * @author Judas Tadeo, PotholeSpot-Uganda Project
+    * */
+   public double[] searchLocation(long logtime)
    {
-
-      // this.dbm.UpdateLabelTag(label);
-
-   }
-
-   public void updateSpotLabelTag(ArrayList<PotholeSpotLabel> labels)
-   {
-
-      for (PotholeSpotLabel label : labels)
-      {
-         this.dbm.UpdateLabelTag(label);
-      }
-   }
-
-   /*
-    * private void speedFilter(ArrayList<PotholeSpotLabel> labels){ } private void highPassFilter(ArrayList<PotholeSpotLabel> labels){ } private ArrayList<PotholeSpotLabel>
-    * zPeakFilter(ArrayList<PotholeSpotLabel> labels){ return labels; }
-    */
-
-   public void setID(long id)
-   {
-      this.id = id;
-   }
-
-   public void setTag(String tag)
-   {
-      this.tag = tag;
-   }
-
-   public String getTag()
-   {
-      return this.tag;
-   }
-
-   public long getID()
-   {
-      return this.id;
+      double[] loc = new double[2];
+      loc[0] = 0.00;
+      loc[1] = 0.00;
+      return loc;
    }
 
 }

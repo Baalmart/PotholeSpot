@@ -23,6 +23,31 @@ public final class Prim
    /** The version of the database schema */
    static final int DATABASE_VERSION = 10;
 
+ 
+   
+   public static final class PotholeSpotDtw extends PotholeSPotDtwColumns implements android.provider.BaseColumns
+   {
+      /** The MIME type of a CONTENT_URI subdirectory of a single track. */
+      public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.dir/vnd.com.prim.dtw";
+      /** The MIME type of CONTENT_URI providing a directory of tracks. */
+      public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.com.prim.dtw";
+      /** The content:// style URL for this provider, content://nl.sogeti.android.gpstracker/tracks */
+      public static final Uri CONTENT_URI = Uri.parse( "content://" + Prim.AUTHORITY + "/" + PotholeSpotDtw.TABLE );
+
+      /** The name of this table */
+      public static final String TABLE = "dtw";
+      static final String CREATE_STATEMENT = 
+         "CREATE TABLE " + PotholeSpotDtw.TABLE + "(" + " " + PotholeSpotDtw._ID           + " " + PotholeSpotDtw._ID_TYPE +                          
+                                          "," + " " + PotholeSpotDtw.X + " " + PotholeSpotDtw.X_TYPE + 
+                                          "," + " " + PotholeSpotDtw.Y + " " + PotholeSpotDtw.Y_TYPE +
+                                          "," + " " + PotholeSpotDtw.Z + " " + PotholeSpotDtw.Z_TYPE +
+                                          "," + " " + PotholeSpotDtw.LONGITUDE + " " + PotholeSpotDtw.LONGITUDE_TYPE +
+                                          "," + " " + PotholeSpotDtw.LATITUDE + " " + PotholeSpotDtw.LATITUDE_TYPE +
+                                          "," + " " + PotholeSpotDtw.TAG + " " + PotholeSpotDtw.TAG_TYPE +
+                                          ");";
+   }
+   
+   
    /**
     * This table contains routes...
 
@@ -354,6 +379,26 @@ public final class Prim
       static final String LATITUDE_TYPE  = "REAL NOT NULL";
       static final String LONGITUDE_TYPE = "REAL NOT NULL";
    }
+   
+   public static class PotholeSPotDtwColumns
+   {   
+      public static final String X ="x";
+      public static final String Y ="y";
+      public static final String Z ="z";   
+      public static final String TAG ="Tag";
+      public static final String LATITUDE = "latitude";
+      public static final String LONGITUDE = "longitude";
+      static final String _ID_TYPE = "INTEGER PRIMARY KEY AUTOINCREMENT"; 
+      /** The recorded time */
+      public static final String TIME = "time";
+      static final String TIME_TYPE      = "INTEGER NOT NULL";
+      static final String TAG_TYPE     = "REAL NOT NULL";
+      static final String X_TYPE = "REAL NOT NULL";
+      static final String Y_TYPE = "REAL NOT NULL";
+      static final String Z_TYPE = "REAL NOT NULL";
+      static final String LATITUDE_TYPE  = "REAL NOT NULL";
+      static final String LONGITUDE_TYPE = "REAL NOT NULL";
+   } 
    
    public static class XYZColumns
    
