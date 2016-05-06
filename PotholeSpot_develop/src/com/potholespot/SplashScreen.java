@@ -1,7 +1,7 @@
 package com.potholespot;
 
 import dev.baalmart.potholespot.R;
-import dev.ugasoft.android.gps.viewer.map.CommonLoggerMap;
+import dev.potholespot.android.viewer.map.CommonLoggerMap;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

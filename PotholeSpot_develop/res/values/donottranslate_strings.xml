@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-   <string name="about_copyright">Copyright©2016 Uganda Soft Limited</string> 
+   <string name="about_copyright">Copyright©2016</string> 
    <string name="about_website_url">http://postholespot.ug</string>
    <string name="about_email">potholespot@gmail.com</string>
    <string name="about_website_label">PotholeSpot</string>

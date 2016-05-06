@@ -118,7 +118,7 @@
       android:src="@drawable/speedindexbar"
       android:visibility="invisible" />
 
-   <dev.ugasoft.android.gps.util.SlidingIndicatorView
+   <dev.potholespot.android.util.SlidingIndicatorView
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:id="@+id/scaleindicator"
       android:layout_width="30dp"

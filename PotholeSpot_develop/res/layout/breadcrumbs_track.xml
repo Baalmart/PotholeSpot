@@ -28,7 +28,7 @@
       android:layout_marginLeft="20dip"
       android:background="#554d4d"/>
 
-   <dev.ugasoft.android.gps.util.DateView
+   <dev.potholespot.android.util.DateView
       android:layout_height="wrap_content"
       android:layout_width="wrap_content"
       android:id="@+id/listitem_from"

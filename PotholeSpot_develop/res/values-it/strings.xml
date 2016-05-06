@@ -255,7 +255,7 @@ Enter number of feet for acres/hour or meters for use in hectares/hour.\n </stri
     <string name="osm_task">Traccia in caricamento su OpenStreetMap</string>
     <string name="sddirectory_title">Directory scheda SD usata per salvare le tracce condivise</string>
     <string name="sddirectory_summary">Tracce e files sono salvati in questa directory su scheda SD.</string>
-    <string name="sddirectory_message">Inserisci percorso su scheda SD dove salvare i files. Il percorso è relativo alla scheda SD. Per esempio il percorso /OpenGPSTracker/ utilizzato di default è accessibile da /Apps/OpenGPSTracker/ o /sdcard/OpenGPSTracker/</string>
+    <string name="sddirectory_message">Inserisci percorso su scheda SD dove salvare i files. Il percorso è relativo alla scheda SD. Per esempio il percorso /OpenGPSTracker/ utilizzato di default è accessibile da /Apps/PotholeSpot/ o /sdcard/PotholeSpot/</string>
     <string name="breadcrumbs_connect">Connetti a GoBreadcrumbs</string>
     
     <string name="preference_stream">Location broadcasting settings</string>

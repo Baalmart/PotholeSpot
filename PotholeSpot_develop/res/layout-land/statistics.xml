@@ -82,7 +82,7 @@
             <TextView
                android:text="@string/stat_starttime"
                android:paddingRight="10dp" />
-            <dev.ugasoft.android.gps.util.DateView
+            <dev.potholespot.android.util.DateView
                android:id="@+id/stat_starttime" />
          </TableRow>
          <TableRow
@@ -92,7 +92,7 @@
             <TextView
                android:text="@string/stat_endtime"
                android:paddingRight="10dp" />
-            <dev.ugasoft.android.gps.util.DateView
+            <dev.potholespot.android.util.DateView
                android:id="@+id/stat_endtime" />
          </TableRow>
 <!--          <TableRow -->
@@ -141,31 +141,31 @@
 
    </LinearLayout>
    
-   <dev.ugasoft.android.gps.actions.utils.ViewFlipper 
+   <dev.potholespot.android.actions.utils.ViewFlipper 
         android:id="@+id/flipper"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         
-      <dev.ugasoft.android.gps.actions.utils.GraphCanvas
+      <dev.potholespot.android.actions.utils.GraphCanvas
          android:id="@+id/graph_timespeed"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"  />
          
-      <dev.ugasoft.android.gps.actions.utils.GraphCanvas
+      <dev.potholespot.android.actions.utils.GraphCanvas
          android:id="@+id/graph_distancespeed"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content" />
 
-      <dev.ugasoft.android.gps.actions.utils.GraphCanvas
+      <dev.potholespot.android.actions.utils.GraphCanvas
          android:id="@+id/graph_timealtitude"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content" />
 
-      <dev.ugasoft.android.gps.actions.utils.GraphCanvas
+      <dev.potholespot.android.actions.utils.GraphCanvas
          android:id="@+id/graph_distancealtitude"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content" />
          
-   </dev.ugasoft.android.gps.actions.utils.ViewFlipper>
+   </dev.potholespot.android.actions.utils.ViewFlipper>
    
 </LinearLayout>

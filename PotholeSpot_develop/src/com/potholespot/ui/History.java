@@ -1,6 +1,5 @@
 package com.potholespot.ui;
 
-
 import dev.baalmart.potholespot.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

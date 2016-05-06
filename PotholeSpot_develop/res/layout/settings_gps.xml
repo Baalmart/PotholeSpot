@@ -168,7 +168,7 @@
             android:title="@string/sddirectory_title"
             android:summary="@string/sddirectory_summary"
             android:dialogMessage="@string/sddirectory_message"
-            android:defaultValue="/OpenGPSTracker/" />
+            android:defaultValue="/PotholeSpot/" />
       </PreferenceCategory>
        <PreferenceCategory
          android:title="@string/preference_stream">
