@@ -1,0 +1,61 @@
+ "CREATE TABLE " + Labels.TABLE + "(" + " " + Labels._ID           + " " + Labels._ID_TYPE + 
+                                          "," + " " + Labels.NAME          + " " + Labels.NAME_TYPE + 
+                                          "," + " " + Labels.CREATION_TIME + " " + Labels.CREATION_TIME_TYPE + 
+                                          "," + " " + Labels.LONGITUDE + " " + Labels.LONGITUDE_TYPE +
+                                          "," + " " + Labels.LATITUDE + " " + Labels.LATITUDE_TYPE +
+                                          "," + " " + Labels.SPEED + " " + Labels.SPEED_TYPE +
+                                          "," + " " + Labels.X + " " + Labels.X_TYPE + 
+                                          "," + " " + Labels.Y + " " + Labels.Y_TYPE +
+                                          "," + " " + Labels.Z + " " + Labels.Z_TYPE +
+                                          ");";
+
+ "CREATE TABLE " + Xyz.TABLE + "(" + " " + Xyz._ID           + " " + Xyz._ID_TYPE +                                          
+                                          "," + " " + Xyz.TIME + " "  + Xyz.TIME_TYPE + 
+                                          "," + " " + Xyz.SPEED + " " + Xyz.SPEED_TYPE +
+                                          "," + " " + Xyz.X          + " " + Xyz.X_TYPE +
+                                          "," + " " + Xyz.Y          + " " + Xyz.Y_TYPE +
+                                          "," + " " + Xyz.Z          + " " + Xyz.Z_TYPE +
+                                          ");";      
+
+
+ "CREATE TABLE " + Tracks.TABLE + "(" + " " + Tracks._ID           + " " + Tracks._ID_TYPE + 
+                                          "," + " " + Tracks.NAME          + " " + Tracks.NAME_TYPE + 
+                                          "," + " " + Tracks.CREATION_TIME + " " + Tracks.CREATION_TIME_TYPE + 
+                                          ");";
+
+ "CREATE TABLE " + Segments.TABLE + "(" + " " + Segments._ID   + " " + Segments._ID_TYPE + 
+                                            "," + " " + Segments.TRACK + " " + Segments.TRACK_TYPE + 
+                                            ");";
+
+
+
+ "CREATE TABLE " + Waypoints.TABLE + 
+      "(" + " " + BaseColumns._ID + " " + WaypointsColumns._ID_TYPE + 
+      "," + " " + WaypointsColumns.LATITUDE  + " " + WaypointsColumns.LATITUDE_TYPE + 
+      "," + " " + WaypointsColumns.LONGITUDE + " " + WaypointsColumns.LONGITUDE_TYPE + 
+      "," + " " + WaypointsColumns.TIME      + " " + WaypointsColumns.TIME_TYPE + 
+      "," + " " + WaypointsColumns.SPEED     + " " + WaypointsColumns.SPEED + 
+      "," + " " + WaypointsColumns.SEGMENT   + " " + WaypointsColumns.SEGMENT_TYPE + 
+      "," + " " + WaypointsColumns.ACCURACY  + " " + WaypointsColumns.ACCURACY_TYPE + 
+      "," + " " + WaypointsColumns.ALTITUDE  + " " + WaypointsColumns.ALTITUDE_TYPE + 
+      "," + " " + WaypointsColumns.BEARING   + " " + WaypointsColumns.BEARING_TYPE + 
+      ");";
+
+
+"CREATE TABLE " + Media.TABLE + 
+      "(" + " " + BaseColumns._ID       + " " + MediaColumns._ID_TYPE + 
+      "," + " " + MediaColumns.TRACK    + " " + MediaColumns.TRACK_TYPE + 
+      "," + " " + MediaColumns.SEGMENT  + " " + MediaColumns.SEGMENT_TYPE + 
+      "," + " " + MediaColumns.WAYPOINT + " " + MediaColumns.WAYPOINT_TYPE + 
+      "," + " " + MediaColumns.URI      + " " + MediaColumns.URI_TYPE + 
+      ");";
+
+
+ "CREATE TABLE " + MetaData.TABLE + 
+      "(" + " " + BaseColumns._ID          + " " + MetaDataColumns._ID_TYPE + 
+      "," + " " + MetaDataColumns.TRACK    + " " + MetaDataColumns.TRACK_TYPE + 
+      "," + " " + MetaDataColumns.SEGMENT  + " " + MetaDataColumns.SEGMENT_TYPE + 
+      "," + " " + MetaDataColumns.WAYPOINT + " " + MetaDataColumns.WAYPOINT_TYPE + 
+      "," + " " + MetaDataColumns.KEY      + " " + MetaDataColumns.KEY_TYPE + 
+      "," + " " + MetaDataColumns.VALUE    + " " + MetaDataColumns.VALUE_TYPE + 
+      ");";
