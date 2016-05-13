@@ -1,6 +1,6 @@
 package dev.potholespot.android.viewer.map;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.db.AndroidDatabaseManager;
 import dev.potholespot.android.util.Constants;
 import dev.potholespot.android.util.SlidingIndicatorView;

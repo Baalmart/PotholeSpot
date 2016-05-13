@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.logger.GPSLoggerServiceManager;
 import dev.potholespot.android.util.Constants;
 import android.app.Activity;

@@ -2,7 +2,7 @@ package dev.potholespot.android.viewer.map;
 
 import java.util.concurrent.Semaphore;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.ControlLogging;
 import dev.potholespot.android.actions.ManualMode;
 import dev.potholespot.android.actions.ShareRoute;
@@ -193,7 +193,7 @@ public class LoggerMapHelper
       mSharedPreferences.registerOnSharedPreferenceChangeListener(mSharedPreferenceChangeListener);
       mUnits.setUnitsChangeListener(mUnitsChangeListener);
       setupActionBar();
-      updateTitleBar();
+      //updateTitleBar();
       updateBlankingBehavior();
 
       if (mTrackId >= 0)
@@ -229,7 +229,7 @@ public class LoggerMapHelper
    {
      ActionBar localActionBar = mLoggerMap.getActivity().getActionBar();    
      
-     if (localActionBar == null)
+    /* if (localActionBar == null)
        return;
      localActionBar.setDisplayShowTitleEnabled(true);
      localActionBar.setNavigationMode(0);
@@ -241,7 +241,16 @@ public class LoggerMapHelper
      localActionBar.setHomeButtonEnabled(true);
      //localActionBar.setTitle(updateTitleBar());
      //localActionBar.setIcon(R.drawable.ic_action_share);
-     localActionBar.setIcon(R.drawable.ic_action_share);
+     localActionBar.setIcon(R.drawable.ic_action_share);*/
+     
+     //ActionBar localActionBar = getActionBar();
+     localActionBar.setDisplayShowTitleEnabled(true);
+     localActionBar.setTitle("PotholeSpot");
+     localActionBar.setNavigationMode(0);
+     localActionBar.setDisplayUseLogoEnabled(true);
+     localActionBar.setLogo(R.drawable.ic_action_map);
+     localActionBar.setDisplayHomeAsUpEnabled(true);
+     localActionBar.setHomeButtonEnabled(true);
    }
    
    
@@ -975,7 +984,7 @@ public class LoggerMapHelper
             satellite.setChecked(mSharedPreferences.getBoolean(Constants.SATELLITE, false));
             regular.setChecked(!mSharedPreferences.getBoolean(Constants.SATELLITE, false));
 
-            int osmbase = mSharedPreferences.getInt(Constants.OSMBASEOVERLAY, 0);
+            int osmbase = mSharedPreferences.getInt(Constants.OSMBASEOVERLAY, 2); //the default overlay for OSM
             cloudmade = (RadioButton) dialog.findViewById(R.id.layer_osm_cloudmade);
             mapnik = (RadioButton) dialog.findViewById(R.id.layer_osm_maknik);
             cycle = (RadioButton) dialog.findViewById(R.id.layer_osm_bicycle);
@@ -989,7 +998,8 @@ public class LoggerMapHelper
             ((CheckBox) dialog.findViewById(R.id.layer_distance)).setChecked(mSharedPreferences.getBoolean(Constants.DISTANCE, false));
             ((CheckBox) dialog.findViewById(R.id.layer_compass)).setChecked(mSharedPreferences.getBoolean(Constants.COMPASS, false));
             ((CheckBox) dialog.findViewById(R.id.layer_location)).setChecked(mSharedPreferences.getBoolean(Constants.LOCATION, false));
-            int provider = Integer.valueOf(mSharedPreferences.getString(Constants.MAPPROVIDER, "" + Constants.GOOGLE)).intValue();
+           // the default provider for maps is done here
+            int provider = Integer.valueOf(mSharedPreferences.getString(Constants.MAPPROVIDER, "" + Constants.OSM)).intValue();
             
             switch (provider)
             {
@@ -1084,8 +1094,8 @@ public class LoggerMapHelper
 
    private void updateMapProvider()
    {
-      Class< ? > mapClass = null;
-      int provider = Integer.valueOf(mSharedPreferences.getString(Constants.MAPPROVIDER, "" + Constants.GOOGLE)).intValue();
+      Class< ? > mapClass = OsmLoggerMap.class; //changed from null
+      int provider = Integer.valueOf(mSharedPreferences.getString(Constants.MAPPROVIDER, "" + Constants.OSM)).intValue();
       switch (provider)
       {
          case Constants.GOOGLE:
@@ -1098,7 +1108,7 @@ public class LoggerMapHelper
             mapClass = MapQuestLoggerMap.class;
             break;
          default:
-            mapClass = GoogleLoggerMap.class;
+            mapClass = OsmLoggerMap.class;
             Log.e(TAG, "Fault in value " + provider + " as MapProvider, defaulting to Google Maps.");
             break;
       }
@@ -1592,7 +1602,7 @@ public class LoggerMapHelper
             mAverageSpeed = 0.0;
             mAverageHeight = 0.0;
             
-            updateTitleBar();
+           // updateTitleBar();
             updateDataOverlays();
             updateSpeedColoring();
             if (center)

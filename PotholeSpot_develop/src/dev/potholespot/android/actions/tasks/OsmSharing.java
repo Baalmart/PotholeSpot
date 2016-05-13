@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.ShareRoute;
 import dev.potholespot.android.actions.utils.ProgressListener;
 import dev.potholespot.android.db.Pspot;

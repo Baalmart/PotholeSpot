@@ -1,6 +1,6 @@
 package dev.potholespot.android.viewer.map;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.util.Constants;
 import dev.potholespot.android.util.SlidingIndicatorView;
 import dev.potholespot.android.viewer.map.overlay.OverlayProvider;
@@ -221,7 +221,7 @@ public class OsmLoggerMap extends Activity implements LoggerMap
    public void updateOverlays()
    {
       SharedPreferences sharedPreferences = mHelper.getPreferences();
-      int renderer = sharedPreferences.getInt(Constants.OSMBASEOVERLAY, 0);
+      int renderer = sharedPreferences.getInt(Constants.OSMBASEOVERLAY, 2);
       switch( renderer )
       {
          case Constants.OSM_CLOUDMADE:

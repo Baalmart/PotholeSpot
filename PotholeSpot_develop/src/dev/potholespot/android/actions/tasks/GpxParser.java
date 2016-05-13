@@ -12,7 +12,7 @@ import java.util.Vector;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.utils.ProgressListener;
 import dev.potholespot.android.db.Pspot.Tracks;
 import dev.potholespot.android.db.Pspot.Waypoints;

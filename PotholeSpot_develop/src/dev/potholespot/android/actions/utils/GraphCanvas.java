@@ -3,7 +3,7 @@ package dev.potholespot.android.actions.utils;
 import java.text.DateFormat;
 import java.util.Date;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.db.Pspot.Segments;
 import dev.potholespot.android.db.Pspot.Waypoints;
 import dev.potholespot.android.util.Constants;

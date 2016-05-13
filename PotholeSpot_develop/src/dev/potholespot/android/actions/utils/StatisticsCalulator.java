@@ -16,7 +16,7 @@ public class StatisticsCalulator extends AsyncTask<Uri, Void, Void>
 {
 
    @SuppressWarnings("unused")
-   private static final String TAG = "OGT.StatisticsCalulator";
+   private static final String TAG = "pspot.StatisticsCalulator";
    private Context mContext;   
    private String overallavgSpeedText = "Unknown";
    private String avgSpeedText = "Unknown";

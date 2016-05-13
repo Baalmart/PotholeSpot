@@ -1,6 +1,6 @@
 package dev.potholespot.android.actions;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.utils.GraphCanvas;
 import dev.potholespot.android.actions.utils.StatisticsCalulator;
 import dev.potholespot.android.actions.utils.StatisticsDelegate;

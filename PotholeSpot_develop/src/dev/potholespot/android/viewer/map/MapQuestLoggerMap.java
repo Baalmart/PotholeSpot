@@ -1,8 +1,9 @@
 package dev.potholespot.android.viewer.map;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.util.SlidingIndicatorView;
 import dev.potholespot.android.viewer.map.overlay.OverlayProvider;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -39,6 +40,7 @@ public class MapQuestLoggerMap extends MapActivity implements LoggerMap
    {
       super.onCreate(load);
       setContentView(R.layout.map_mapquest);
+      setupActionBar();
       
       mMapView = (MapView) findViewById(R.id.myMapView);
       mHelper = new LoggerMapHelper(this);
@@ -416,5 +418,18 @@ public class MapQuestLoggerMap extends MapActivity implements LoggerMap
    {
       return true;
    }
+   
+   @SuppressWarnings("deprecation")
+   protected void setupActionBar()
+     {
+       ActionBar localActionBar = getActionBar();
+       localActionBar.setDisplayShowTitleEnabled(true);
+       localActionBar.setTitle("Map");
+       localActionBar.setNavigationMode(0);
+       localActionBar.setDisplayUseLogoEnabled(true);
+       localActionBar.setLogo(R.drawable.ic_action_map);
+       localActionBar.setDisplayHomeAsUpEnabled(true);
+       localActionBar.setHomeButtonEnabled(true);
+     }
 
 }

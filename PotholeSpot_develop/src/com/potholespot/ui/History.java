@@ -1,6 +1,6 @@
 package com.potholespot.ui;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

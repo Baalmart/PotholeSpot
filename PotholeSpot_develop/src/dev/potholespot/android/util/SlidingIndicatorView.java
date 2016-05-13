@@ -1,6 +1,6 @@
 package dev.potholespot.android.util;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;

@@ -2,7 +2,7 @@ package dev.potholespot.android.actions;
 
 import java.util.Calendar;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.db.Pspot.Tracks;
 import android.app.Activity;
 import android.app.AlertDialog;

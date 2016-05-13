@@ -3,7 +3,7 @@ package dev.potholespot.android.adapter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.util.Constants;
 import android.content.Context;
 import android.database.DataSetObserver;

@@ -1,6 +1,6 @@
 package dev.potholespot.android.actions;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.db.Pspot.Tracks;
 import dev.potholespot.android.logger.GPSLoggerServiceManager;
 import dev.potholespot.android.util.Constants;

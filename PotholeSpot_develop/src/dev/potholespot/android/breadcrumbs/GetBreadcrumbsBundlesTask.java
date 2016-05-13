@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.tasks.XmlCreator;
 import dev.potholespot.android.actions.utils.ProgressListener;
 import dev.potholespot.android.adapter.BreadcrumbsAdapter;

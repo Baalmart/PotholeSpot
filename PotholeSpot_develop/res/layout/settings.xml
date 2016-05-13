@@ -21,7 +21,7 @@
             android:layout_width="fill_parent" 
             android:layout_height="fill_parent">
             
-            <TextView 
+          <!--   <TextView 
                 android:textColor="@color/gray" 
                 android:id="@+id/textView1" 
                 android:layout_width="wrap_content" 
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content" 
                 android:progress="60" 
                 android:progressDrawable="@drawable/slider_progress_layer"
-                android:thumb="@drawable/slider_thumb" />
+                android:thumb="@drawable/slider_thumb" /> -->
             
             <TextView
                  android:textColor="@color/gray" 
@@ -97,34 +97,40 @@
                     android:layout_height="wrap_content" 
                     style="@style/custom_switch" />
                 
-                <Switch 
+                <!-- <Switch 
                     android:id="@id/switch1" 
                     android:layout_width="wrap_content" 
                     android:layout_height="wrap_content" 
                     android:layout_marginLeft="10.0dip" 
                     android:checked="true" 
-                    style="@style/custom_switch" />
+                    style="@style/custom_switch" /> -->
                 
             </LinearLayout>
             
             <LinearLayout 
-                android:gravity="center_vertical" 
+               
                 android:id="@+id/a" 
                 android:layout_width="wrap_content" 
                 android:layout_height="wrap_content" 
                 android:layout_marginTop="20.0dip" 
-                android:layout_marginBottom="10.0dip">
+                android:layout_marginBottom="10.0dip"
+                android:orientation="vertical">
+                
+                 <!-- android:gravity="center_vertical -->" 
                 
                 <TextView 
                     android:textColor="@color/gray" 
                     android:id="@+id/textView4" 
                     android:layout_width="wrap_content" 
-                    android:layout_height="wrap_content" 
-                    android:layout_marginRight="10.0dip" 
-                    android:text="@string/radio_btn" />
+                    android:layout_height="wrap_content"                     
+                    android:text="@string/radio_btn"
+                    android:layout_marginLeft="30.0dip"
+                    android:layout_marginRight="10.0dip"                   
+                   />
                 
+                <!-- android:layout_marginRight="10.0dip" -->
                 <RadioGroup 
-                    android:orientation="horizontal" 
+                    android:orientation="vertical" 
                     android:id="@+id/radioGroup1" 
                     android:layout_width="wrap_content" 
                     android:layout_height="wrap_content">
@@ -135,15 +141,26 @@
                         android:layout_height="wrap_content" 
                         android:layout_marginRight="10.0dip" 
                         android:checked="true" 
-                        android:button="@drawable/radio_btn" />
+                        android:button="@drawable/radio_btn"
+                        android:text="MapQuest" />
                     
                     <RadioButton 
                         android:id="@+id/radio1" 
                         android:layout_width="wrap_content" 
                         android:layout_height="wrap_content" 
-                        android:button="@drawable/radio_btn" />
-                    
+                        android:button="@drawable/radio_btn"
+                        android:text="OpenStreetMap" />
+                        
+                    <RadioButton 
+                        android:id="@+id/radio2" 
+                        android:layout_width="wrap_content" 
+                        android:layout_height="wrap_content" 
+                        android:button="@drawable/radio_btn"
+                        android:text="Google"                             
+                        />                    
                 </RadioGroup>
+                
+               <!--  
                 <TextView 
                     android:textColor="@color/gray" 
                     android:id="@+id/textView5" 
@@ -165,11 +182,11 @@
                     android:id="@+id/checkBox2" 
                     android:layout_width="wrap_content" 
                     android:layout_height="wrap_content" 
-                    android:button="@drawable/checkbox" />
+                    android:button="@drawable/checkbox" /> -->
                 
             </LinearLayout>
             
-            <TextView 
+<!--             <TextView 
                 android:textColor="@color/gray" 
                 android:id="@+id/textView6" 
                 android:layout_width="wrap_content" 
@@ -225,23 +242,24 @@
                     android:layout_weight="1.0" 
                     style="@style/tab_btn_small" />
                 
-            </LinearLayout>
+            </LinearLayout> -->
             
-            <TextView 
+            <!-- <TextView 
                 android:textColor="@color/gray" 
                 android:id="@+id/textView7" 
                 android:layout_width="wrap_content" 
                 android:layout_height="wrap_content" 
                 android:layout_marginTop="20.0dip" 
                 android:layout_marginBottom="10.0dip" 
-                android:text="@string/button" />
+                android:text="@string/button" /> -->
             
             <Button 
                 android:id="@+id/btnDemo" 
                 android:layout_width="wrap_content" 
                 android:layout_height="wrap_content" 
-                android:text="Share this video" 
-                style="@style/yellow_btn" />
+                android:text="More Settings" 
+                style="@style/yellow_btn" 
+                />
             
         </LinearLayout>
     </ScrollView>

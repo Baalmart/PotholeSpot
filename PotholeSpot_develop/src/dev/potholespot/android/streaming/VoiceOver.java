@@ -1,6 +1,6 @@
 package dev.potholespot.android.streaming;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.util.Constants;
 import android.content.BroadcastReceiver;
 import android.content.Context;

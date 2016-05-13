@@ -96,7 +96,7 @@
             android:summary="@string/mapprovider_summary"
             android:entries="@array/mapprovider_choices"
             android:entryValues="@array/mapprovider_values"
-            android:defaultValue="0" />
+            android:defaultValue="1" />
          <ListPreference
             android:key="trackcoloring"
             android:title="@string/trackcoloring_title"

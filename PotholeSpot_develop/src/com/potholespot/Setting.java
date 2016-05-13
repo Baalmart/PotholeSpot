@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.potholespot.custom.CustomActivity;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class Setting extends CustomActivity
@@ -19,9 +19,10 @@ public class Setting extends CustomActivity
   private void setDummyContents()
   {
     isRunning = true;
-    setTouchNClick(R.id.btnDemo);
+    //setTouchNClick(R.id.btnDemo);
     new Thread(new Runnable()
     {
+      @Override
       public void run()
       {
         final ProgressBar localProgressBar = (ProgressBar)findViewById(R.id.progressBar1);
@@ -36,7 +37,8 @@ public class Setting extends CustomActivity
             Thread.sleep(1000L);
             runOnUiThread(new Runnable()
             {
-              public void run()
+              @Override
+            public void run()
               {
                 int i = 5 + localProgressBar.getProgress();
                 if (i > 100)
@@ -57,7 +59,8 @@ public class Setting extends CustomActivity
     }).start();
   }
 
-  protected void onCreate(Bundle paramBundle)
+  @Override
+protected void onCreate(Bundle paramBundle)
   {
     super.onCreate(paramBundle);
     setContentView(R.layout.settings);
@@ -65,20 +68,22 @@ public class Setting extends CustomActivity
     setDummyContents();
   }
 
-  protected void onDestroy()
+  @Override
+protected void onDestroy()
   {
     super.onDestroy();
     isRunning = false;
   }
 
-  protected void setupActionBar()
+  @SuppressWarnings("deprecation")
+protected void setupActionBar()
   {
     ActionBar localActionBar = getActionBar();
     localActionBar.setDisplayShowTitleEnabled(true);
     localActionBar.setTitle("Settings");
     localActionBar.setNavigationMode(0);
     localActionBar.setDisplayUseLogoEnabled(true);
-    localActionBar.setLogo(2130837520);
+    localActionBar.setLogo(R.drawable.ic_gear);
     localActionBar.setDisplayHomeAsUpEnabled(true);
     localActionBar.setHomeButtonEnabled(true);
   }

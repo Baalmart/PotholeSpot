@@ -11,7 +11,7 @@ import java.util.TimerTask;
 import java.util.Vector;
 import java.util.concurrent.Semaphore;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.db.Pspot.Labels;
 import dev.potholespot.android.db.Pspot.Locations;
 import dev.potholespot.android.db.Pspot.Media;

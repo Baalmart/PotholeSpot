@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.tasks.XmlCreator;
 import dev.potholespot.android.actions.utils.ProgressListener;
 import dev.potholespot.android.adapter.BreadcrumbsAdapter;

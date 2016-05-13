@@ -1,6 +1,8 @@
 package dev.potholespot.android.viewer.map;
 
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.util.Constants;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,8 +20,9 @@ public class CommonLoggerMap extends Activity
       super.onCreate(savedInstanceState);
       Intent myIntent = getIntent();
       Intent realIntent;
+     
 
-      Class<?> mapClass = GoogleLoggerMap.class;
+      Class<?> mapClass = OsmLoggerMap.class;
       int provider = Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(this).getString
             (Constants.MAPPROVIDER, "" + Constants.OSM)).intValue();
       switch (provider)
@@ -35,7 +38,7 @@ public class CommonLoggerMap extends Activity
             break;
          default:
             mapClass = OsmLoggerMap.class;
-            Log.e(TAG, "Fault in value " + provider + " as MapProvider, defaulting to Google Maps.");
+            Log.e(TAG, "Fault in value " + provider + " as MapProvider, defaulting to MapQuest.");
             break;
       }
       
@@ -53,4 +56,8 @@ public class CommonLoggerMap extends Activity
       startActivity(realIntent);
       finish();
    }
+   
+  
+   
+   
 }

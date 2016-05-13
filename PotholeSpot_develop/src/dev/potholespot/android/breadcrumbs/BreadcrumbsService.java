@@ -7,7 +7,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.utils.ProgressListener;
 import dev.potholespot.android.oauth.PrepareRequestTokenActivity;
 import dev.potholespot.android.util.Constants;

@@ -2,7 +2,7 @@ package dev.potholespot.android.viewer;
 
 import java.util.regex.Pattern;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.util.Constants;
 import dev.potholespot.android.util.UnitsI18n;
 import android.content.SharedPreferences.Editor;

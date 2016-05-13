@@ -15,7 +15,7 @@ import android.provider.BaseColumns;
 public final class Pspot
 {
    /** The authority of this provider: nl.sogeti.android.gpstracker */
-   public static final String AUTHORITY = "dev.baalmart.potholespot";
+   public static final String AUTHORITY = "dev.potholespot.uganda";
    /** The content:// style Uri for this provider, content://nl.sogeti.android.gpstracker */
    public static final Uri CONTENT_URI = Uri.parse( "content://" + Pspot.AUTHORITY );
    /** The name of the database file */

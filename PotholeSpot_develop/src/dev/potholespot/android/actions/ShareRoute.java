@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.tasks.GpxCreator;
 import dev.potholespot.android.actions.tasks.GpxSharing;
 import dev.potholespot.android.actions.tasks.JogmapSharing;

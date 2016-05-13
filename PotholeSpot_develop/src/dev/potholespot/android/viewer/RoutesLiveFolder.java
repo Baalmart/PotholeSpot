@@ -1,6 +1,6 @@
 package dev.potholespot.android.viewer;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.db.Pspot;
 import android.app.Activity;
 import android.content.Intent;

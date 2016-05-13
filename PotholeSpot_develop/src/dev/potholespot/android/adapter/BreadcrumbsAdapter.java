@@ -3,7 +3,7 @@ package dev.potholespot.android.adapter;
 import java.util.LinkedList;
 import java.util.List;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.tasks.GpxParser;
 import dev.potholespot.android.breadcrumbs.BreadcrumbsService;
 import dev.potholespot.android.breadcrumbs.BreadcrumbsTracks;

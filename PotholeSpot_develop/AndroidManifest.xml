@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.baalmart.potholespot"
+    package="dev.potholespot.uganda"
     android:installLocation="auto"
     android:versionCode="1"
     android:versionName="2016.04.29" >
@@ -73,9 +73,12 @@
                 <data android:scheme="content" />
                 <data android:host="dev.potholespot.android" />
                 <data android:mimeType="vnd.android.cursor.item/vnd.nl.sogeti.android.track" />
-            </intent-filter>
+            </intent-filter>            
             
-  
+             <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.potholespot.MainActivity" />
+             
             <!-- <intent-filter android:label="Show track on map" >
                 <action android:name="android.intent.action.VIEW" />
                 
@@ -110,20 +113,23 @@
             android:name="dev.potholespot.android.viewer.map.GoogleLoggerMap"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.NoBackground" >
+             >
+           <!--   android:theme="@style/Theme.NoBackground" -->
         </activity>
         
         <activity
             android:name="dev.potholespot.android.viewer.map.OsmLoggerMap"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.NoBackground" >
+             >
+           <!--  android:theme="@style/Theme.NoBackground" -->
         </activity>
         <activity
             android:name="dev.potholespot.android.viewer.map.MapQuestLoggerMap"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.NoBackground" >
+            >
+           <!--  android:theme="@style/Theme.NoBackground" --> 
         </activity>
         
         <activity
@@ -243,6 +249,10 @@
             android:name="com.potholespot.Setting" 
             android:screenOrientation="portrait" />
         
+        <activity
+            android:name="dev.potholespot.android.db.sync.MainActivity"
+            android:label="@string/app_name" android:noHistory="true"/>
+        
         <service
             android:name="dev.potholespot.android.logger.GPSLoggerService"
             android:enabled="true"
@@ -258,7 +268,7 @@
 
         <provider
             android:name="dev.potholespot.android.db.PspotProvider"
-            android:authorities="dev.baalmart.potholespot"
+            android:authorities="dev.potholespot.uganda"
             android:enabled="true"
             android:permission="android.permission.ACCESS_FINE_LOCATION" >
             <grant-uri-permission android:pathPrefix="/tracks/" />
@@ -272,6 +282,23 @@
                 android:path="/live_folders/tracks"
                 android:readPermission="android.permission.BIND_APPWIDGET" />
         </provider>
+        
+        <!-- Register MyService -->
+        <service
+            android:name="dev.potholespot.android.db.sync.MyService"
+            android:enabled="true" />
+        
+		<!--  Register BroadCase Receiver -->
+        <receiver
+            android:name="dev.potholespot.android.db.sync.SampleBC"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </receiver>
+        
+        
 
         <!-- This is used to auto start the application at boot -->
         <receiver

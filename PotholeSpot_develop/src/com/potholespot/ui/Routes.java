@@ -1,6 +1,7 @@
 package com.potholespot.ui;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+@SuppressLint("InflateParams")
 public class Routes extends Fragment
   implements View.OnClickListener
 {
@@ -23,14 +25,16 @@ public class Routes extends Fragment
     paramView.findViewById(R.id.tabFav).setOnClickListener(this);
   }
 
-  public void onClick(View paramView)
+  @Override
+public void onClick(View paramView)
   {
     tab.setEnabled(true);
     tab = paramView;
     tab.setEnabled(false);
   }
 
-  public View onCreateView(LayoutInflater paramLayoutInflater, 
+  @Override
+public View onCreateView(LayoutInflater paramLayoutInflater, 
 		  ViewGroup paramViewGroup, Bundle paramBundle)
   {
     View localView = paramLayoutInflater.inflate(R.layout.routes, null);
@@ -44,22 +48,26 @@ public class Routes extends Fragment
     {
     }
 
-    public int getCount()
+    @Override
+   public int getCount()
     {
       return 10;
     }
 
-    public Object getItem(int paramInt)
+    @Override
+   public Object getItem(int paramInt)
     {
       return null;
     }
 
-    public long getItemId(int paramInt)
+    @Override
+   public long getItemId(int paramInt)
     {
       return paramInt;
     }
 
-    public View getView(int paramInt, View paramView, ViewGroup paramViewGroup)
+    @Override
+   public View getView(int paramInt, View paramView, ViewGroup paramViewGroup)
     {
       if (paramView == null)
         paramView = getLayoutInflater(null).inflate(R.layout.route_item, null);

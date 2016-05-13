@@ -8,14 +8,17 @@
     <LinearLayout 
         android:orientation="vertical" 
         android:layout_width="fill_parent" 
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content">
         
         <ImageView 
             android:id="@+id/imageView1" 
             android:layout_width="fill_parent" 
             android:layout_height="wrap_content" 
-            android:src="@drawable/image" 
-            android:scaleType="fitXY" />
+            android:src="@drawable/nav_image" 
+            android:scaleType="fitXY"        
+             />
+        
+        <!-- android:paddingLeft="60.0dip" -->
         
         <LinearLayout 
             android:gravity="center"
@@ -39,22 +42,23 @@
                     android:id="@+id/textView1" 
                     android:layout_width="0.0dip" 
                     android:layout_height="wrap_content" 
-                    android:text="Manual Input" 
+                    android:text="Manual" 
                     android:layout_weight="1.0" />
                 
                 <ImageView 
                     android:id="@+id/imageView2" 
                     android:layout_width="wrap_content" 
-                    android:layout_height="wrap_content" 
-                    android:layout_marginRight="10.0dip" 
-                    android:src="@drawable/ic_gps" />
+                    android:layout_height="wrap_content"                    
+                    android:src="@drawable/ic_gps"
+                    android:layout_marginLeft="40.0dip" />
                 
                 <TextView 
                     android:textColor="@color/white" 
                     android:id="@+id/textView2" 
                     android:layout_width="wrap_content" 
                     android:layout_height="wrap_content" 
-                    android:text="GPS" 
+                    android:text="Auto" 
+                    android:gravity="center" 
                     android:layout_weight="1.0" />
             </LinearLayout>
             
@@ -68,7 +72,7 @@
                 android:id="@+id/textView3" 
                 android:layout_width="0.0dip" 
                 android:layout_height="wrap_content" 
-                android:text="Excercise Type" 
+                android:text="GPS Precision Type" 
                 android:layout_weight="1.0" 
                 style="@style/lbl_new_act_left" />
             
@@ -76,7 +80,7 @@
                 android:id="@+id/textView4" 
                 android:layout_width="0.0dip" 
                 android:layout_height="wrap_content" 
-                android:text="Distance Run" 
+                android:text="Normal" 
                 android:layout_weight="1.0" 
                 style="@style/lbl_new_act_right" />
         </LinearLayout>
@@ -87,7 +91,7 @@
             android:layout_width="fill_parent" 
             android:layout_height="1.0dip" />
         
-        <LinearLayout 
+      <!--   <LinearLayout 
             android:padding="10.0dip" 
             android:layout_width="fill_parent" 
             android:layout_height="wrap_content">
@@ -96,7 +100,7 @@
                 android:id="@+id/textView5" 
                 android:layout_width="0.0dip" 
                 android:layout_height="wrap_content" 
-                android:text="Workout" 
+                android:text="Mode" 
                 android:layout_weight="1.0" 
                 style="@style/lbl_new_act_left" />
             
@@ -104,7 +108,7 @@
                 android:id="@+id/textView6" 
                 android:layout_width="0.0dip" 
                 android:layout_height="wrap_content" 
-                android:text="Best a Friend" 
+                android:text="Auto" 
                 android:layout_weight="1.0" 
                 style="@style/lbl_new_act_right" />
         </LinearLayout>
@@ -113,7 +117,7 @@
             android:id="@+id/view2" 
             android:background="@color/gray_border" 
             android:layout_width="fill_parent" 
-            android:layout_height="1.0dip" />
+            android:layout_height="1.0dip" /> -->
         
         <LinearLayout 
             android:padding="10.0dip" 
@@ -124,7 +128,7 @@
                 android:id="@+id/textView7" 
                 android:layout_width="0.0dip" 
                 android:layout_height="wrap_content" 
-                android:text="Music" 
+                android:text="Default Mode" 
                 android:layout_weight="1.0" 
                 style="@style/lbl_new_act_left" />
             
@@ -132,7 +136,7 @@
                 android:id="@+id/textView8" 
                 android:layout_width="0.0dip" 
                 android:layout_height="wrap_content" 
-                android:text="Soft music" 
+                android:text="Manual" 
                 android:layout_weight="1.0" 
                 style="@style/lbl_new_act_right" />
         </LinearLayout>
@@ -155,7 +159,7 @@
                 android:id="@+id/textView9" 
                 android:layout_width="0.0dip" 
                 android:layout_height="wrap_content" 
-                android:text="Excercise Type" 
+                android:text="GPS Precision Type" 
                 android:layout_weight="1.0" 
                 style="@style/lbl_new_act_left" />
             

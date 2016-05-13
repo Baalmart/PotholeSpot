@@ -1,6 +1,6 @@
 package dev.potholespot.android.widget;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.ControlLogging;
 import dev.potholespot.android.actions.ManualMode;
 import dev.potholespot.android.util.Constants;
@@ -29,7 +29,7 @@ public class ControlWidgetProvider extends AppWidgetProvider
    private static final String TAG = "OGT.ControlWidgetProvider";
 
    static final ComponentName THIS_APPWIDGET = new ComponentName
-         ("dev.baalmart.potholespot", 
+         ("dev.potholespot.uganda", 
                "dev.potholespot.android.widget.ControlWidgetProvider");
    
    //dev.ugasoft.android.gps.widget

@@ -12,11 +12,13 @@ public class CustomActivity extends FragmentActivity
 {
   public static final TouchEffect TOUCH = new TouchEffect();
 
-  public void onClick(View paramView)
+  @Override
+public void onClick(View paramView)
   {
   }
 
-  public boolean onOptionsItemSelected(MenuItem paramMenuItem)
+  @Override
+public boolean onOptionsItemSelected(MenuItem paramMenuItem)
   {
     if (paramMenuItem.getItemId() == 16908332)
       finish();

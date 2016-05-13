@@ -1,6 +1,6 @@
 package dev.potholespot.android.viewer;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.DescribeRoute;
 import dev.potholespot.android.actions.Statistics;
 import dev.potholespot.android.actions.tasks.GpxParser;

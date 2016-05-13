@@ -1,6 +1,6 @@
 package com.potholespot;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.viewer.map.CommonLoggerMap;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,8 +17,10 @@ public class SplashScreen extends Activity
     {
       if (isRunning)
       {
+         
+         //CommonLoggerMap.class
         isRunning = false;
-        Intent localIntent = new Intent(this, CommonLoggerMap.class);
+        Intent localIntent = new Intent(this, MainActivity.class);
         localIntent.addFlags(67108864);
         //67108864
         startActivity(localIntent);
@@ -37,6 +39,7 @@ public class SplashScreen extends Activity
   {
     new Thread(new Runnable()
     {
+      @Override
       public void run()
       {
         try
@@ -64,7 +67,8 @@ public class SplashScreen extends Activity
     }).start();
   }
 
-  public void onCreate(Bundle paramBundle)
+  @Override
+public void onCreate(Bundle paramBundle)
   {
     super.onCreate(paramBundle);
     setContentView(R.layout.splash);
@@ -72,7 +76,8 @@ public class SplashScreen extends Activity
     startSplash();
   }
 
-  public boolean onKeyDown(int paramInt, KeyEvent paramKeyEvent)
+  @Override
+public boolean onKeyDown(int paramInt, KeyEvent paramKeyEvent)
   {
     if (paramInt == 4)
     {

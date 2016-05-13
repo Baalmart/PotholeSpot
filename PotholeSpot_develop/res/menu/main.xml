@@ -6,4 +6,22 @@
         android:id="@+id/menu_setting" 
         android:title="@string/settings" 
         android:showAsAction="always" />
+    <item 
+        android:icon="@drawable/ic_sync" 
+        android:id="@+id/menu_sync" 
+        android:title="@string/sync" 
+        android:showAsAction="ifRoom" />
+    
+     <item 
+        android:icon="@drawable/ic_action_map" 
+        android:id="@+id/menu_map" 
+        android:title="@string/map" 
+        android:showAsAction="ifRoom" />
+     <item 
+        android:icon="@drawable/icon_code" 
+        android:id="@+id/menu_code" 
+        android:title="@string/code" 
+        android:showAsAction="ifRoom" />  
+        
+   
 </menu>

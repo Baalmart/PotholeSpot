@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.potholespot.custom.CustomActivity;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 
 public class Workout extends Fragment
   implements View.OnClickListener
@@ -24,11 +24,13 @@ public class Workout extends Fragment
     localView2.setOnTouchListener(CustomActivity.TOUCH);
   }
 
-  public void onClick(View paramView)
+  @Override
+public void onClick(View paramView)
   {
   }
 
-  public View onCreateView(LayoutInflater paramLayoutInflater, ViewGroup paramViewGroup, 
+  @Override
+public View onCreateView(LayoutInflater paramLayoutInflater, ViewGroup paramViewGroup, 
 		  Bundle paramBundle)
   {
     View localView = paramLayoutInflater.inflate(R.layout.workout, null);

@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
-import dev.baalmart.potholespot.BuildConfig;
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.BuildConfig;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.db.Pspot;
 import dev.potholespot.android.db.Pspot.Media;
 import dev.potholespot.android.db.Pspot.Waypoints;

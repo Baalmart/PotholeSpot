@@ -165,7 +165,7 @@ public class Constants
 
    
    /**
-    * Based on preference return the SD-Card directory in which Open GPS Tracker creates and stores files
+    * Based on preference return the SD-Card directory in which PotholeSpot creates and stores files
     * shared tracks,
     * 
     * @param ctx

@@ -18,7 +18,7 @@ import java.util.Observable;
 import java.util.Set;
 import java.util.Vector;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.db.Pspot.MetaData;
 import dev.potholespot.android.util.Constants;
 import dev.potholespot.android.util.Pair;

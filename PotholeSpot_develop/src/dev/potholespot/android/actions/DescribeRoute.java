@@ -2,7 +2,7 @@ package dev.potholespot.android.actions;
 
 import java.util.List;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.breadcrumbs.BreadcrumbsService;
 import dev.potholespot.android.breadcrumbs.BreadcrumbsTracks;
 import dev.potholespot.android.breadcrumbs.BreadcrumbsService.LocalBinder;

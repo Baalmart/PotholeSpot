@@ -11,7 +11,9 @@ import android.view.View.OnTouchListener;
 public class TouchEffect
   implements View.OnTouchListener
 {
-  public boolean onTouch(View paramView, MotionEvent paramMotionEvent)
+  @SuppressWarnings("deprecation")
+@Override
+public boolean onTouch(View paramView, MotionEvent paramMotionEvent)
   {
     if (paramMotionEvent.getAction() == 0)
     {

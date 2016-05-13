@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dev.baalmart.potholespot.R;
+import dev.potholespot.uganda.R;
 import dev.potholespot.android.actions.tasks.GpxCreator;
 import dev.potholespot.android.actions.tasks.XmlCreator;
 import dev.potholespot.android.actions.utils.ProgressListener;
