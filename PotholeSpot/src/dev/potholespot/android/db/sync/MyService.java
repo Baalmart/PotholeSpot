@@ -11,25 +11,30 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
-public class MyService extends Service {
+public class MyService extends Service 
+{
 	int numMessages = 0;
 
-	public MyService() {
+	public MyService() 
+	{
 	}
 
 	@Override
-	public IBinder onBind(Intent intent) {
+	public IBinder onBind(Intent intent) 
+	{
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 
 	@Override
-	public void onCreate() {
+	public void onCreate() 
+	{
 		Toast.makeText(this, "Service was Created", Toast.LENGTH_LONG).show();
 
 	}
 
 	@Override
-	public void onStart(Intent intent, int startId) {
+	public void onStart(Intent intent, int startId) 
+	{
 		Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
 		Intent resultIntent = new Intent(this, MainActivity.class);
 		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0,
@@ -53,14 +58,15 @@ public class MyService extends Service {
 		mNotifyBuilder.setDefaults(defaults);
 		// Set the content for Notification 
 		mNotifyBuilder.setContentText(intent.getStringExtra("intntdata"));
-		// Set autocancel
+		// Set auto cancel
 		mNotifyBuilder.setAutoCancel(true);
 		// Post a notification
 		mNotificationManager.notify(notifyID, mNotifyBuilder.build());
 	}
 
 	@Override
-	public void onDestroy() {
+	public void onDestroy() 
+	{
 		Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
 
 	}

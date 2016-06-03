@@ -17,11 +17,11 @@
         android:id="@+id/menu_map" 
         android:title="@string/map" 
         android:showAsAction="ifRoom" />
-     <item 
+    <!--  <item 
         android:icon="@drawable/icon_code" 
         android:id="@+id/menu_code" 
         android:title="@string/code" 
-        android:showAsAction="ifRoom" />  
+        android:showAsAction="ifRoom" />   -->
         
    
 </menu>

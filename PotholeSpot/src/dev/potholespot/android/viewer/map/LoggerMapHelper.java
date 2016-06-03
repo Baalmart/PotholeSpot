@@ -818,8 +818,9 @@ public class LoggerMapHelper
    // some conditions are met as seen below
    public void onPrepareOptionsMenu(Menu menu)
    {
-      /*MenuItem noteMenu = menu.findItem(MENU_NOTE);
-      noteMenu.setEnabled(mLoggerServiceManager.isMediaPrepared());*/
+      MenuItem noteMenu = menu.findItem(MENU_NOTE);
+      noteMenu.setEnabled(mTrackId >= 0 || mLoggerServiceManager.isMediaPrepared());
+     /* noteMenu.setEnabled(mLoggerServiceManager.isMediaPrepared());*/
 
       MenuItem shareMenu = menu.findItem(MENU_SHARE);
       shareMenu.setEnabled(mTrackId >= 0);
@@ -916,6 +917,7 @@ public class LoggerMapHelper
       switch (id)
       {
          case DIALOG_LAYERS:
+            
             builder = new AlertDialog.Builder(mLoggerMap.getActivity());
             factory = LayoutInflater.from(mLoggerMap.getActivity());
             view = factory.inflate(R.layout.layerdialog, null);
@@ -1020,7 +1022,7 @@ public class LoggerMapHelper
                   break;
                   
                default:
-                  dialog.findViewById(R.id.osm_backgrounds).setVisibility(View.GONE);
+                  dialog.findViewById(R.id.osm_backgrounds).setVisibility(View.VISIBLE);
                   dialog.findViewById(R.id.google_backgrounds).setVisibility(View.GONE);
                   dialog.findViewById(R.id.shared_layers).setVisibility(View.INVISIBLE);
                   dialog.findViewById(R.id.google_overlays).setVisibility(View.GONE);

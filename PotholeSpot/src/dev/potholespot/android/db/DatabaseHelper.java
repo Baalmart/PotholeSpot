@@ -40,8 +40,9 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper
 {
    private Context mContext;
-   private final static String TAG = "PRIM.DatabaseHelper";
+   private final static String TAG = "pspot.DatabaseHelper";
 
+   //constructor where the database name is one of the arguments...in relation to the OpenHelper
    public DatabaseHelper(Context context)
    {
       super(context, Pspot.DATABASE_NAME, null, Pspot.DATABASE_VERSION);

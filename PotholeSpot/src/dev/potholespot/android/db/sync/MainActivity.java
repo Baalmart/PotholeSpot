@@ -44,7 +44,8 @@ public class MainActivity extends ActionBarActivity {
 		// Get User records from SQLite DB
 		ArrayList<HashMap<String, String>> userList = controller.getAllUsers();
 		// If users exists in SQLite DB
-		if (userList.size() != 0) {
+		if (userList.size() != 0) 
+		{
 			// Set the User Array list in ListView
 			ListAdapter adapter = new SimpleAdapter(MainActivity.this, userList, R.layout.view_user_entry, new String[] {
 							"userId", "userName" }, new int[] { R.id.userId, R.id.userName });
