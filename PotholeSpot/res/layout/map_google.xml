@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mapScreen"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <com.google.android.maps.MapView
+        android:id="@+id/myMapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:apiKey="AIzaSyDZ8UYJNu8X_6EEtr5sEmp-Sr-N6kPJIB8"
+        android:clickable="true"
+        android:state_enabled="true" />
+   
+    <!-- Release: 0bmdf4-ggC50QWBY1OgGRutQ9bIboIy11OczZbw -->
+    <!-- Debug: 0bmdf4-ggC50QJGdjml6Turq0NJdMhKFQNdhkYA -->
+    
+    <!-- removed... -->
+    <!-- 0bmdf4-ggC50QJGdjml6Turq0NJdMhKFQNdhkYA -->
+    
+<!--     removed on the 26th of March 2016.
+    AIzaSyCJ9blB0HFetoJu9Buw84sh9oPhuhW7Xlg -->
+    
+  <!--   I have removed the bu widgets below. :) -->
+    
+    <include
+        layout="@layout/map_widgets" />
+</RelativeLayout>
+
+<!-- my new api keys for dev.baalmart.gps.... -->
+
+<!-- AIzaSyCJ9blB0HFetoJu9Buw84sh9oPhuhW7Xlg -->
