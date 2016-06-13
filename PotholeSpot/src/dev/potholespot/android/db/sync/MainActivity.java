@@ -28,30 +28,39 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import dev.potholespot.android.db.DatabaseHelper;
 import dev.potholespot.uganda.R;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity 
+{
 	// DB Class to perform DB related operations..more like the database helper
-	DBController controller = new DBController(this);
+	//DBController controller = new DBController(this);
+	DatabaseHelper dbHelper = new DatabaseHelper(this);
 	// Progress Dialog Object
 	ProgressDialog prgDialog;
 	HashMap<String, String> queryValues;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_sync);
 		// Get User records from SQLite DB
-		ArrayList<HashMap<String, String>> userList = controller.getAllUsers();
+		//ArrayList<HashMap<String, String>> userList = controller.getAllUsers();
+		//getting label records from the database
+		ArrayList<HashMap<String, String>> xyzList =  dbHelper.getAll_xyz();
 		// If users exists in SQLite DB
-		if (userList.size() != 0) 
+		if (xyzList.size() != 0) 
 		{
-			// Set the User Array list in ListView
-			ListAdapter adapter = new SimpleAdapter(MainActivity.this, userList, R.layout.view_user_entry, new String[] {
-							"userId", "userName" }, new int[] { R.id.userId, R.id.userName });
+			// Set the labels Array list in ListView
+			ListAdapter adapter = new SimpleAdapter
+			      (MainActivity.this, xyzList, R.layout.view_user_entry, new String[] 
+			            {"id", "time", "speed", "x", "y", "z" }, 
+			            new int[] { R.id.id, R.id.time, R.id.speed, R.id.x, R.id.y, R.id.z});
 			ListView myList = (ListView) findViewById(android.R.id.list);
 			myList.setAdapter(adapter);
 		}
+		
 		// Initialize Progress Dialog properties
 		prgDialog = new ProgressDialog(this);
 		prgDialog.setMessage("Transferring Data from Remote MySQL DB and Syncing SQLite. Please wait...");
@@ -77,7 +86,8 @@ public class MainActivity extends ActionBarActivity {
 
 	// When Options Menu is selected
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
 		// Handle action bar item clicks here. 
 		int id = item.getItemId();
 		// When Sync action button is clicked
@@ -98,25 +108,34 @@ public class MainActivity extends ActionBarActivity {
 		// Show ProgressBar
 		prgDialog.show();
 		// Make Http call to getusers.php
-		client.post("http://192.168.2.4:9000/mysqlsqlitesync/getusers.php", params, new AsyncHttpResponseHandler() {
+		client.post("http://localhost/potholespot/web/mysqlsqlitesync/get_xyz.php", 
+		      params, new AsyncHttpResponseHandler() 
+		  {
 				@Override
-				public void onSuccess(String response) {
+				public void onSuccess(String response) 
+				{
 					// Hide ProgressBar
 					prgDialog.hide();
 					// Update SQLite DB with response sent by getusers.php
-					updateSQLite(response);
+					//updateSQLite(response);
 				}
 				// When error occured
 				@Override
-				public void onFailure(int statusCode, Throwable error, String content) {
+				public void onFailure(int statusCode, Throwable error, String content) 
+				{
 					// TODO Auto-generated method stub
 					// Hide ProgressBar
 					prgDialog.hide();
-					if (statusCode == 404) {
+					if (statusCode == 404) 
+					{
 						Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
-					} else if (statusCode == 500) {
+					} 
+					else if (statusCode == 500) 
+					{
 						Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
-					} else {
+					} 
+					else 
+					{
 						Toast.makeText(getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet]",
 								Toast.LENGTH_LONG).show();
 					}
@@ -124,7 +143,9 @@ public class MainActivity extends ActionBarActivity {
 		});
 	}
 	
-	public void updateSQLite(String response){
+	//this method also takes advantage of the response and extracts a JSON array.
+	public void updateSQLite(String response)
+	{
 		ArrayList<HashMap<String, String>> usersynclist;
 		usersynclist = new ArrayList<HashMap<String, String>>();
 		// Create GSON object
@@ -135,45 +156,71 @@ public class MainActivity extends ActionBarActivity {
 			System.out.println(arr.length());
 			// If no of array elements is not zero
 			if(arr.length() != 0){
-				// Loop through each array element, get JSON object which has userid and username
-				for (int i = 0; i < arr.length(); i++) {
+				// Loop through each array element, get JSON object which has the columns for x, y and z.
+				for (int i = 0; i < arr.length(); i++) 
+				{
 					// Get JSON object
 					JSONObject obj = (JSONObject) arr.get(i);
-					System.out.println(obj.get("userId"));
-					System.out.println(obj.get("userName"));
+					System.out.println(obj.get("id"));
+					System.out.println(obj.get("time"));
+					System.out.println(obj.get("speed"));
+					System.out.println(obj.get("x"));
+					System.out.println(obj.get("y"));
+					System.out.println(obj.get("z"));					
+					
 					// DB QueryValues Object to insert into SQLite
 					queryValues = new HashMap<String, String>();
-					// Add userID extracted from Object
-					queryValues.put("userId", obj.get("userId").toString());
-					// Add userName extracted from Object
-					queryValues.put("userName", obj.get("userName").toString());
-					// Insert User into SQLite DB
-					controller.insertUser(queryValues);
+					
+					
+					// Add id extracted from Object
+					queryValues.put("id", obj.get("id").toString());
+					// Add time extracted from Object
+					queryValues.put("time", obj.get("time").toString());
+					 // Add speed extracted from Object
+               queryValues.put("speed", obj.get("speed").toString());
+               // Add x extracted from Object
+               queryValues.put("x", obj.get("x").toString());
+               // Add y extracted from Object
+               queryValues.put("y", obj.get("y").toString());
+               // Add z extracted from Object
+               queryValues.put("z", obj.get("z").toString());
+										
+					// Insert values into SQLite DB
+				  dbHelper.insert_xyz(queryValues);
 					HashMap<String, String> map = new HashMap<String, String>();
-					// Add status for each User in Hashmap
+					// Add status for each xyz in Hashmap
 					map.put("Id", obj.get("userId").toString());
+					map.put("time", obj.get("time").toString());
+					map.put("speed", obj.get("speed").toString());
+					map.put("x", obj.get("x").toString());
+					map.put("y", obj.get("y").toString());
+					map.put("z", obj.get("z").toString());
 					map.put("status", "1");
 					usersynclist.add(map);
 				}
-				// Inform Remote MySQL DB about the completion of Sync activity by passing Sync status of Users
+				// Inform Remote MySQL DB about the completion of Sync activity by passing Sync status of xyz values
 				updateMySQLSyncSts(gson.toJson(usersynclist));
 				// Reload the Main Activity
 				reloadActivity();
 			}
-		} catch (JSONException e) {
+		} 
+		
+		catch (JSONException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	// Method to inform remote MySQL DB about completion of Sync activity
-	public void updateMySQLSyncSts(String json) {
+	public void updateMySQLSyncSts(String json) 
+	{
 		System.out.println(json);
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("syncsts", json);
 		// Make Http call to updatesyncsts.php with JSON parameter which has Sync statuses of Users
-		client.post("http://192.168.2.4:9000/mysqlsqlitesync/updatesyncsts.php", params, new AsyncHttpResponseHandler() {
+		client.post("http://localhost/potholespot/web/mysqlsqlitesync/updatesyncsts.php", params, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
 				Toast.makeText(getApplicationContext(),	"MySQL DB has been informed about Sync activity", Toast.LENGTH_LONG).show();
@@ -187,7 +234,8 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	// Reload MainActivity
-	public void reloadActivity() {
+	public void reloadActivity() 
+	{
 		Intent objIntent = new Intent(getApplicationContext(), MainActivity.class);
 		startActivity(objIntent);
 	}

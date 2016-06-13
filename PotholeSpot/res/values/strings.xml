@@ -353,6 +353,7 @@ Enter number of feet for acres/hour or meters for use in hectares/hour.\n </stri
     <string name="sync">Sync</string>
     <string name="map">Map</string>
     <string name="code">See Code</string>
+    <string name="db">DB</string>
     
 
 </resources>

@@ -31,7 +31,7 @@ public final class Pspot
    
    public static final class Labels extends LabelsColumns implements android.provider.BaseColumns
    {
-      /** The MIME type of a CONTENT_URI subdirectory of a single track. */
+      /** The MIME type of a CONTENT_URI subdirectory of a single label. */
       public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.nl.sogeti.android.track";
       /** The MIME type of CONTENT_URI providing a directory of tracks. */
       public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.nl.sogeti.android.track";
@@ -52,7 +52,41 @@ public final class Pspot
                                           "," + " " + Labels.Z + " " + Labels.Z_TYPE +
                                           ");";
    }
-      
+    
+   
+   public static final class PotholeSpotDtw extends PotholeSPotDtwColumns implements android.provider.BaseColumns
+   {
+      /** The MIME type of a CONTENT_URI subdirectory of a single track. */
+      public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.dir/vnd.com.prim.dtw";
+      /** The MIME type of CONTENT_URI providing a directory of tracks. */
+      public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.com.prim.dtw";
+      /** The content:// style URL for this provider, content://nl.sogeti.android.gpstracker/tracks */
+      public static final Uri CONTENT_URI = Uri.parse( "content://" + Pspot.AUTHORITY + "/" + PotholeSpotDtw.TABLE );
+
+      /** The name of this table */
+      public static final String TABLE = "dtw";
+      static final String CREATE_STATEMENT = 
+         "CREATE TABLE " + PotholeSpotDtw.TABLE + "(" + " " + PotholeSpotDtw._ID           + " " + PotholeSpotDtw._ID_TYPE +                          
+                                          "," + " " + PotholeSpotDtw.SEQ1 + " " + PotholeSpotDtw.SEQ1_TYPE + 
+                                          "," + " " + PotholeSpotDtw.SEQ2 + " " + PotholeSpotDtw.SEQ2_TYPE +
+                                          "," + " " + PotholeSpotDtw.SEQ3 + " " + PotholeSpotDtw.SEQ3_TYPE +
+                                          "," + " " + PotholeSpotDtw.SEQ4 + " " + PotholeSpotDtw.SEQ4_TYPE +
+                                          "," + " " + PotholeSpotDtw.SEQ5 + " " + PotholeSpotDtw.SEQ5_TYPE +
+                                          "," + " " + PotholeSpotDtw.SEQ6 + " " + PotholeSpotDtw.SEQ6_TYPE +
+                                          "," + " " + PotholeSpotDtw.SEQ7 + " " + PotholeSpotDtw.SEQ7_TYPE +
+                                          "," + " " + PotholeSpotDtw.SEQ8 + " " + PotholeSpotDtw.SEQ8_TYPE +
+                                          "," + " " + PotholeSpotDtw.SEQ9 + " " + PotholeSpotDtw.SEQ9_TYPE +
+                                          "," + " " + PotholeSpotDtw.SEQ10 + " " + PotholeSpotDtw.SEQ10_TYPE +
+                                          "," + " " + PotholeSpotDtw.LONGITUDE + " " + PotholeSpotDtw.LONGITUDE_TYPE +
+                                          "," + " " + PotholeSpotDtw.LATITUDE + " " + PotholeSpotDtw.LATITUDE_TYPE +
+                                          "," + " " + PotholeSpotDtw.TAG + " " + PotholeSpotDtw.TAG_TYPE +
+                                          "," + " " + PotholeSpotDtw.TIME + " " + PotholeSpotDtw.TIME_TYPE +
+                                          ");";
+   }
+   
+   
+   
+   
    public static final class Xyz extends XYZColumns implements android.provider.BaseColumns
    {
       /** The MIME type of a CONTENT_URI subdirectory of a single track. */
@@ -460,6 +494,7 @@ public final class Pspot
 
     */
    public static class MediaColumns
+   
    {
       /** The track _id to which this segment belongs */
       public static final String TRACK    = "track";     
@@ -476,8 +511,8 @@ public final class Pspot
    /**
     * Columns from the media table.
     * 
-
     */
+   
    public static class MetaDataColumns
    {
       /** The track _id to which this segment belongs */
@@ -493,4 +528,44 @@ public final class Pspot
       static final String VALUE_TYPE      = "TEXT NOT NULL";
       static final String _ID_TYPE        = "INTEGER PRIMARY KEY AUTOINCREMENT";
    }
+   
+   /**
+    * Columns from the dtw table.
+    */
+   public static class PotholeSPotDtwColumns
+   {   
+      public static final String SEQ1 ="Seq1";
+      public static final String SEQ2 ="Seq2";
+      public static final String SEQ3 ="Seq3"; 
+      public static final String SEQ4 ="Seq4"; 
+      public static final String SEQ5 ="Seq5"; 
+      public static final String SEQ6 ="Seq6"; 
+      public static final String SEQ7 ="Seq7"; 
+      public static final String SEQ8 ="Seq8"; 
+      public static final String SEQ9 ="Seq9"; 
+      public static final String SEQ10 ="Seq10"; 
+      public static final String TAG ="Tag";
+      public static final String LATITUDE = "latitude";
+      public static final String LONGITUDE = "longitude";
+      static final String _ID_TYPE = "INTEGER PRIMARY KEY AUTOINCREMENT"; 
+      /** The recorded time */
+      public static final String TIME = "time";
+      static final String TIME_TYPE      = "INTEGER NOT NULL";
+      static final String TAG_TYPE     = "REAL NOT NULL";
+      static final String SEQ1_TYPE = "REAL NOT NULL";
+      static final String SEQ2_TYPE = "REAL NOT NULL";
+      static final String SEQ3_TYPE = "REAL NOT NULL";
+      static final String SEQ4_TYPE = "REAL NOT NULL";
+      static final String SEQ5_TYPE = "REAL NOT NULL";
+      static final String SEQ6_TYPE = "REAL NOT NULL";
+      static final String SEQ7_TYPE = "REAL NOT NULL";
+      static final String SEQ8_TYPE = "REAL NOT NULL";
+      static final String SEQ9_TYPE = "REAL NOT NULL";
+      static final String SEQ10_TYPE = "REAL NOT NULL";
+      static final String LATITUDE_TYPE  = "REAL NOT NULL";
+      static final String LONGITUDE_TYPE = "REAL NOT NULL";
+   } 
+   
+   
+   
 }

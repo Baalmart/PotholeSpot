@@ -4,13 +4,24 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
     	<TextView
-        android:id="@+id/userId"
+        android:id="@+id/id"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:visibility="gone" />
- 
+
+       
+        <TextView
+           android:id="@+id/time"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"        
+           android:paddingLeft="6dip"         
+           android:textColor="#008000"
+           android:textSize="17sp"
+           android:textStyle="bold" />  
+           
+         <!-- 
        <TextView
-           android:id="@+id/userName"
+           android:id="@+id/name"
            android:layout_width="fill_parent"
            android:layout_height="wrap_content"
            android:layout_marginBottom="5dp"
@@ -19,6 +30,46 @@
            android:paddingTop="6dip"
            android:textColor="#008000"
            android:textSize="17sp"
+           android:textStyle="bold" /> -->
+       
+       <TextView
+           android:id="@+id/speed"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"        
+           android:paddingLeft="6dip"         
+           android:textColor="#008000"
+           android:textSize="17sp"
            android:textStyle="bold" />
+       
+       <TextView
+           android:id="@+id/x"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"        
+           android:paddingLeft="6dip"         
+           android:textColor="#008000"
+           android:textSize="17sp"
+           android:textStyle="bold" />
+       
+       <TextView
+           android:id="@+id/y"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"        
+           android:paddingLeft="6dip"         
+           android:textColor="#008000"
+           android:textSize="17sp"
+           android:textStyle="bold" />
+       
+       <TextView
+           android:id="@+id/z"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"        
+           android:paddingLeft="6dip"         
+           android:textColor="#008000"
+           android:textSize="17sp"
+           android:textStyle="bold" />
+       
+       
+       
+       
 
 </LinearLayout>

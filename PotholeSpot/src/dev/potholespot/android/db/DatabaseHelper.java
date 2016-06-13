@@ -1,7 +1,12 @@
 package dev.potholespot.android.db;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+
+import com.opencsv.CSVWriter;
 
 import dev.potholespot.android.db.Pspot.Labels;
 import dev.potholespot.android.db.Pspot.LabelsColumns;
@@ -10,6 +15,7 @@ import dev.potholespot.android.db.Pspot.LocationsColumns;
 import dev.potholespot.android.db.Pspot.Media;
 import dev.potholespot.android.db.Pspot.MediaColumns;
 import dev.potholespot.android.db.Pspot.MetaData;
+import dev.potholespot.android.db.Pspot.PotholeSpotDtw;
 import dev.potholespot.android.db.Pspot.Segments;
 import dev.potholespot.android.db.Pspot.Tracks;
 import dev.potholespot.android.db.Pspot.TracksColumns;
@@ -27,6 +33,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 
 /**
@@ -55,6 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     * android.database.sqlite.SQLiteOpenHelper#onCreate(android.database.sqlite
     * .SQLiteDatabase)
     */
+   
    @Override
    public void onCreate(SQLiteDatabase db)
    {
@@ -65,7 +73,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
       db.execSQL(Segments.CREATE_STATMENT);
       db.execSQL(Tracks.CREATE_STATEMENT);
       db.execSQL(Media.CREATE_STATEMENT);
-      db.execSQL(MetaData.CREATE_STATEMENT);      
+      db.execSQL(MetaData.CREATE_STATEMENT); 
+      db.execSQL(PotholeSpotDtw.CREATE_STATEMENT);
      
    }
    
@@ -84,6 +93,49 @@ public class DatabaseHelper extends SQLiteOpenHelper
     * @see Pspot.DATABASE_VERSION
     */
    
+   
+  // getting all the xyz values:
+      public ArrayList<HashMap<String, String>> getAll_xyz() 
+  {
+      ArrayList<HashMap<String, String>> xyzList;
+      xyzList = new ArrayList<HashMap<String, String>>();
+      String selectQuery = "SELECT  * FROM xyz";
+       SQLiteDatabase database = this.getWritableDatabase();
+       Cursor cursor = database.rawQuery(selectQuery, null);
+       if (cursor.moveToFirst()) 
+       {
+           do 
+           {
+            HashMap<String, String> map = new HashMap<String, String>();
+           
+            map.put("id", cursor.getString(0));
+            map.put("time", cursor.getString(1));
+            map.put("speed", cursor.getString(2));
+            map.put("x", cursor.getString(3));
+            map.put("y", cursor.getString(4));
+            map.put("z", cursor.getString(5));
+                xyzList.add(map);
+           } 
+           
+           while (cursor.moveToNext());
+       }
+       database.close();
+       return xyzList;
+   }   
+      
+      public void insert_xyz(HashMap<String, String> queryValues) 
+      {
+         SQLiteDatabase database = this.getWritableDatabase();
+         ContentValues values = new ContentValues();
+         values.put("id", queryValues.get("id"));
+         values.put("time", queryValues.get("time"));
+         values.put("speed", queryValues.get("speed"));
+         values.put("x", queryValues.get("x"));
+         values.put("y", queryValues.get("y"));
+         values.put("z", queryValues.get("z"));         
+         database.insert("xyz", null, values);
+         database.close();
+      }
    
    @Override
    public void onUpgrade(SQLiteDatabase db, int current, int targetVersion)
@@ -853,12 +905,139 @@ public class DatabaseHelper extends SQLiteOpenHelper
       return segmentId;
    }
    
+   
+   
+   
+   
+   
    /***
     * 
     * ************methods for the database manager**********
     * 
     * 
     * ************/
+   
+   
+  /* exporting the database*/
+   
+
+   /*
+    * Exporting the database....
+    * 
+    * **/
+   
+   @SuppressWarnings("unused")
+   public void exportLabels() {
+      
+     
+      File dbFile = mContext.getDatabasePath(Pspot.DATABASE_NAME);
+      DatabaseHelper dbhelper = new DatabaseHelper(mContext);
+      File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+      if (!exportDir.exists())
+      {
+          exportDir.mkdirs();
+      }
+
+      File file = new File(exportDir, "labels.csv");
+      try
+      {
+          file.createNewFile();
+          CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+          SQLiteDatabase db = dbhelper.getReadableDatabase();
+          //selecting the table to export from
+          Cursor curCSV = db.rawQuery("SELECT * FROM labels",null);
+          csvWrite.writeNext(curCSV.getColumnNames());
+          while(curCSV.moveToNext())
+          {
+              //Which column you want to exprort
+              String arrStr[] ={curCSV.getString(1),curCSV.getString(2), 
+                    curCSV.getString(6), curCSV.getString(7), curCSV.getString(8)};
+              csvWrite.writeNext(arrStr);
+          }
+          csvWrite.close();
+          curCSV.close();
+      }
+      catch(Exception sqlEx)
+      {
+          Log.e("DatabaseHelper", sqlEx.getMessage(), sqlEx);
+      }   
+   }
+      
+   @SuppressWarnings("unused")
+   public void export_xyz() {
+      
+     
+      File dbFile = mContext.getDatabasePath(Pspot.DATABASE_NAME);
+      DatabaseHelper dbhelper = new DatabaseHelper(mContext);
+      File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+      if (!exportDir.exists())
+      {
+          exportDir.mkdirs();
+      }
+
+      File file = new File(exportDir, "xyz.csv");
+      try
+      {
+          file.createNewFile();
+          CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+          SQLiteDatabase db = dbhelper.getReadableDatabase();
+          //selecting the table to export from
+          Cursor curCSV = db.rawQuery("SELECT * FROM xyz",null);
+          csvWrite.writeNext(curCSV.getColumnNames());
+          while(curCSV.moveToNext())
+          {
+              //Which column you want to exprort
+              String arrStr[] ={curCSV.getString(1),curCSV.getString(2), 
+                    curCSV.getString(3), curCSV.getString(4), curCSV.getString(5)};
+              csvWrite.writeNext(arrStr);
+          }
+          csvWrite.close();
+          curCSV.close();
+      }
+      catch(Exception sqlEx)
+      {
+          Log.e("DatabaseHelper", sqlEx.getMessage(), sqlEx);
+      }   
+   }
+   
+   
+   @SuppressWarnings("unused")
+   public void export_waypoints() {
+      
+     
+      File dbFile = mContext.getDatabasePath(Pspot.DATABASE_NAME);
+      DatabaseHelper dbhelper = new DatabaseHelper(mContext);
+      File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+      if (!exportDir.exists())
+      {
+          exportDir.mkdirs();
+      }
+
+      File file = new File(exportDir, "waypoints.csv");
+      try
+      {
+          file.createNewFile();
+          CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+          SQLiteDatabase db = dbhelper.getReadableDatabase();
+          //selecting the table to export from
+          Cursor curCSV = db.rawQuery("SELECT * FROM waypoints",null);
+          csvWrite.writeNext(curCSV.getColumnNames());
+          while(curCSV.moveToNext())
+          {
+              //Which column you want to exprort
+              String arrStr[] ={curCSV.getString(1),curCSV.getString(2), 
+                    curCSV.getString(3), curCSV.getString(4)};
+              csvWrite.writeNext(arrStr);
+          }
+          csvWrite.close();
+          curCSV.close();
+      }
+      catch(Exception sqlEx)
+      {
+          Log.e("DatabaseHelper", sqlEx.getMessage(), sqlEx);
+      }   
+   }
+   
    
    
    public ArrayList<Cursor> getData(String Query)

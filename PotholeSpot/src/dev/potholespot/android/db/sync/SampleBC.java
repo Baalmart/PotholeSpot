@@ -12,7 +12,8 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-public class SampleBC extends BroadcastReceiver {
+public class SampleBC extends BroadcastReceiver 
+{
 	static int noOfTimes = 0;
 	
 	// Method gets called when Broad Case is issued from MainActivity for every 10 seconds
@@ -20,11 +21,11 @@ public class SampleBC extends BroadcastReceiver {
 	public void onReceive(final Context context, Intent intent) {
 		// TODO Auto-generated method stub
 		noOfTimes++;
-		Toast.makeText(context, "BC Service Running for " + noOfTimes + " times", Toast.LENGTH_SHORT).show();
+		Toast.makeText(context, "sync Service Running for " + noOfTimes + " times", Toast.LENGTH_SHORT).show();
 		AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         // Checks if new records are inserted in Remote MySQL DB to proceed with Sync operation
-        client.post("http://192.168.2.4:9000/mysqlsqlitesync/getdbrowcount.php",params ,new AsyncHttpResponseHandler() {
+        client.post("http://localhost/potholespot/web/mysqlsqlitesync/getdbrowcount.php",params ,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 System.out.println(response);

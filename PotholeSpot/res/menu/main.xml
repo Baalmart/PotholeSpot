@@ -17,6 +17,13 @@
         android:id="@+id/menu_map" 
         android:title="@string/map" 
         android:showAsAction="ifRoom" />
+     
+     <item 
+        android:icon="@drawable/stat_notify_manage" 
+        android:id="@+id/menu_db" 
+        android:title="@string/db" 
+        android:showAsAction="ifRoom" />
+     
     <!--  <item 
         android:icon="@drawable/icon_code" 
         android:id="@+id/menu_code" 
