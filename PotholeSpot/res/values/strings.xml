@@ -48,7 +48,7 @@
     <string name="service_gpsproblem">Receiving no location information</string>
 
     <!-- Dialogs -->
-    <string name="dialog_select_media_title">Select note</string>
+    <string name="dialog_select_media_title">Select Label</string>
     <string name="dialog_select_media_message">Multiple notes were found at this location, please select one to open</string>
     <string name="dialog_tracking_title">PotholeSpot</string>
     <string name="dialog_routename_title">Name Log File</string>

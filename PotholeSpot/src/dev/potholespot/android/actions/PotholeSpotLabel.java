@@ -253,7 +253,8 @@ public class PotholeSpotLabel
    private RoadEventTemplate match(ArrayList<Double> roadEventStream)
    {
       roadEventSequence = new double[10];
-      for(int i = 0; i <10; i++){
+      for(int i = 0; i <10; i++)
+      {
          roadEventSequence[i]  = roadEventStream.get(i);
       }
       
@@ -363,9 +364,9 @@ public class PotholeSpotLabel
 
       float[] filteredValues = new float[3];
 
-      /*filteredValues[0] = x * a + filteredValues[0] * (1.0f – a);
-      filteredValues[1] = y * a + filteredValues[1] * (1.0f – a);
-      filteredValues[2] = z * a + filteredValues[2] * (1.0f – a);*/
+      /*filteredValues[0] = x * a + filteredValues[0] * (1.0f ï¿½ a);
+      filteredValues[1] = y * a + filteredValues[1] * (1.0f ï¿½ a);
+      filteredValues[2] = z * a + filteredValues[2] * (1.0f ï¿½ a);*/
 
       return filteredValues;
 
@@ -375,13 +376,13 @@ public class PotholeSpotLabel
 
       float[] filteredValues = new float[3];
 
-    /*  gravity[0] = ALPHA * gravity[0] + (1 – ALPHA) * x;
-      gravity[1] = ALPHA * gravity[1] + (1 – ALPHA) * y;
-      gravity[2] = ALPHA * gravity[2] + (1 – ALPHA) * z;
+    /*  gravity[0] = ALPHA * gravity[0] + (1 ï¿½ ALPHA) * x;
+      gravity[1] = ALPHA * gravity[1] + (1 ï¿½ ALPHA) * y;
+      gravity[2] = ALPHA * gravity[2] + (1 ï¿½ ALPHA) * z;
 
-      filteredValues[0] = x – gravity[0];
-      filteredValues[1] = y – gravity[1];
-      filteredValues[2] = z – gravity[2];*/
+      filteredValues[0] = x ï¿½ gravity[0];
+      filteredValues[1] = y ï¿½ gravity[1];
+      filteredValues[2] = z ï¿½ gravity[2];*/
 
       return filteredValues;
 

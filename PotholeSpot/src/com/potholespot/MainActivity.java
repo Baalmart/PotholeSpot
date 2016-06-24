@@ -24,7 +24,7 @@ import android.widget.Button;
 
 import com.potholespot.custom.CustomActivity;
 import com.potholespot.ui.History;
-import com.potholespot.ui.NewActivity;
+import com.potholespot.ui.NewFragment;
 import com.potholespot.ui.Routes;
 import com.potholespot.ui.Workout;
 
@@ -44,8 +44,7 @@ public class MainActivity extends CustomActivity implements SensorEventListener
   public long currentTime;
   private SensorEvent mLastRecordedEvent;
   private SensorManager mSensorManager;
-  String TAG = "Pspot.MainActivity";
-  
+  String TAG = "Pspot.MainActivity";  
 
   @SuppressWarnings("deprecation")
 private void initPager()
@@ -81,7 +80,6 @@ private void initPager()
     findViewById(R.id.tab4).setOnClickListener(this);
     //setCurrentTab(0);
   }
-
   //so the problem is inside this method below:
   
   private void setCurrentTab(int paramInt)
@@ -164,9 +162,8 @@ protected void onCreate(Bundle paramBundle)
     setupActionBar();
     initTabs();
     initPager();
-    
+      
     mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
     mSensorManager.registerListener(this, mSensorManager.getDefaultSensor
                     (Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
      lastTime = System.currentTimeMillis();
@@ -202,8 +199,6 @@ public boolean onOptionsItemSelected(MenuItem paramMenuItem)
       return true;
     }
     
-    
-    
     return super.onOptionsItemSelected(paramMenuItem);
   }
 
@@ -237,27 +232,17 @@ protected void setupActionBar()
    public Fragment getItem(int paramInt)
     {
       if (paramInt == 0)
-        return new NewActivity();
+        return new NewFragment();
       if (paramInt == 1)
         return new Routes();
       if (paramInt == 2)
         return new Workout();
+      
+      //return for the history....
       return new History();
     }
     
   }
-  
-  
-  public SensorEvent getmLastRecordedEvent()
-  {
-     return mLastRecordedEvent;
-  }
-
-  public void setmLastRecordedEvent(SensorEvent mLastRecordedEvent)
-  {
-     this.mLastRecordedEvent = mLastRecordedEvent;
-  }
-
 
 @Override
 public void onSensorChanged(SensorEvent event)
@@ -285,7 +270,7 @@ public void onSensorChanged(SensorEvent event)
                 
            // callAsynchronousTask();
            
-              /*  float x = event.values[0];
+            /*    float x = event.values[0];
                 float y = event.values[1];
                 float z = event.values[2];
                 
@@ -346,11 +331,7 @@ lastTime = System.currentTimeMillis();
  protected void onStop() 
 {
    super.onStop(); 
-   mSensorManager.unregisterListener(this); mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
-   mSensorManager.registerListener(this, mSensorManager.getDefaultSensor
-                   (Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
-    lastTime = System.currentTimeMillis();
+   mSensorManager.unregisterListener(this);  
 }
 
 public void startAccelerometerSensor()
@@ -367,6 +348,15 @@ public void stopAccelerometerSensor()
    
    }
 
+public SensorEvent getmLastRecordedEvent()
+{
+   return mLastRecordedEvent;
+}
+
+public void setmLastRecordedEvent(SensorEvent mLastRecordedEvent)
+{
+   this.mLastRecordedEvent = mLastRecordedEvent;
+}
 
   
   
