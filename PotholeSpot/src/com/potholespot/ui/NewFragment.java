@@ -44,6 +44,7 @@ public class NewFragment extends Fragment
       super.onCreate(savedInstanceState);
       mDbHelper = new DatabaseHelper(getActivity()); 
       lastTime = System.currentTimeMillis();  
+      potholeSpot = new PotholeSpotLabel(mDbHelper);
      // callAsynchronousTask();
       //callAsynchronousTask();      
       //startLogging();
@@ -62,8 +63,6 @@ public class NewFragment extends Fragment
        
        //new Storing_xyz().execute();
        //storeAllAccelerationValues(mLastRecordedEvent);
-       
-       
    }
       
   private void setupView(View paramView)
@@ -84,9 +83,12 @@ public class NewFragment extends Fragment
            localView.setTag("manual");
            return;
          }
-         localView.setBackgroundResource(R.drawable.swith_up_left);
+         localView.setBackgroundResource(R.drawable.swith_up_left);         
+         store_xyz_asynchronousTask();
+         store_dtw_asynchronousTask();
          localView.setTag("auto");
-         callAsynchronousTask();   
+         //return;
+        
       }
     });       
   }    
@@ -103,7 +105,7 @@ public View onCreateView(LayoutInflater paramLayoutInflater,
    
   
   //the continuous collection of data  
-  public void callAsynchronousTask() 
+  public void store_xyz_asynchronousTask() 
   {
       final Handler handler = new Handler();
       Timer timer = new Timer();
@@ -140,7 +142,11 @@ private class Storing_xyz extends AsyncTask<String, Void, String>
    {               /*storeAllAccelerationValues(mLastRecordedEvent);*/              
               SensorEvent mLastContinousEvent = ((MainActivity)getActivity()).getmLastRecordedEvent();            
               storeAllAccelerationValues(mLastContinousEvent);
-              segmentDTWValues(mLastContinousEvent);
+              /*Log.d("x", "" +mLastContinousEvent.values[0]);
+              Log.d("y", "" +mLastContinousEvent.values[1]);
+              Log.d("z", "" +mLastContinousEvent.values[2]);*/
+              
+              //segmentDTWValues(mLastContinousEvent);
               //potholeSpot.segmentStream(mLastContinousEvent.values[0], mLastContinousEvent.values[1], mLastContinousEvent.values[2]);  
        return "Executed";
    }
@@ -166,6 +172,59 @@ private class Storing_xyz extends AsyncTask<String, Void, String>
    protected void onProgressUpdate(Void... values) 
    {
       
+   }
+}
+
+
+public void store_dtw_asynchronousTask() 
+{
+    final Handler handler = new Handler();
+    Timer timer = new Timer();
+    TimerTask doAsynchronousTask = new TimerTask() 
+    {       
+        @Override
+        public void run() {
+            handler.post(new Runnable() {
+                @Override
+               public void run() {       
+                    try 
+                    {                        
+                       //mLastRecordedEvent = ((MainActivity)getActivity()).getmLastRecordedEvent();
+                       Storing_dtw performBackgroundTask = new Storing_dtw();
+                        // PerformBackgroundTask this class is the class that extends AsynchTask 
+                        performBackgroundTask.execute();
+                    } 
+                    
+                    catch (Exception e) 
+                    {
+                        // TODO Auto-generated catch block
+                    }
+                }
+            });
+        }
+    };
+    timer.schedule(doAsynchronousTask, 0, 20); //execute in every 20 ms
+} 
+
+
+//the async task for storing DTW
+
+private class Storing_dtw extends AsyncTask<String, Void, String> 
+{
+
+   @Override
+   protected String doInBackground(String... params)
+   {
+      
+      SensorEvent mLastContinousEvent = ((MainActivity)getActivity()).getmLastRecordedEvent();
+      Log.d("x", "" +mLastContinousEvent.values[0]);
+      Log.d("y", "" +mLastContinousEvent.values[1]);
+      Log.d("z", "" +mLastContinousEvent.values[2]);
+      
+      segmentDTWValues(mLastContinousEvent);
+      
+      // TODO Auto-generated method stub
+      return "executed";
    }
 }
 
@@ -216,11 +275,13 @@ public void storeAllAccelerationValues(SensorEvent event)
     //potholeSpot.segmentStream(event.values[0], event.values[1], event.values[2]);  
 }
 
+//segmentation of all the values in preparation for the algorithm
 
 public void segmentDTWValues(SensorEvent event)
 {
    // TODO Auto-generated method stub
    
+   //if (event != null)
    potholeSpot.segmentStream(event.values[0], event.values[1], event.values[2]);
    
 }

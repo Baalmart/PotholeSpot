@@ -1,13 +1,15 @@
 package dev.potholespot.android.actions;
 
 import java.util.ArrayList;
-import android.util.Log;
+import java.util.Arrays;
+import java.util.Iterator;
 
+import android.hardware.SensorEvent;
+import android.util.Log;
 import dev.potholespot.android.db.*;
 import dev.potholespot.android.db.Pspot.PotholeSpotDtw;
 
-public class PotholeSpotLabel
-{
+public class PotholeSpotLabel{
    private DatabaseHelper dbm;
 
    private double[] roadEventSequence;
@@ -20,7 +22,7 @@ public class PotholeSpotLabel
 
    private double warpingDistance;
    private ArrayList<RoadEventTemplate> templates;
-   private ArrayList<Double> segmentedInputStream;
+   private ArrayList<Float> segmentedInputStream;
 
    /**
     * Constructor
@@ -31,56 +33,49 @@ public class PotholeSpotLabel
    {
       RoadEventTemplate template;
       templates = new ArrayList<RoadEventTemplate>();
-      segmentedInputStream = new ArrayList<Double>();
+      segmentedInputStream = new ArrayList<Float>();
       segmentedInputStream.clear();
       dbm = dbh;
+      
+   // stable accelerometer/device Template
+      template = new RoadEventTemplate();
+      template.name = "Template-1-stationary";
+      //template.sequence = new double[] {9.92297,9.2277,9.58878,9.58878,9.5373,9.58878,9.5373,9.5373,9.56005,9.56005,9.87967,9.87967,9.98622,9.98622,9.98622 };
+      template.sequence = new double[] {9.93953,9.94432,9.4432,9.4432,9.94073,9.94073,9.94073,9.94073,9.94073,9.94073,9.93713,9.93474};
+      template.labelName = "Stationary";
+      templates.add(template);
+      
+      
+      // Normal/smooth Road Template
+      template = new RoadEventTemplate();
+      template.name = "Template-1-stationary";
+      //template.sequence = new double[] {9.92297,9.2277,9.58878,9.58878,9.5373,9.58878,9.5373,9.5373,9.56005,9.56005,9.87967,9.87967,9.98622,9.98622,9.98622 };
+      template.sequence = new double[] {9.92297,9.2277,9.58878,9.58878,9.5373,9.58878,9.5373,9.5373,9.56005,9.56005,9.87967,9.98622};
+      template.labelName = "Stationary";
+      templates.add(template);
       
       //Pothole Templates
       template = new RoadEventTemplate();
       template.name = "Template-1-Pothole";
-      template.sequence = new double[] { 8.6323,10.281,9.1506,9.3051,9.681,9.3003,9.28995,9.432,9.1447,9.9994,9.7683,11.159,11.769,12.066,10.336,7.4963,8.7233,8.2492,10.197,10.489,9.8893,9.9108,9.1387,8.9986,8.418 };
+      //template.sequence = new double[] {8.6323,10.281,9.1506,9.3051,9.681,9.3003,9.28995,9.432,9.1447,9.9994,9.7683,11.159,11.769,12.066,10.336,7.4963,8.7233,8.2492,10.197,10.489,9.8893,9.9108,9.1387,8.9986,8.418 };
+      template.sequence = new double[] {8.6323,10.281,10.281,9.7683,11.159,11.769,12.066,10.336,7.4963,8.7233,8.2492,10.197,10.489,9.8893};
       template.labelName = "Pothole";
       templates.add(template);
-
-      /*template = new RoadEventTemplate();
-      template.name = "Template-2-Pothole";
-      template.sequence = new double[] { -5.00, -2.00, 0.00, 0.00 };
-      template.labelName = "Pothole";
-      templates.add(template);*/
 
       //Roadhump Templates
       template = new RoadEventTemplate();
       template.name = "Template-1-Roadhump";
-      template.sequence = new double[] { 8.9328,7.8925,9.4272,9.4834,8.1487,9.8928,8.2732,9.0549,7.7955,7.9679,7.9322,6.3315,8.8502,8.8957,8.8238,10.002,9.5086,7.6375,11.842,9.2189,9.8545,9.171,7.2975,7.0282};
+      //template.sequence = new double[] { 8.9328,7.8925,9.4272,9.4834,8.1487,9.8928,8.2732,9.0549,7.7955,7.9679,7.9322,6.3315,8.8502,8.8957,8.8238,10.002,9.5086,7.6375,11.842,9.2189,9.8545,9.171,7.2975,7.0282};
+      template.sequence = new double[] { 8.9328,7.8925,8.2732,7.7955,6.3315,8.8502,8.8957,10.002,9.5086,7.6375,11.842,9.2189};
       template.labelName = "Roadhump";
       templates.add(template);
-      /*
-      
-      template = new RoadEventTemplate();
-      template.name = "Template-2-Roadhump";
-      template.sequence = new double[] { 0.00, 0.00, 0.00, 0.00 };
-      template.labelName = "Roadhump";
-      templates.add(template);
-
-      template = new RoadEventTemplate();
-      template.name = "Template-3-Roadhump";
-      template.sequence = new double[] { 0.00, 0.00, 0.00, 0.00 };
-      template.labelName = "Roadhump";
-      templates.add(template);*/
 
       //UnevenRoad Templates
       template = new RoadEventTemplate();
       template.name = "Template-1-UnevenRoad";
-      template.sequence = new double[] { 9.1279,7.5214,7.4963,8.1487,7.9356,7.683,8.7496,9.2117,8.102,8.8095,7.8937,9.8545,7.9679,8.7975,8.4659,9.0884,7.0198,8.9376,8.8544,8.15};
+      template.sequence = new double[] {9.1279,7.5214,7.4963,8.1487,7.9356,7.683,8.7496,9.2117,9.8545,7.8937,9.8545,7.9679};
       template.labelName = "UnevenRoad";
       templates.add(template);
-
-      /*
-      template = new RoadEventTemplate();
-      template.name = "Template-2-UnevenRoad";
-      template.sequence = new double[] { 0.00, 0.00, 0.00, 0.00 };
-      template.labelName = "UnevenRoad";
-      templates.add(template);*/
    }
 
    private void match()
@@ -247,17 +242,15 @@ public class PotholeSpotLabel
    /**
     * Matches the an Incoming input stream to several templates stored.
     * @return a template whose matching with Incoming stream resulted into the minimum distance 
-    * @param roadEventStream , an incoming stream of 10 values in total.
+    * @param segmentedInputStream2 , an incoming stream of 10 values in total.
     * @author Judas Tadeo, PotholeSpot-Uganda Project
     * */
-   private RoadEventTemplate match(ArrayList<Double> roadEventStream)
-   {
-      roadEventSequence = new double[10];
-      for(int i = 0; i <10; i++)
+   private RoadEventTemplate match(ArrayList<Float> segmentedInputStream2)
       {
-         roadEventSequence[i]  = roadEventStream.get(i);
-      }
-      
+         roadEventSequence = new double[10];
+         for(int i = 0; i <10; i++){
+         roadEventSequence[i]  = segmentedInputStream2.get(i);
+      }      
       //roadEventSequence = roadEventStream;
       RoadEventTemplate template = null;
       RoadEventTemplate matchedTemplate = null;
@@ -278,10 +271,10 @@ public class PotholeSpotLabel
          template.minimumDistance = warpingDistance;
       }
 
+      matchedTemplate = templates.get(0);
+      
       for (int i = 0; i < templates.size(); i++)
       {
-         matchedTemplate = templates.get(i);
-
          if (i >= 1)
          {
             if (matchedTemplate.minimumDistance > templates.get(i - 1).minimumDistance)
@@ -303,7 +296,7 @@ public class PotholeSpotLabel
     * @return void.
     * @author Judas Tadeo, PotholeSpot-Uganda Project.
     * */
-   public void segmentStream(double x, double y, double z)
+   public void segmentStream(float x, float y, float z)
    {
       int count = segmentedInputStream.size();
       if (count == 10)
@@ -311,6 +304,7 @@ public class PotholeSpotLabel
          RoadEventTemplate temp = match(segmentedInputStream);
          saveToDatabase(temp,segmentedInputStream);
       }
+      
       else if (count < 10)
       {
          segmentedInputStream.add(count, z);
@@ -364,9 +358,9 @@ public class PotholeSpotLabel
 
       float[] filteredValues = new float[3];
 
-      /*filteredValues[0] = x * a + filteredValues[0] * (1.0f � a);
-      filteredValues[1] = y * a + filteredValues[1] * (1.0f � a);
-      filteredValues[2] = z * a + filteredValues[2] * (1.0f � a);*/
+      /*filteredValues[0] = x * a + filteredValues[0] * (1.0f \96 a);
+      filteredValues[1] = y * a + filteredValues[1] * (1.0f \96 a);
+      filteredValues[2] = z * a + filteredValues[2] * (1.0f \96 a);*/
 
       return filteredValues;
 
@@ -376,19 +370,25 @@ public class PotholeSpotLabel
 
       float[] filteredValues = new float[3];
 
-    /*  gravity[0] = ALPHA * gravity[0] + (1 � ALPHA) * x;
-      gravity[1] = ALPHA * gravity[1] + (1 � ALPHA) * y;
-      gravity[2] = ALPHA * gravity[2] + (1 � ALPHA) * z;
+    /*  gravity[0] = ALPHA * gravity[0] + (1 \96 ALPHA) * x;
+      gravity[1] = ALPHA * gravity[1] + (1 \96 ALPHA) * y;
+      gravity[2] = ALPHA * gravity[2] + (1 \96 ALPHA) * z;
 
-      filteredValues[0] = x � gravity[0];
-      filteredValues[1] = y � gravity[1];
-      filteredValues[2] = z � gravity[2];*/
+      filteredValues[0] = x \96 gravity[0];
+      filteredValues[1] = y \96 gravity[1];
+      filteredValues[2] = z \96 gravity[2];*/
 
       return filteredValues;
 
       }
    
-   private void saveToDatabase(RoadEventTemplate template, ArrayList<Double> segmentedInputStream){
+   /**
+    * @category, The method saves a matched or an identified Road Event to SQLlite Database with its label also called tag
+    * @param template, is the matched Template whose location must also be found.
+    * @return, void.
+    * @author Judas Tadeo, PotholeSpot-Uganda Project
+    * */
+   private void saveToDatabase(RoadEventTemplate template, ArrayList<Float> segmentedInputStream2){
             
       if(template != null){
         
@@ -406,29 +406,29 @@ public class PotholeSpotLabel
       queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+PotholeSpotDtw.SEQ10+","; 
       queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+PotholeSpotDtw.LATITUDE+",";
       queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+PotholeSpotDtw.LONGITUDE+",";
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+PotholeSpotDtw.TAG;
-      //queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+PotholeSpotDtw.TIME;
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+PotholeSpotDtw.TAG+",";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+PotholeSpotDtw.TIME;
        
       queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+" ) VALUES ( ";
       
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream.get(0)+"' , ";
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream.get(1)+"' , ";
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream.get(2)+"', "; 
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream.get(3)+"', ";
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream.get(6)+"', ";
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream.get(5)+"', ";
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream.get(6)+"', ";
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream.get(7)+"', ";
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream.get(8)+"', ";
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream.get(9)+"', ";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream2.get(0)+"' , ";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream2.get(1)+"' , ";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream2.get(2)+"', "; 
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream2.get(3)+"', ";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream2.get(4)+"', ";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream2.get(5)+"', ";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream2.get(6)+"', ";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream2.get(7)+"', ";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream2.get(8)+"', ";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+segmentedInputStream2.get(9)+"', ";
       queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+0+"', ";
       queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+0+"', ";
-      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+template.labelName+"' ) ";
-      //queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+Long.valueOf(System.currentTimeMillis()) +"' ) "; 
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+template.labelName+"', ";
+      queryStoreAccelerationValuesDTW=queryStoreAccelerationValuesDTW+"'"+Long.valueOf(System.currentTimeMillis()) +"' ) "; 
       Log.d("Insert Query", queryStoreAccelerationValuesDTW);
          
          this.dbm.getData(queryStoreAccelerationValuesDTW);
-         segmentedInputStream.clear();
+         segmentedInputStream2.clear();
       }
    }
 }
