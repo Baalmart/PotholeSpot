@@ -249,7 +249,7 @@
             android:screenOrientation="portrait" />
         
         <activity
-            android:name="dev.potholespot.android.db.sync.MainActivity"
+            android:name="dev.potholespot.android.db.sync.SyncActivity"
             android:label="@string/app_name" android:noHistory="true"/>
         
         <service

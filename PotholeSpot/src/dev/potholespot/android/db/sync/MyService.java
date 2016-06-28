@@ -36,7 +36,7 @@ public class MyService extends Service
 	public void onStart(Intent intent, int startId) 
 	{
 		Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
-		Intent resultIntent = new Intent(this, MainActivity.class);
+		Intent resultIntent = new Intent(this, SyncActivity.class);
 		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0,
 				resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		NotificationCompat.Builder mNotifyBuilder;
