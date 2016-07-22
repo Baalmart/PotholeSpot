@@ -33,6 +33,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -54,6 +55,7 @@ import dev.potholespot.android.db.AndroidDatabaseManager;
 import dev.potholespot.android.db.DatabaseHelper;
 import dev.potholespot.android.db.sync.SampleBC;
 import dev.potholespot.android.viewer.map.CommonLoggerMap;
+import dev.potholespot.android.viewer.map.v2.MapsActivity;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 @SuppressLint("NewApi")
@@ -143,6 +145,14 @@ private void initPager()
       }
     }
   }
+  
+  
+/*  ImageView img = (ImageView) findViewById(R.id.imageView1);
+  img.setOnClickListener(new OnClickListener() {
+      public void onClick(View v) {
+         // your code here
+      }
+  });*/
 
   @Override
 public void onClick(View paramView)
@@ -150,6 +160,8 @@ public void onClick(View paramView)
     super.onClick(paramView);
     if (paramView.getId() == R.id.tab1)
       pager.setCurrentItem(0, true);
+   
+       
     
 /*    do
     {
@@ -212,7 +224,7 @@ protected void onCreate(Bundle paramBundle)
     */
     // Initialize Progress Dialog properties
     prgDialog = new ProgressDialog(this);
-    prgDialog.setMessage("Transferring Data from Remote MySQL DB and Syncing SQLite. Please wait...");
+    prgDialog.setMessage("Transferring Data. Please wait...");
     prgDialog.setCancelable(false);
     // BroadCase Receiver Intent Object
     Intent alarmIntent = new Intent(getApplicationContext(), SampleBC.class);
@@ -268,6 +280,15 @@ public boolean onOptionsItemSelected(MenuItem paramMenuItem)
       syncSQLiteMySQLDB();
        return true;
     }
+    
+    if (paramMenuItem.getItemId() == R.id.menu_manual) 
+    {
+       // Transfer data from remote MySQL DB to SQLite on Android and perform Sync
+      /*syncSQLiteMySQLDB();*/
+       startActivity(new Intent(this, MapsActivity.class));
+       return true;
+    }
+    
     
     return super.onOptionsItemSelected(paramMenuItem);
   }
@@ -362,13 +383,13 @@ public void onSensorChanged(SensorEvent event)
 @Override
 public void onAccuracyChanged(Sensor sensor, int accuracy)
 {
-   // TODO Auto-generated method stub
-   
+   // TODO Auto-generated method stub   
 }
 
 //methods for the sync
 // Method to Sync MySQL to SQLite DB
-public void syncSQLiteMySQLDB() {
+public void syncSQLiteMySQLDB() 
+{
    // Create AsycHttpClient object
    AsyncHttpClient client = new AsyncHttpClient();
    // Http Request Params Object
@@ -376,7 +397,7 @@ public void syncSQLiteMySQLDB() {
    // Show ProgressBar
    prgDialog.show();
    // Make Http call to getusers.php
-   client.post("http://localhost/potholespot/web/mysqlsqlitesync/get_xyz.php", 
+   client.post("http://192.232.238.118/~potholespot/synchronization/web/mysqlsqlitesync/getdtw.php", 
          params, new AsyncHttpResponseHandler() 
      {
          @Override
@@ -415,8 +436,8 @@ public void syncSQLiteMySQLDB() {
 //this method also takes advantage of the response and extracts a JSON array.
 public void updateSQLite(String response)
 {
-   ArrayList<HashMap<String, String>> usersynclist;
-   usersynclist = new ArrayList<HashMap<String, String>>();
+   ArrayList<HashMap<String, String>> dtwynclist;
+   dtwynclist = new ArrayList<HashMap<String, String>>();
    // Create GSON object
    Gson gson = new GsonBuilder().create();
    try {
@@ -430,45 +451,86 @@ public void updateSQLite(String response)
          {
             // Get JSON object
             JSONObject obj = (JSONObject) arr.get(i);
-            System.out.println(obj.get("id"));
-            System.out.println(obj.get("time"));
-            System.out.println(obj.get("speed"));
-            System.out.println(obj.get("x"));
-            System.out.println(obj.get("y"));
-            System.out.println(obj.get("z"));               
+           // System.out.println(obj.get("id"));
+            System.out.println(obj.get("_id"));
+            System.out.println(obj.get("Seq1"));
+            System.out.println(obj.get("Seq2"));
+            System.out.println(obj.get("Seq3"));
+            System.out.println(obj.get("Seq4"));
+            System.out.println(obj.get("Seq5"));
+            System.out.println(obj.get("Seq6"));
+            System.out.println(obj.get("Seq7"));
+            System.out.println(obj.get("Seq8"));
+            System.out.println(obj.get("Seq9"));
+            System.out.println(obj.get("Seq10"));
+            System.out.println(obj.get("longitude"));
+            System.out.println(obj.get("latitude"));
+            System.out.println(obj.get("tag"));
+            System.out.println(obj.get("time")); 
+            System.out.println(obj.get("syncsts"));
             
             // DB QueryValues Object to insert into SQLite
             queryValues = new HashMap<String, String>();
             
-            
+            queryValues.put("_id", obj.get("_id").toString());
             // Add id extracted from Object
-            queryValues.put("id", obj.get("id").toString());
+            queryValues.put("Seq1", obj.get("Seq1").toString());
             // Add time extracted from Object
-            queryValues.put("time", obj.get("time").toString());
+            queryValues.put("Seq2", obj.get("Seq2").toString());
              // Add speed extracted from Object
-            queryValues.put("speed", obj.get("speed").toString());
+            queryValues.put("Seq3", obj.get("Seq3").toString());
             // Add x extracted from Object
-            queryValues.put("x", obj.get("x").toString());
-            // Add y extracted from Object
-            queryValues.put("y", obj.get("y").toString());
-            // Add z extracted from Object
-            queryValues.put("z", obj.get("z").toString());
-                           
-            // Insert values into SQLite DB
-           dbHelper.insert_xyz(queryValues);
+            queryValues.put("Seq4", obj.get("Seq4").toString());
+            // Add x extracted from Object
+            queryValues.put("Seq4", obj.get("Seq4").toString());
+            // Add x extracted from Object
+            queryValues.put("Seq5", obj.get("Seq5").toString());
+            // Add x extracted from Object
+            queryValues.put("Seq6", obj.get("Seq6").toString());
+            // Add x extracted from Object
+            queryValues.put("Seq7", obj.get("Seq7").toString());
+            // Add x extracted from Object
+            queryValues.put("Seq8", obj.get("Seq8").toString());
+            // Add x extracted from Object
+            queryValues.put("Seq9", obj.get("Seq9").toString());
+            // Add x extracted from Object
+            queryValues.put("Seq10", obj.get("Seq10").toString());
+            // Add x extracted from Object
+            queryValues.put("longitude", obj.get("longitude").toString());
+            // Add x extracted from Object
+            queryValues.put("latitude", obj.get("latitude").toString());            
+            // Add x extracted from Object
+            queryValues.put("tag", obj.get("tag").toString());            
+            // Add x extracted from Object
+            queryValues.put("time", obj.get("time").toString());
+            // Add x extracted from Object
+            queryValues.put("syncsts", obj.get("syncsts").toString());
+                                       
+            // Insert dtw values into SQLite DB
+           dbHelper.insert_dtw(queryValues);
             HashMap<String, String> map = new HashMap<String, String>();
             // Add status for each xyz in Hashmap
-            map.put("Id", obj.get("userId").toString());
-            map.put("time", obj.get("time").toString());
-            map.put("speed", obj.get("speed").toString());
-            map.put("x", obj.get("x").toString());
-            map.put("y", obj.get("y").toString());
-            map.put("z", obj.get("z").toString());
+            map.put("_id", obj.get("_id").toString());
+            map.put("Seq1", obj.get("Seq1").toString());
+            map.put("Seq2", obj.get("Seq2").toString());
+            map.put("Seq3", obj.get("Seq3").toString());
+            map.put("Seq4", obj.get("Seq4").toString());
+            map.put("Seq5", obj.get("Seq5").toString());
+            map.put("Seq6", obj.get("Seq6").toString());
+            map.put("Seq7", obj.get("Seq7").toString());
+            map.put("Seq8", obj.get("Seq8").toString());
+            map.put("Seq9", obj.get("Seq9").toString());
+            map.put("Seq10", obj.get("Seq10").toString());
+            map.put("longitude", obj.get("longitude").toString());
+            map.put("latitude", obj.get("latitude").toString());
+            map.put("tag", obj.get("tag").toString());
+            map.put("time", obj.get("time").toString());   
+            map.put("syncsts", obj.get("syncsts").toString());
             map.put("status", "1");
-            usersynclist.add(map);
+            dtwynclist.add(map);
          }
          // Inform Remote MySQL DB about the completion of Sync activity by passing Sync status of xyz values
-         updateMySQLSyncSts(gson.toJson(usersynclist));
+         updateMySQLSyncSts(gson.toJson(dtwynclist));
          // Reload the Main Activity
          reloadActivity();
       }
@@ -482,7 +544,6 @@ public void updateSQLite(String response)
 }
 
 
-
 // Method to inform remote MySQL DB about completion of Sync activity
 public void updateMySQLSyncSts(String json) 
 {
@@ -491,7 +552,7 @@ public void updateMySQLSyncSts(String json)
    RequestParams params = new RequestParams();
    params.put("syncsts", json);
    // Make Http call to updatesyncsts.php with JSON parameter which has Sync statuses of Users
-   client.post("http://localhost/potholespot/web/mysqlsqlitesync/updatesyncsts.php", params, new AsyncHttpResponseHandler() {
+   client.post("http://192.232.238.118/~potholespot/synchronization/web/mysqlsqlitesync/updatesyncsts.php", params, new AsyncHttpResponseHandler() {
       @Override
       public void onSuccess(String response) {
          Toast.makeText(getApplicationContext(),   "MySQL DB has been informed about Sync activity", Toast.LENGTH_LONG).show();
@@ -510,13 +571,6 @@ public void reloadActivity()
    Intent objIntent = new Intent(getApplicationContext(), MainActivity.class);
    startActivity(objIntent);
 }
-
-
-
-
-
-
-
 
 //class life cycle
 

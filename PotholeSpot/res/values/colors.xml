@@ -38,4 +38,10 @@
     <color name="background">#ffececec</color>
     <color name="tab_bg_yellow">#ffffa638</color>
     <color name="gray_border">#ffcfcfcf</color>
+    
+    <!-- for the map v2 -->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    
 </resources>

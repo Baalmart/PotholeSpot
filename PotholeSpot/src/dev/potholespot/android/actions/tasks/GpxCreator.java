@@ -369,23 +369,29 @@ public class GpxCreator extends XmlCreator
                serializer.text("\n");*/
                
                serializer.text("\n");
-               serializer.startTag("", "x");
+               serializer.startTag("", "altitude");
                serializer.text(Double.toString(waypointsCursor.getDouble(3)));
-               serializer.endTag("", "x");
+               serializer.endTag("", "altitude");
                serializer.text("\n");
                
                serializer.text("\n");
-               serializer.startTag("", "y");
-               serializer.text(Double.toString(waypointsCursor.getDouble(3)));
-               serializer.endTag("", "y");
+               serializer.startTag("", "speed");
+               serializer.text(Double.toString(waypointsCursor.getDouble(5)));
+               serializer.endTag("", "speed");
                serializer.text("\n");
                
                serializer.text("\n");
-               serializer.startTag("", "z");
-               serializer.text(Double.toString(waypointsCursor.getDouble(3)));
-               serializer.endTag("", "z");
+               serializer.startTag("", "accuracy");
+               serializer.text(Double.toString(waypointsCursor.getDouble(6)));
+               serializer.endTag("", "accuracy");
                serializer.text("\n");
             
+               serializer.text("\n");
+               serializer.startTag("", "bearing");
+               serializer.text(Double.toString(waypointsCursor.getDouble(6)));
+               serializer.endTag("", "bearing");
+               serializer.text("\n");
+               
                
                serializer.startTag("", "time");
                Date time = new Date(waypointsCursor.getLong(2));

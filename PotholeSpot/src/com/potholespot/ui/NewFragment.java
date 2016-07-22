@@ -8,10 +8,13 @@ import com.potholespot.MainActivity;
 import dev.potholespot.android.actions.PotholeSpotLabel;
 import dev.potholespot.android.db.DatabaseHelper;
 import dev.potholespot.android.db.Pspot.Xyz;
+import dev.potholespot.android.viewer.map.CommonLoggerMap;
+import dev.potholespot.android.viewer.map.v2.MapsActivity;
 import dev.potholespot.uganda.R;
 import dev.potholespot.uganda.R.drawable;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -64,7 +67,9 @@ public class NewFragment extends Fragment
        //new Storing_xyz().execute();
        //storeAllAccelerationValues(mLastRecordedEvent);
    }
-      
+ 
+   
+   
   private void setupView(View paramView)
   {
     final View localView = paramView.findViewById(R.id.vSwitch);    
@@ -81,7 +86,8 @@ public class NewFragment extends Fragment
          {
            localView.setBackgroundResource(R.drawable.swith_up_right);
            localView.setTag("manual");
-           return;
+           
+             return;
          }
          localView.setBackgroundResource(R.drawable.swith_up_left);         
          store_xyz_asynchronousTask();
@@ -92,16 +98,32 @@ public class NewFragment extends Fragment
       }
     });       
   }    
+  
 
 @Override
 public View onCreateView(LayoutInflater paramLayoutInflater, 
 		  ViewGroup paramViewGroup, Bundle paramBundle)
   {
     View localView = paramLayoutInflater.inflate(R.layout.new_activity, null);
+      
+    //the upper image of the new fragment class
+      if (localView .getId() == R.id.imageView1) 
+      {
+        //let me just move to the map
+        //startActivity(new Intent(this, CommonLoggerMap.class));
+      }   
+    
     setupView(localView);
     //callAsynchronousTask();
     return localView;
   }
+
+public void imageClick()
+
+{
+  
+}
+
    
   
   //the continuous collection of data  

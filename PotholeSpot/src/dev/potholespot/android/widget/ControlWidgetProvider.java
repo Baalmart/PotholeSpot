@@ -26,7 +26,7 @@ public class ControlWidgetProvider extends AppWidgetProvider
 {
    private static final int BUTTON_TRACKINGCONTROL = 2;
    private static final int BUTTON_INSERTNOTE = 3;
-   private static final String TAG = "OGT.ControlWidgetProvider";
+   private static final String TAG = "Pspot.ControlWidgetProvider";
 
    static final ComponentName THIS_APPWIDGET = new ComponentName
          ("dev.potholespot.uganda", 

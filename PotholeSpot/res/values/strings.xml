@@ -63,9 +63,9 @@
     <string name="dialog_layer_title">Activate overlays</string>
     <string name="dialog_graphtype_title">Graph type</string>
     <string name="dialog_notetext_title">Text note</string>
-    <string name="dialog_notetext_message">Enter a text note for the current location</string>
-    <string name="dialog_notename_title">Mark</string>
-    <string name="dialog_notename_message">Enter the name of this location</string>
+    <string name="dialog_notetext_message">Enter a text note for the label observed</string>
+    <string name="dialog_notename_title">Mark the pothole</string>
+    <string name="dialog_notename_message">Enter the name of the label observed</string>
     <string name="logcontrol_start">Start Automatic Mode</string>
     <string name="logcontrol_pause">Pause</string>
     <string name="logcontrol_resume">Resume</string>
@@ -187,17 +187,24 @@
     <string name="menu_showLayers">Overlays</string>
     <string name="menu_graphtype">Graph type</string>
     <string name="menu_insertnote">Manual Mode</string>
-    <string name="menu_notename">Mark with a name</string>
-    <string name="menu_notepicture">Take Picture</string>
-    <string name="menu_notetext">Write Text</string>
+    <string name="menu_notename">label name</string>
+    <string name="menu_notepicture">Take Picture of label</string>
+    <string name="menu_notetext">Short Description</string>
     <string name="menu_notespeech">Record Speech</string>
     <string name="menu_notevideo">Record Video</string>
     <string name="graphtype_timespeed">Speed over time</string>
-    <string name="graphtype_timealtitude">Altitude over time</string>
+    <string name="graphtype_timealtitude">z values over time</string>
     <string name="graphtype_distancespeed">Speed over distance</string>
-    <string name="graphtype_distancealtitude">Altitude over distance</string>
+    <string name="graphtype_distancealtitude">z values over distance</string>
     <string name="menu_vacuum">Crop data</string>
     <string name="menu_contrib">Contribute</string>
+    
+    <!-- 
+    
+     <string name="graphtype_timealtitude">Altitude over time</string>
+     <string name="graphtype_distancealtitude">Altitude over distance</string>
+     
+     -->
 
     <!-- Communicated -->
     <string name="email_subject">PRIM GPS - Label data</string>
@@ -351,9 +358,26 @@ Enter number of feet for acres/hour or meters for use in hectares/hour.\n </stri
     <string name="tab">Tab</string>
     <string name="button">Button</string>
     <string name="sync">Sync</string>
-    <string name="map">Map</string>
+    <string name="map">Auto Map</string>
     <string name="code">See Code</string>
     <string name="db">DB</string>
+    <string name="manual">Manual Map</string>
     
+    
+    <!-- for the maps V2 -->
+    
+    <string name="title_activity_maps">Map</string>
+
+    <!--Fetch Address-->
+    <string name="no_geocoder_available">No geocoder available</string>
+
+    <string name="fetch_address">Fetch address</string>
+
+    <string name="address_found">Address found</string>
+
+    <string name="no_address_found">Sorry, no address found</string>
+    <string name="no_location_data_provided">No location data provided</string>
+    <string name="service_not_available">Sorry, the service is not available</string>
+    <string name="invalid_lat_long_used">Invalid latitude or longitude used</string>
 
 </resources>

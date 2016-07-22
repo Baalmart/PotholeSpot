@@ -136,6 +136,31 @@ public class DatabaseHelper extends SQLiteOpenHelper
          database.insert("xyz", null, values);
          database.close();
       }
+      
+      //for the dtw values
+      
+      public void insert_dtw(HashMap<String, String> queryValues) 
+      {
+         SQLiteDatabase database = this.getWritableDatabase();
+         ContentValues values = new ContentValues();
+         values.put("id", queryValues.get("id"));
+         values.put("Seq1", queryValues.get("Seq1"));
+         values.put("Seq2", queryValues.get("Seq2"));
+         values.put("Seq3", queryValues.get("Seq3"));
+         values.put("Seq4", queryValues.get("Seq4"));
+         values.put("Seq5", queryValues.get("Seq5"));
+         values.put("Seq6", queryValues.get("Seq6"));
+         values.put("Seq7", queryValues.get("Seq7"));
+         values.put("Seq8", queryValues.get("Seq8"));
+         values.put("Seq9", queryValues.get("Seq9"));
+         values.put("Seq10", queryValues.get("Seq10"));
+         values.put("longitude", queryValues.get("longitude"));
+         values.put("latitude", queryValues.get("latitude"));
+         values.put("Tag", queryValues.get("Tag"));
+         values.put("time", queryValues.get("time"));                
+         database.insert("dtw", null, values);
+         database.close();
+      }
    
    @Override
    public void onUpgrade(SQLiteDatabase db, int current, int targetVersion)
@@ -407,8 +432,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
        db.close();
        return row;
    }
-   
-  
+     
    public Cursor selectLabelsRecords() 
    {
       SQLiteDatabase database = getReadableDatabase();
@@ -433,8 +457,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     */
    long insertMedia(long trackId, long segmentId, long waypointId, String mediaUri)
    {
-      if (trackId < 0 || segmentId < 0 || waypointId < 0)
-         
+      if (trackId < 0 || segmentId < 0 || waypointId < 0)         
       {
          throw new IllegalArgumentException("Track, segments and waypoint may not the less then 0.");
       }
@@ -447,7 +470,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
       args.put(MediaColumns.WAYPOINT, waypointId);
       args.put(MediaColumns.URI, mediaUri);
 
-      Log.d( TAG, "Media stored in the datebase: "+mediaUri );
+      Log.d( TAG, "Media stored in the database: "+mediaUri );
 
       long mediaId = sqldb.insert(Media.TABLE, null, args);
 
@@ -906,7 +929,114 @@ public class DatabaseHelper extends SQLiteOpenHelper
    }
    
    
+   //methods for the synhronization
    
+   /**
+    * Inserts label into SQLite DB
+    * @param queryValues
+    */
+   public void insertLabel(HashMap<String, String> queryValues) 
+   {
+      SQLiteDatabase database = this.getWritableDatabase();
+      ContentValues values = new ContentValues();
+      values.put("userId", queryValues.get("userId"));
+      values.put("userName", queryValues.get("userName"));
+      database.insert("users", null, values);
+      database.close();
+   }
+   
+   /**
+    * Get list of dtw elements from SQLite DB as Array List
+    * @return
+    */
+   public ArrayList<HashMap<String, String>> getAll_dtw() 
+   {
+      ArrayList<HashMap<String, String>> dtwList;
+      dtwList = new ArrayList<HashMap<String, String>>();
+      String selectQuery = "SELECT  * FROM dtw";
+       SQLiteDatabase database = this.getWritableDatabase();
+       Cursor cursor = database.rawQuery(selectQuery, null);
+       if (cursor.moveToFirst()) {
+           do 
+          {
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("Seq1", cursor.getString(1));
+            map.put("Seq2", cursor.getString(2));
+            map.put("Seq3", cursor.getString(3));
+            map.put("Seq4", cursor.getString(4));
+            map.put("Seq5", cursor.getString(5));
+            map.put("Seq6", cursor.getString(6));
+            map.put("Seq7", cursor.getString(7));
+            map.put("Seq8", cursor.getString(8));
+            map.put("Seq9", cursor.getString(9));
+            map.put("Seq10", cursor.getString(10));
+            map.put("Longitude", cursor.getString(11));
+            map.put("Latitude", cursor.getString(12));
+            map.put("Tag", cursor.getString(13));
+            map.put("Time", cursor.getString(14));
+                dtwList.add(map);
+           } while (cursor.moveToNext());
+       }
+       database.close();
+       return dtwList;
+   }
+   
+   
+   /**
+    * Get list of dtw elements from SQLite DB as Array List
+    * @return
+    */
+   public ArrayList<HashMap<String, String>> getAll_waypoints() 
+   {
+      ArrayList<HashMap<String, String>> waypointsList;
+      waypointsList = new ArrayList<HashMap<String, String>>();
+      String selectQuery = "SELECT  * FROM waypoints";
+       SQLiteDatabase database = this.getWritableDatabase();
+       Cursor cursor = database.rawQuery(selectQuery, null);
+       if (cursor.moveToFirst()) 
+       {
+           do 
+          {
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("latitude", cursor.getString(1));
+            map.put("longitude", cursor.getString(2));
+            map.put("time", cursor.getString(3));
+            map.put("speed", cursor.getString(4));
+            map.put("tracksegment", cursor.getString(5));            
+                waypointsList.add(map);
+           } while (cursor.moveToNext());
+       }
+       database.close();
+       return waypointsList;
+   }
+   
+   /**
+    * Get list of dtw elements from SQLite DB as Array List
+    * @return
+    */
+   public ArrayList<HashMap<String, String>> getAll_labels() 
+   {
+      ArrayList<HashMap<String, String>> labelsList;
+      labelsList = new ArrayList<HashMap<String, String>>();
+      String selectQuery = "SELECT  * FROM labels";
+       SQLiteDatabase database = this.getWritableDatabase();
+       Cursor cursor = database.rawQuery(selectQuery, null);
+       if (cursor.moveToFirst()) {
+           do 
+          {
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("name", cursor.getString(1));
+            map.put("creationtime", cursor.getString(2));
+            map.put("longitude", cursor.getString(3));
+            map.put("latitude", cursor.getString(4));
+            map.put("speed", cursor.getString(5));
+            
+                labelsList.add(map);
+           } while (cursor.moveToNext());
+       }
+       database.close();
+       return labelsList;
+   }
    
    
    

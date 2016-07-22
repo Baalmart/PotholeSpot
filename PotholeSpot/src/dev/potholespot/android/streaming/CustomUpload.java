@@ -138,7 +138,15 @@ public class CustomUpload extends BroadcastReceiver
       CharSequence contentText = e.getMessage();
       Intent notificationIntent = new Intent(context, CustomUpload.class);
       PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
-      notification.setLatestEventInfo(appContext, contentTitle, contentText, contentIntent);
+      /*notification.setLatestEventInfo(appContext, contentTitle, contentText, contentIntent);*/
+      
+       notification = new Notification.Builder(appContext)
+      .setContentTitle( contentTitle)
+      .setContentText(contentText)
+      .setSmallIcon(icon)
+      .setContentIntent(contentIntent)      
+      .build();
+       
       notification.flags = Notification.FLAG_AUTO_CANCEL;
 
       mNotificationManager.notify(NOTIFICATION_ID, notification);

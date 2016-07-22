@@ -51,8 +51,7 @@ public final class Pspot
                                           "," + " " + Labels.Y + " " + Labels.Y_TYPE +
                                           "," + " " + Labels.Z + " " + Labels.Z_TYPE +
                                           ");";
-   }
-    
+   }    
    
    public static final class PotholeSpotDtw extends PotholeSPotDtwColumns implements android.provider.BaseColumns
    {
@@ -81,6 +80,7 @@ public final class Pspot
                                           "," + " " + PotholeSpotDtw.LATITUDE + " " + PotholeSpotDtw.LATITUDE_TYPE +
                                           "," + " " + PotholeSpotDtw.TAG + " " + PotholeSpotDtw.TAG_TYPE +
                                           "," + " " + PotholeSpotDtw.TIME + " " + PotholeSpotDtw.TIME_TYPE +
+                                          "," + " " + PotholeSpotDtw.SYNC + " " + PotholeSpotDtw.SYNC_TYPE +
                                           ");";
    }
    
@@ -155,12 +155,7 @@ public final class Pspot
                                           ");";
    }
  
-   
-   
-   
-   
-   
-   
+ 
    
    /**
     * This table contains segments.
@@ -287,8 +282,7 @@ public final class Pspot
          builder.appendPath(Xyz.TABLE);
          ContentUris.appendId(builder, xyzId);
          builder.appendPath(Locations.TABLE);
-         ContentUris.appendId(builder, locationId);
-         
+         ContentUris.appendId(builder, locationId);         
          return builder.build();
       }
    }
@@ -547,6 +541,7 @@ public final class Pspot
       public static final String TAG ="Tag";
       public static final String LATITUDE = "latitude";
       public static final String LONGITUDE = "longitude";
+      public static final String SYNC = "syncsts";
       static final String _ID_TYPE = "INTEGER PRIMARY KEY AUTOINCREMENT"; 
       /** The recorded time */
       public static final String TIME = "time";
@@ -564,6 +559,7 @@ public final class Pspot
       static final String SEQ10_TYPE = "REAL NOT NULL";
       static final String LATITUDE_TYPE  = "REAL NOT NULL";
       static final String LONGITUDE_TYPE = "REAL NOT NULL";
+      public static final String SYNC_TYPE = "REAL NOT NULL";
    } 
    
    

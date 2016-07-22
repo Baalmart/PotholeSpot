@@ -100,10 +100,10 @@ public class Statistics extends Activity implements StatisticsDelegate
                mViewFlipper.setDisplayedChild( 1 );
                break;
             case R.id.graphtype_timealtitude:
-               mViewFlipper.setDisplayedChild( 2 );
+               //mViewFlipper.setDisplayedChild( 2 );
                break;
             case R.id.graphtype_distancealtitude:
-               mViewFlipper.setDisplayedChild( 3 );
+              // mViewFlipper.setDisplayedChild( 3 );
                break;
             default:
                break;

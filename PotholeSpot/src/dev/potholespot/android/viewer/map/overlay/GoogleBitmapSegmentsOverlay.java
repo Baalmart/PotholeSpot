@@ -1,4 +1,4 @@
-package dev.potholespot.android.viewer.map.overlay;
+/*package dev.potholespot.android.viewer.map.overlay;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -7,28 +7,31 @@ import android.graphics.Canvas;
 import android.os.Handler;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.maps.GeoPoint;
 
+import dev.potholespot.android.viewer.map.GoogleInterface;
 import dev.potholespot.android.viewer.map.LoggerMap;
+import dev.potholespot.android.viewer.map.MapQuestLoggerMap;
 
-public class BitmapSegmentsOverlay extends AsyncOverlay
+public class GoogleBitmapSegmentsOverlay extends GoogleAsyncOverlay
 {
    private static final String TAG = "PS.BitmapSegmentsOverlay";
 
-   List<SegmentRendering> mOverlays;
+   List<GoogleSegmentRendering> mOverlays;
    Handler mOverlayHandler;
 
-   public BitmapSegmentsOverlay(LoggerMap loggermap, Handler handler)
+   public GoogleBitmapSegmentsOverlay(MapQuestLoggerMap mLoggerMap, Handler handler)
    {
-      super(loggermap, handler);
-      mOverlays = new LinkedList<SegmentRendering>();
+      super(mLoggerMap, handler);
+      mOverlays = new LinkedList<GoogleSegmentRendering>();
       mOverlayHandler = handler;
    }
 
    @Override
    synchronized protected void redrawOffscreen(Canvas asyncBuffer, LoggerMap loggermap)
    {
-      for (SegmentRendering segment : mOverlays)
+      for (GoogleSegmentRendering segment : mOverlays)
       {
          segment.draw(asyncBuffer);
       }
@@ -37,7 +40,7 @@ public class BitmapSegmentsOverlay extends AsyncOverlay
    @Override
    public synchronized void scheduleRecalculation()
    {
-      for (SegmentRendering segment : mOverlays)
+      for (GoogleSegmentRendering segment : mOverlays)
       {
          segment.calculateMedia();
          segment.calculateTrack();
@@ -45,10 +48,10 @@ public class BitmapSegmentsOverlay extends AsyncOverlay
    }
 
    @Override
-   synchronized protected boolean commonOnTap(GeoPoint tappedGeoPoint)
+   synchronized protected boolean commonOnTap(LatLng tappedGeoPoint)
    {
       boolean handled = false;
-      for (SegmentRendering segment : mOverlays)
+      for (GoogleSegmentRendering segment : mOverlays)
       {
          if (!handled)
          {
@@ -58,7 +61,7 @@ public class BitmapSegmentsOverlay extends AsyncOverlay
       return handled;
    }
 //used to add segments on the map
-   synchronized public void addSegment(SegmentRendering segment)
+   synchronized public void addSegment(GoogleSegmentRendering segment)
    {
       segment.setBitmapHolder(this);
       mOverlays.add(segment);
@@ -66,7 +69,7 @@ public class BitmapSegmentsOverlay extends AsyncOverlay
 
    synchronized public void clearSegments()
    {
-      for (SegmentRendering segment : mOverlays)
+      for (GoogleSegmentRendering segment : mOverlays)
       {
          segment.closeResources();
       }
@@ -77,7 +80,7 @@ public class BitmapSegmentsOverlay extends AsyncOverlay
    //set the color of using the setTrackColorMethod
    synchronized public void setTrackColoringMethod(int color, double speed, double height)
    {
-      for (SegmentRendering segment : mOverlays)
+      for (GoogleSegmentRendering segment : mOverlays)
       {
          segment.setTrackColoringMethod(color, speed, height);
       }
@@ -88,4 +91,14 @@ public class BitmapSegmentsOverlay extends AsyncOverlay
    {
       return mOverlays.size();
    }
+
+   @Override
+   protected void redrawOffscreen(Canvas asyncBuffer, GoogleInterface mLoggerMap2)
+   {
+      // TODO Auto-generated method stub
+      
+   }
+
+ 
 }
+*/

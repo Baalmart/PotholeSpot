@@ -1,5 +1,7 @@
 package dev.potholespot.android.db.sync;
 
+import com.potholespot.MainActivity;
+
 import dev.potholespot.uganda.R;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -36,7 +38,7 @@ public class MyService extends Service
 	public void onStart(Intent intent, int startId) 
 	{
 		Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
-		Intent resultIntent = new Intent(this, SyncActivity.class);
+		Intent resultIntent = new Intent(this, MainActivity.class);
 		PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0,
 				resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		NotificationCompat.Builder mNotifyBuilder;
@@ -47,7 +49,7 @@ public class MyService extends Service
 		mNotifyBuilder = new NotificationCompat.Builder(this)
 				.setContentTitle("Alert")
 				.setContentText("You've received new messages.")
-				.setSmallIcon(R.drawable.ic_launcher);
+				.setSmallIcon(R.drawable.ic_maps_indicator_current_position);
 		// Set pending intent
 		mNotifyBuilder.setContentIntent(resultPendingIntent);
 		// Set Vibrate, Sound and Light

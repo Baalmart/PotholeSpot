@@ -1,4 +1,4 @@
-package dev.potholespot.android.viewer.map;
+/*package dev.potholespot.android.viewer.map;
 
 import java.util.concurrent.Semaphore;
 
@@ -19,6 +19,7 @@ import dev.potholespot.android.viewer.About;
 import dev.potholespot.android.viewer.ApplicationPreferenceActivity;
 import dev.potholespot.android.viewer.RouteList;
 import dev.potholespot.android.viewer.map.overlay.BitmapSegmentsOverlay;
+import dev.potholespot.android.viewer.map.overlay.GoogleSegmentRendering;
 import dev.potholespot.android.viewer.map.overlay.SegmentRendering;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -64,11 +65,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.maps.GeoPoint;
 import com.potholespot.MainActivity;
 
 
-public class LoggerMapHelper
+public class GoogleInterfaceHelper
 {
 
    public static final String OSM_PROVIDER = "OSM";
@@ -111,7 +113,7 @@ public class LoggerMapHelper
    private WakeLock mWakeLock = null;
    private SharedPreferences mSharedPreferences;
    private GPSLoggerServiceManager mLoggerServiceManager;
-   private SegmentRendering mLastSegmentOverlay;
+   private GoogleSegmentRendering mLastSegmentOverlay;
    private BaseAdapter mMediaAdapter;
 
    private Handler mHandler;
@@ -128,27 +130,28 @@ public class LoggerMapHelper
    private OnSharedPreferenceChangeListener mSharedPreferenceChangeListener;
    private UnitsI18n.UnitsChangeListener mUnitsChangeListener;
 
-   /**
+   *//**
     * Run after the ServiceManager completes the binding to the remote service
-    */
+    *//*
    
    private Runnable mServiceConnected;
    private Runnable speedCalculator;
    private Runnable heightCalculator;
-   private LoggerMap mLoggerMap;
+   private GoogleLoggerMap mLoggerMap;
+   
    private BitmapSegmentsOverlay mBitmapSegmentsOverlay;
    private float mSpeed;
    private double mAltitude;
    private float mDistance;
 
-   public LoggerMapHelper(LoggerMap loggerMap)
+   public GoogleInterfaceHelper(GoogleLoggerMap googleLoggerMap)
    {
-      mLoggerMap = loggerMap;
+      mLoggerMap = googleLoggerMap;
    }
 
-   /**
+   *//**
     * Called when the activity is first created.
-    */
+    *//*
    
    protected void onCreate(Bundle load)
    {
@@ -229,7 +232,7 @@ public class LoggerMapHelper
    {
      ActionBar localActionBar = mLoggerMap.getActivity().getActionBar();    
      
-    /* if (localActionBar == null)
+     if (localActionBar == null)
        return;
      localActionBar.setDisplayShowTitleEnabled(true);
      localActionBar.setNavigationMode(0);
@@ -241,7 +244,7 @@ public class LoggerMapHelper
      localActionBar.setHomeButtonEnabled(true);
      //localActionBar.setTitle(updateTitleBar());
      //localActionBar.setIcon(R.drawable.ic_action_share);
-     localActionBar.setIcon(R.drawable.ic_action_share);*/
+     localActionBar.setIcon(R.drawable.ic_action_share);
      
      //ActionBar localActionBar = getActionBar();
      localActionBar.setDisplayShowTitleEnabled(true);
@@ -359,12 +362,12 @@ public class LoggerMapHelper
 
       if (load != null && load.containsKey(INSTANCE_E6LAT) && load.containsKey(INSTANCE_E6LONG))
       {
-         GeoPoint storedPoint = new GeoPoint(load.getInt(INSTANCE_E6LAT), load.getInt(INSTANCE_E6LONG));
+         LatLng storedPoint = new LatLng(load.getInt(INSTANCE_E6LAT), load.getInt(INSTANCE_E6LONG));
          mLoggerMap.animateTo(storedPoint);
       }
       else
       {
-         GeoPoint lastPoint = getLastTrackPoint();
+         LatLng lastPoint = getLastTrackPoint();
          mLoggerMap.animateTo(lastPoint);
       }
    }
@@ -378,9 +381,9 @@ public class LoggerMapHelper
       save.putFloat(INSTANCE_SPEED, mSpeed);
       save.putDouble(INSTANCE_ALTITUDE, mAltitude);
       save.putFloat(INSTANCE_DISTANCE, mDistance);
-      GeoPoint point = mLoggerMap.getMapCenter();
-      save.putInt(INSTANCE_E6LAT, point.getLatitudeE6());
-      save.putInt(INSTANCE_E6LONG, point.getLongitudeE6());
+      LatLng point = mLoggerMap.getMapCenter();
+      save.putInt(INSTANCE_E6LAT, (int) point.latitude);
+      save.putInt(INSTANCE_E6LONG, (int) point.longitude);
    }
 
    public boolean onKeyDown(int keyCode, KeyEvent event)
@@ -452,9 +455,9 @@ public class LoggerMapHelper
 
    private void createListeners()
    {
-      /*******************************************************
+      *//*******************************************************
        * 8 Runnable listener actions
-       */
+       *//*
       speedCalculator = new Runnable()
       {
          @Override
@@ -465,7 +468,7 @@ public class LoggerMapHelper
             Cursor waypointsCursor = null;
             try
             {
-               waypointsCursor = resolver.query(Uri.withAppendedPath(Tracks.CONTENT_URI, LoggerMapHelper.this.mTrackId + "/waypoints"), new String[] {
+               waypointsCursor = resolver.query(Uri.withAppendedPath(Tracks.CONTENT_URI, GoogleInterfaceHelper.this.mTrackId + "/waypoints"), new String[] {
                      "avg(" + Waypoints.SPEED + ")", "max(" + Waypoints.SPEED + ")" }, null, null, null);
 
                if (waypointsCursor != null && waypointsCursor.moveToLast())
@@ -509,7 +512,7 @@ public class LoggerMapHelper
             Cursor waypointsCursor = null;
             try
             {
-               waypointsCursor = resolver.query(Uri.withAppendedPath(Tracks.CONTENT_URI, LoggerMapHelper.this.mTrackId + "/waypoints"), new String[] {
+               waypointsCursor = resolver.query(Uri.withAppendedPath(Tracks.CONTENT_URI, GoogleInterfaceHelper.this.mTrackId + "/waypoints"), new String[] {
                      "avg(" + Waypoints.ALTITUDE + ")", "max(" + Waypoints.ALTITUDE + ")" }, null, null, null);
 
                if (waypointsCursor != null && waypointsCursor.moveToLast())
@@ -548,9 +551,9 @@ public class LoggerMapHelper
          }
       };
       
-      /*******************************************************
+      *//*******************************************************
        * 8 Various dialog listeners
-       */
+       *//*
       
       mGalerySelectListener = new AdapterView.OnItemSelectedListener()
       {
@@ -646,9 +649,9 @@ public class LoggerMapHelper
       };
       
       
-      /**
+      *//**
        * Listeners to events outside this mapview
-       */
+       *//*
       mSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener()
       {
          @Override
@@ -781,8 +784,8 @@ public class LoggerMapHelper
       menu.add(ContextMenu.NONE, MENU_TRACKING, ContextMenu.NONE, R.string.menu_tracking).
       setIcon(R.drawable.ic_action_set).setAlphabeticShortcut('T');
       
-    /*  menu.add(ContextMenu.NONE, MENU_HOME, ContextMenu.NONE, R.string.menu_home).
-      setIcon(R.drawable.ic_action_umbrella).setAlphabeticShortcut('H');*/
+      menu.add(ContextMenu.NONE, MENU_HOME, ContextMenu.NONE, R.string.menu_home).
+      setIcon(R.drawable.ic_action_umbrella).setAlphabeticShortcut('H');
       
       menu.add(ContextMenu.NONE, MENU_LAYERS, ContextMenu.NONE, R.string.menu_showLayers).
       setIcon(R.drawable.ic_menu_mapmode).setAlphabeticShortcut('L');
@@ -804,14 +807,14 @@ public class LoggerMapHelper
       
           
       // More
-      /*menu.add(ContextMenu.NONE, MENU_TRACKLIST, ContextMenu.NONE, R.string.menu_tracklist).
+      menu.add(ContextMenu.NONE, MENU_TRACKLIST, ContextMenu.NONE, R.string.menu_tracklist).
       setIcon(R.drawable.ic_menu_show_list).setAlphabeticShortcut('P');    
     
       menu.add(ContextMenu.NONE, MENU_ABOUT, ContextMenu.NONE, R.string.menu_about).
       setIcon(R.drawable.ic_menu_info_details).setAlphabeticShortcut('A');
       
       menu.add(ContextMenu.NONE, MENU_CONTRIB, ContextMenu.NONE, R.string.menu_contrib).
-      setIcon(R.drawable.ic_menu_allfriends);*/
+      setIcon(R.drawable.ic_menu_allfriends);
    }
 
    //the class below is used to prepare some options to become active only after
@@ -820,7 +823,7 @@ public class LoggerMapHelper
    {
       MenuItem noteMenu = menu.findItem(MENU_NOTE);
       noteMenu.setEnabled(mTrackId >= 0 || mLoggerServiceManager.isMediaPrepared());
-     /* noteMenu.setEnabled(mLoggerServiceManager.isMediaPrepared());*/
+      noteMenu.setEnabled(mLoggerServiceManager.isMediaPrepared());
 
       MenuItem shareMenu = menu.findItem(MENU_SHARE);
       shareMenu.setEnabled(mTrackId >= 0);
@@ -841,11 +844,11 @@ public class LoggerMapHelper
             handled = true;
             break;
             
-        /* case MENU_HOME:
+         case MENU_HOME:
             intent = new Intent(mLoggerMap.getActivity(), MainActivity.class);
             mLoggerMap.getActivity().startActivityForResult(intent, MENU_HOME);
             handled = true;
-            break;*/
+            break;
             
          case MENU_LAYERS:
             mLoggerMap.getActivity().showDialog(DIALOG_LAYERS);
@@ -869,7 +872,7 @@ public class LoggerMapHelper
             mLoggerMap.getActivity().startActivityForResult(intent, MENU_TRACKLIST);
             handled = true;
             break;
-     /*    case MENU_STATS:
+         case MENU_STATS:
             if (this.mTrackId >= 0)
             {
                intent = new Intent(mLoggerMap.getActivity(), Statistics.class);
@@ -883,7 +886,7 @@ public class LoggerMapHelper
                mLoggerMap.getActivity().showDialog(DIALOG_NOTRACK);
             }
             handled = true;
-            break;*/
+            break;
          case MENU_ABOUT:
             intent = new Intent(mLoggerMap.getActivity(), About.class);
             mLoggerMap.getActivity().startActivity(intent);
@@ -899,8 +902,8 @@ public class LoggerMapHelper
             mLoggerMap.getActivity().startActivityForResult(Intent.createChooser(intent, mLoggerMap.getActivity().getString(R.string.share_track)), MENU_SHARE);
             handled = true;
             break;
-/*         case MENU_CONTRIB:
-            mLoggerMap.getActivity().showDialog(DIALOG_CONTRIB);*/
+         case MENU_CONTRIB:
+            mLoggerMap.getActivity().showDialog(DIALOG_CONTRIB);
          default:
             handled = false;
             break;
@@ -956,7 +959,7 @@ public class LoggerMapHelper
                   .setNegativeButton(R.string.btn_cancel, null).setPositiveButton(R.string.btn_okay, mNoteSelectDialogListener).setView(view);
             dialog = builder.create();
             return dialog;
-         /*case DIALOG_CONTRIB:
+         case DIALOG_CONTRIB:
             builder = new AlertDialog.Builder(mLoggerMap.getActivity());
             factory = LayoutInflater.from(mLoggerMap.getActivity());
             view = factory.inflate(R.layout.contrib, null);
@@ -965,7 +968,7 @@ public class LoggerMapHelper
             builder.setTitle(R.string.dialog_contrib_title).setView(view).setIcon(android.R.drawable.ic_dialog_email)
                   .setPositiveButton(R.string.btn_okay, null);
             dialog = builder.create();
-            return dialog;*/
+            return dialog;
          default:
             return null;
       }
@@ -1330,11 +1333,11 @@ public class LoggerMapHelper
       }
    }
 
-   /**
+   *//**
     * Retrieves the numbers of the measured speed and altitude from the most
     * recent waypoint and updates UI components with this latest bit of
     * information.
-    */
+    *//*
    private void updateTrackNumbers()
    {
       Location lastWaypoint = mLoggerServiceManager.getLastWaypoint();
@@ -1394,13 +1397,13 @@ public class LoggerMapHelper
       
    }
 
-   /**
+   *//**
     * For the current track identifier the route of that track is drawn by
     * adding a OverLay for each segments in the track
     * 
     * @param trackId
     * @see SegmentRendering
-    */
+    *//*
    private void createDataOverlays()
    {
       mLastSegmentOverlay = null;
@@ -1422,7 +1425,7 @@ public class LoggerMapHelper
             {
                long segmentsId = segments.getLong(0);
                Uri segmentUri = ContentUris.withAppendedId(segmentsUri, segmentsId);
-               SegmentRendering segmentOverlay = new SegmentRendering(mLoggerMap, segmentUri, trackColoringMethod, mAverageSpeed, mAverageHeight, mHandler);
+               GoogleSegmentRendering segmentOverlay = new GoogleSegmentRendering(mLoggerMap, segmentUri, trackColoringMethod, mAverageSpeed, mAverageHeight, mHandler);
                mBitmapSegmentsOverlay.addSegment(segmentOverlay);
                mLastSegmentOverlay = segmentOverlay;
                if (segments.isFirst())
@@ -1478,13 +1481,13 @@ public class LoggerMapHelper
       }
    }
 
-   /**
+   *//**
     * Call when an overlay has recalulated and has new information to be redrawn
-    */
+    *//*
 
    private void moveActiveViewWindow()
    {
-      GeoPoint lastPoint = getLastTrackPoint();
+      LatLng lastPoint = getLastTrackPoint();
       if (lastPoint != null && mLoggerServiceManager.getLoggingState() == Constants.LOGGING)
       {
          if (mLoggerMap.isOutsideScreen(lastPoint))
@@ -1500,9 +1503,9 @@ public class LoggerMapHelper
       }
    }
 
-   /**
+   *//**
     * Updates the labels next to the color bar with speeds
-    */
+    *//*
    private void drawSpeedTexts()
    {
       UnitsI18n units = mUnits;
@@ -1541,9 +1544,9 @@ public class LoggerMapHelper
          }
       }
    }
-   /**
+   *//**
     * Updates the labels next to the color bar with heights
-    */
+    *//*
    private void drawHeightTexts()
    {
       UnitsI18n units = mUnits;
@@ -1570,12 +1573,12 @@ public class LoggerMapHelper
       }
    }
 
-   /**
+   *//**
     * Alter this to set a new track as current.
     * 
     * @param trackId
     * @param center center on the end of the track
-    */
+    *//*
    private void moveToTrack(long trackId, boolean center)
    {
       if( trackId == mTrackId )
@@ -1609,7 +1612,7 @@ public class LoggerMapHelper
             updateSpeedColoring();
             if (center)
             {
-               GeoPoint lastPoint = getLastTrackPoint();
+               LatLng lastPoint = getLastTrackPoint();
                mLoggerMap.animateTo(lastPoint);
             }
          }
@@ -1623,14 +1626,14 @@ public class LoggerMapHelper
       }
    }
 
-   /**
+   *//**
     * Get the last know position from the GPS provider and return that
     * information wrapped in a GeoPoint to which the Map can navigate.
     * 
     * @see GeoPoint
     * @return
-    */
-   private GeoPoint getLastKnowGeopointLocation()
+    *//*
+   private LatLng getLastKnowGeopointLocation()
    {
       int microLatitude = 0;
       int microLongitude = 0;
@@ -1655,30 +1658,30 @@ public class LoggerMapHelper
             microLongitude = 5106132;
          }
       }
-      GeoPoint geoPoint = new GeoPoint(microLatitude, microLongitude);
+      LatLng geoPoint = new LatLng(microLatitude, microLongitude);
       return geoPoint;
    }
 
-   /**
+   *//**
     * Retrieve the last point of the current track
     * 
     * @param context
-    */
-   private GeoPoint getLastTrackPoint()
+    *//*
+   private LatLng getLastTrackPoint()
    {
       Cursor waypoint = null;
-      GeoPoint lastPoint = null;
+      LatLng lastPoint = null;
       // First try the service which might have a cached version
       Location lastLoc = mLoggerServiceManager.getLastWaypoint();
       if (lastLoc != null)
       {
          int microLatitude = (int) (lastLoc.getLatitude() * 1E6d);
          int microLongitude = (int) (lastLoc.getLongitude() * 1E6d);
-         lastPoint = new GeoPoint(microLatitude, microLongitude);
+         lastPoint = new LatLng(microLatitude, microLongitude);
       }
 
       // If nothing yet, try the content resolver and query the track
-      if (lastPoint == null || lastPoint.getLatitudeE6() == 0 || lastPoint.getLongitudeE6() == 0)
+      if (lastPoint == null || lastPoint.latitude == 0 || lastPoint.longitude == 0)
       {
          try
          {
@@ -1689,7 +1692,7 @@ public class LoggerMapHelper
             {
                int microLatitude = (int) (waypoint.getDouble(0) * 1E6d);
                int microLongitude = (int) (waypoint.getDouble(1) * 1E6d);
-               lastPoint = new GeoPoint(microLatitude, microLongitude);
+               lastPoint = new LatLng(microLatitude, microLongitude);
             }
          }
          finally
@@ -1702,7 +1705,7 @@ public class LoggerMapHelper
       }
 
       // If nothing yet, try the last generally known location
-      if (lastPoint == null || lastPoint.getLatitudeE6() == 0 || lastPoint.getLongitudeE6() == 0)
+      if (lastPoint == null || lastPoint.latitude == 0 || lastPoint.longitude == 0)
       {
          lastPoint = getLastKnowGeopointLocation();
       }
@@ -1732,12 +1735,12 @@ public class LoggerMapHelper
       }
    }
 
-   /**
+   *//**
     * Enables a SegmentOverlay to call back to the MapActivity to show a dialog
     * with choices of media
     * 
     * @param mediaAdapter
-    */
+    *//*
    public void showMediaDialog(BaseAdapter mediaAdapter)
    {
       mMediaAdapter = mediaAdapter;
@@ -1755,3 +1758,4 @@ public class LoggerMapHelper
    }
 
 }
+*/

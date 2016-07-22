@@ -14,21 +14,21 @@
         android:clickable="true"
         android:state_enabled="true" />
    
-    <!-- Release: 0bmdf4-ggC50QWBY1OgGRutQ9bIboIy11OczZbw -->
-    <!-- Debug: 0bmdf4-ggC50QJGdjml6Turq0NJdMhKFQNdhkYA -->
+ <!--    Release: 0bmdf4-ggC50QWBY1OgGRutQ9bIboIy11OczZbw
+    Debug: 0bmdf4-ggC50QJGdjml6Turq0NJdMhKFQNdhkYA
     
-    <!-- removed... -->
-    <!-- 0bmdf4-ggC50QJGdjml6Turq0NJdMhKFQNdhkYA -->
+    removed...
+    0bmdf4-ggC50QJGdjml6Turq0NJdMhKFQNdhkYA
     
-<!--     removed on the 26th of March 2016.
-    AIzaSyCJ9blB0HFetoJu9Buw84sh9oPhuhW7Xlg -->
+    removed on the 26th of March 2016.
+    AIzaSyCJ9blB0HFetoJu9Buw84sh9oPhuhW7Xlg
     
-  <!--   I have removed the bu widgets below. :) -->
+    I have removed the bu widgets below. :) -->
     
     <include
         layout="@layout/map_widgets" />
 </RelativeLayout>
+<!-- 
+my new api keys for dev.baalmart.gps....
 
-<!-- my new api keys for dev.baalmart.gps.... -->
-
-<!-- AIzaSyCJ9blB0HFetoJu9Buw84sh9oPhuhW7Xlg -->
+AIzaSyCJ9blB0HFetoJu9Buw84sh9oPhuhW7Xlg -->

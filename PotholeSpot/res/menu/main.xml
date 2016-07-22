@@ -24,11 +24,11 @@
         android:title="@string/db" 
         android:showAsAction="ifRoom" />
      
-    <!--  <item 
+     <item 
         android:icon="@drawable/icon_code" 
-        android:id="@+id/menu_code" 
-        android:title="@string/code" 
-        android:showAsAction="ifRoom" />   -->
+        android:id="@+id/menu_manual" 
+        android:title="@string/manual" 
+        android:showAsAction="ifRoom" />  
         
    
 </menu>

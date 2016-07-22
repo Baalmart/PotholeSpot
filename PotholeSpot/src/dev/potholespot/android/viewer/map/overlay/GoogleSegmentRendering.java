@@ -1,4 +1,4 @@
-package dev.potholespot.android.viewer.map.overlay;
+/*package dev.potholespot.android.viewer.map.overlay;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -11,6 +11,7 @@ import dev.potholespot.android.db.Pspot;
 import dev.potholespot.android.db.Pspot.Media;
 import dev.potholespot.android.db.Pspot.Waypoints;
 import dev.potholespot.android.util.UnitsI18n;
+import dev.potholespot.android.viewer.map.GoogleInterface;
 import dev.potholespot.android.viewer.map.LoggerMap;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -44,16 +45,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 
-/**
+*//**
  * Creates an overlay that can draw a single segment of connected waypoints
  * 
  * @version $Id$
  * @author Martin Bbaale
- */
-public class SegmentRendering
+ *//*
+public class GoogleSegmentRendering
 {
    public static final int MIDDLE_SEGMENT = 0;
    public static final int FIRST_SEGMENT = 1;
@@ -72,15 +74,15 @@ public class SegmentRendering
    private int mTrackColoringMethod = DRAW_CALCULATED;
 
    private ContentResolver mResolver;
-   private LoggerMap mLoggerMap;
+   private GoogleInterface mLoggerMap;
 
-   private int mPlacement = SegmentRendering.MIDDLE_SEGMENT;
+   private int mPlacement = GoogleSegmentRendering.MIDDLE_SEGMENT;
    private Uri mWaypointsUri;
    private Uri mMediaUri;
    private double mAvgSpeed;
    private double mAvgHeight;
-   private GeoPoint mGeoTopLeft;
-   private GeoPoint mGeoBottumRight;
+   private LatLng mGeoTopLeft;
+   private LatLng mGeoBottumRight;
 
    private Vector<DotVO> mDotPath;
    private Vector<DotVO> mDotPathCalculation;
@@ -92,8 +94,8 @@ public class SegmentRendering
    private Vector<MediaVO> mMediaPath;
    private Vector<MediaVO> mMediaPathCalculation;
 
-   private GeoPoint mStartPoint;
-   private GeoPoint mEndPoint;
+   private LatLng mStartPoint;
+   private LatLng mEndPoint;
    private Point mPrevDrawnScreenPoint;
    private Point mScreenPointBackup;
    private Point mScreenPoint;
@@ -107,7 +109,7 @@ public class SegmentRendering
    private int mWaypointCount = -1;
    private int mWidth;
    private int mHeight;
-   private GeoPoint mPrevGeoPoint;
+   private LatLng mPrevGeoPoint;
    private int mCurrentColor;
    private Paint dotpaint;
    private Paint radiusPaint;
@@ -117,7 +119,7 @@ public class SegmentRendering
    private Handler mHandler;
    private static Bitmap sStartBitmap;
    private static Bitmap sStopBitmap;
-   private AsyncOverlay mAsyncOverlay;
+   private GoogleAsyncOverlay mAsyncOverlay;
 
    private ContentObserver mTrackSegmentsObserver;
 
@@ -126,7 +128,7 @@ public class SegmentRendering
       @Override
       public void run()
       {
-         SegmentRendering.this.calculateMediaAsync();
+         GoogleSegmentRendering.this.calculateMediaAsync();
       }
    };
 
@@ -135,25 +137,25 @@ public class SegmentRendering
       @Override
       public void run()
       {
-         SegmentRendering.this.calculateTrackAsync();
+         GoogleSegmentRendering.this.calculateTrackAsync();
       }
    };
 
-   /**
+   *//**
     * Constructor: create a new TrackingOverlay.
     * 
-    * @param loggermap
+    * @param mLoggerMap2
     * @param segmentUri
     * @param color
     * @param avgSpeed
     * @param handler
-    */
+    *//*
    
-   public SegmentRendering(LoggerMap loggermap, Uri segmentUri, int color, double avgSpeed, double avgHeight, Handler handler)
+   public GoogleSegmentRendering(GoogleInterface mLoggerMap2, Uri segmentUri, int color, double avgSpeed, double avgHeight, Handler handler)
    {
       super();
       mHandler = handler;
-      mLoggerMap = loggermap;
+      mLoggerMap = mLoggerMap2;
       mTrackColoringMethod = color;
       mAvgSpeed = avgSpeed;
       mAvgHeight = avgHeight;
@@ -227,8 +229,8 @@ public class SegmentRendering
             }
          }
       });
-      SegmentRendering.sStopBitmap = null;
-      SegmentRendering.sStartBitmap = null;
+      GoogleSegmentRendering.sStopBitmap = null;
+      GoogleSegmentRendering.sStartBitmap = null;
    }
 
    public void openResources()
@@ -236,12 +238,12 @@ public class SegmentRendering
       mResolver.registerContentObserver(mWaypointsUri, false, mTrackSegmentsObserver);
    }
 
-   /**
+   *//**
     * Private draw method called by both the draw from Google Overlay and the
     * OSM Overlay
     * 
     * @param canvas
-    */
+    *//*
    public void draw(Canvas canvas)
    {
       switch (mTrackColoringMethod)
@@ -270,10 +272,10 @@ public class SegmentRendering
       mHandler.post(mTrackCalculator);
    }
 
-   /**
+   *//**
     * Either the Path or the Dots are calculated based on he current track
     * coloring method
-    */
+    *//*
    private synchronized void calculateTrackAsync()
    {
       mGeoTopLeft = mLoggerMap.fromPixels(0, 0);
@@ -315,9 +317,9 @@ public class SegmentRendering
       mAsyncOverlay.onDateOverlayChanged();
    }
 
-   /**
+   *//**
     * Calculated the new contents of segment in the mDotPathCalculation
-    */
+    *//*
    private void calculatePath()
    {
       mDotPathCalculation.clear();
@@ -325,7 +327,7 @@ public class SegmentRendering
 
       this.mShader = null;
 
-      GeoPoint geoPoint;
+      LatLng geoPoint;
       this.mPrevLocation = null;
 
       if (mWaypointsCursor == null)
@@ -355,7 +357,7 @@ public class SegmentRendering
          {
             geoPoint = extractGeoPoint();
             // Do no include log wrong 0.0 lat 0.0 long, skip to next value in while-loop
-            if (geoPoint.getLatitudeE6() == 0 || geoPoint.getLongitudeE6() == 0)
+            if (geoPoint.latitude == 0 || geoPoint.longitude == 0)
             {
                continue;
             }
@@ -395,12 +397,12 @@ public class SegmentRendering
       //      Log.d( TAG, "transformSegmentToPath stop: points "+mCalculatedPoints+" from "+moves+" moves" );
    }
 
-   /**
+   *//**
     * @param canvas
     * @param mapView
     * @param shadow
-    * @see SegmentRendering#draw(Canvas, MapView, boolean)
-    */
+    * @see GoogleSegmentRendering#draw(Canvas, MapView, boolean)
+    *//*
    private void calculateDots()
    {
       mPathCalculation.reset();
@@ -418,7 +420,7 @@ public class SegmentRendering
       }
       if (mLoggerMap.hasProjection() && mWaypointsCursor.moveToFirst())
       {
-         GeoPoint geoPoint;
+         LatLng geoPoint;
 
          mStartPoint = extractGeoPoint();
          mPrevGeoPoint = mStartPoint;
@@ -427,7 +429,7 @@ public class SegmentRendering
          {
             geoPoint = extractGeoPoint();
             // Do no include log wrong 0.0 lat 0.0 long, skip to next value in while-loop
-            if (geoPoint.getLatitudeE6() == 0 || geoPoint.getLongitudeE6() == 0)
+            if (geoPoint.latitude == 0 || geoPoint.longitude == 0)
             {
                continue;
             }
@@ -480,7 +482,7 @@ public class SegmentRendering
       }
       if (mLoggerMap.hasProjection() && mMediaCursor.moveToFirst())
       {
-         GeoPoint lastPoint = null;
+         LatLng lastPoint = null;
          int wiggle = 0;
          do
          {
@@ -497,7 +499,7 @@ public class SegmentRendering
                {
                   int microLatitude = (int) (waypointCursor.getDouble(0) * 1E6d);
                   int microLongitude = (int) (waypointCursor.getDouble(1) * 1E6d);
-                  mediaVO.geopoint = new GeoPoint(microLatitude, microLongitude);
+                  mediaVO.geopoint = new LatLng(microLatitude, microLongitude);
                }
             }
             finally
@@ -574,10 +576,10 @@ public class SegmentRendering
       }
    }
 
-   /**
+   *//**
     * @param canvas
-    * @see SegmentRendering#draw(Canvas, MapView, boolean)
-    */
+    * @see GoogleSegmentRendering#draw(Canvas, MapView, boolean)
+    *//*
    private void drawPath(Canvas canvas)
    {
       switch (mTrackColoringMethod)
@@ -696,14 +698,14 @@ public class SegmentRendering
       return bitmapKey;
    }
 
-   /**
+   *//**
     * Set the mPlace to the specified value.
     * 
-    * @see SegmentRendering.FIRST
-    * @see SegmentRendering.MIDDLE
-    * @see SegmentRendering.LAST
+    * @see GoogleSegmentRendering.FIRST
+    * @see GoogleSegmentRendering.MIDDLE
+    * @see GoogleSegmentRendering.LAST
     * @param place The placement of this segment in the line.
-    */
+    *//*
    public void addPlacement(int place)
    {
       this.mPlacement += place;
@@ -719,14 +721,14 @@ public class SegmentRendering
       return Long.parseLong(mSegmentUri.getLastPathSegment());
    }
 
-   /**
+   *//**
     * Set the beginnging to the next contour of the line to the give GeoPoint
     * 
-    * @param geoPoint
-    */
-   private void moveToGeoPoint(GeoPoint geoPoint)
+    * @param mStartPoint2
+    *//*
+   private void moveToGeoPoint(LatLng mStartPoint2)
    {
-      setScreenPoint(geoPoint);
+      setScreenPoint(mStartPoint2);
 
       if (this.mPathCalculation != null)
       {
@@ -736,39 +738,39 @@ public class SegmentRendering
       }
    }
 
-   /**
+   *//**
     * Line to point without shaders
     * 
     * @param geoPoint
-    */
-   private void plainLineToGeoPoint(GeoPoint geoPoint)
+    *//*
+   private void plainLineToGeoPoint(LatLng geoPoint)
    {
       shaderLineToGeoPoint(geoPoint, 0, 0);
    }
 
-   /**
+   *//**
     * Line to point with speed
     * 
     * @param geoPoint
     * @param height
-    */
-   private void heightLineToGeoPoint(GeoPoint geoPoint, double height)
+    *//*
+   private void heightLineToGeoPoint(LatLng geoPoint, double height)
    {
       shaderLineToGeoPoint(geoPoint, height, mAvgHeight);
    }
 
-   /**
+   *//**
     * Line to point with speed
     * 
     * @param geoPoint
     * @param speed
-    */
-   private void speedLineToGeoPoint(GeoPoint geoPoint, double speed)
+    *//*
+   private void speedLineToGeoPoint(LatLng geoPoint, double speed)
    {
       shaderLineToGeoPoint(geoPoint, speed, mAvgSpeed);
    }
 
-   private void shaderLineToGeoPoint(GeoPoint geoPoint, double value, double average)
+   private void shaderLineToGeoPoint(LatLng geoPoint, double value, double average)
    {
       setScreenPoint(geoPoint);
 
@@ -827,12 +829,12 @@ public class SegmentRendering
       this.mPathCalculation.lineTo(this.mScreenPoint.x, this.mScreenPoint.y);
    }
 
-   /**
+   *//**
     * Use to update location/point state when calculating the line
     * 
     * @param geoPoint
-    */
-   private void setScreenPoint(GeoPoint geoPoint)
+    *//*
+   private void setScreenPoint(LatLng geoPoint)
    {
       mScreenPointBackup.x = this.mScreenPoint.x;
       mScreenPointBackup.y = this.mScreenPoint.x;
@@ -840,13 +842,13 @@ public class SegmentRendering
       mLoggerMap.toPixels(geoPoint, this.mScreenPoint);
    }
 
-   /**
+   *//**
     * Move to a next waypoint, for on screen this are the points with mStepSize
     * % position == 0 to avoid jittering in the rendering or the points on the
     * either side of the screen edge.
     * 
     * @return if a next waypoint is pointed to with the mWaypointsCursor
-    */
+    *//*
    private boolean moveToNextWayPoint()
    {
       boolean cursorReady = true;
@@ -868,13 +870,13 @@ public class SegmentRendering
       return cursorReady;
    }
 
-   /**
+   *//**
     * Move the cursor to the next waypoint modulo of the step size or less if
     * the screen edge is reached
     * 
     * @param trackCursor
     * @return
-    */
+    *//*
    private boolean moveOnScreenWaypoint()
    {
       int nextPosition = mStepSize * (mWaypointsCursor.getPosition() / mStepSize) + mStepSize;
@@ -902,12 +904,12 @@ public class SegmentRendering
       }
    }
 
-   /**
+   *//**
     * Previous path GeoPoint was off screen and the next one will be to or the
     * first on screen when the path reaches the projection.
     * 
     * @return
-    */
+    *//*
    private boolean moveOffscreenWaypoint(int flexStepsize)
    {
       while (mWaypointsCursor.move(flexStepsize))
@@ -916,9 +918,9 @@ public class SegmentRendering
          {
             return true;
          }
-         GeoPoint evalPoint = extractGeoPoint();
+         LatLng evalPoint = extractGeoPoint();
          // Do no include log wrong 0.0 lat 0.0 long, skip to next value in while-loop
-         if (evalPoint.getLatitudeE6() == 0 || evalPoint.getLongitudeE6() == 0)
+         if (evalPoint.latitude == 0 || evalPoint.longitude == 0)
          {
             continue;
          }
@@ -946,11 +948,11 @@ public class SegmentRendering
       return mWaypointsCursor.moveToLast();
    }
 
-   /**
+   *//**
     * If a segment contains more then 500 waypoints and is zoomed out more then
     * twice then some waypoints will not be used to render the line, this
     * speeding things along.
-    */
+    *//*
    private void calculateStepSize()
    {
       Cursor waypointsCursor = null;
@@ -988,60 +990,60 @@ public class SegmentRendering
       }
    }
 
-   /**
+   *//**
     * Is a given GeoPoint in the current projection of the map.
     * 
     * @param eval
     * @return
-    */
-   protected boolean isGeoPointOnScreen(GeoPoint geopoint)
+    *//*
+   protected boolean isGeoPointOnScreen(LatLng latLng)
    {
-      boolean onscreen = geopoint != null;
-      if (geopoint != null && mGeoTopLeft != null && mGeoBottumRight != null)
+      boolean onscreen = latLng != null;
+      if (latLng != null && mGeoTopLeft != null && mGeoBottumRight != null)
       {
-         onscreen = onscreen && mGeoTopLeft.getLatitudeE6() > geopoint.getLatitudeE6();
-         onscreen = onscreen && mGeoBottumRight.getLatitudeE6() < geopoint.getLatitudeE6();
-         if (mGeoTopLeft.getLongitudeE6() < mGeoBottumRight.getLongitudeE6())
+         onscreen = onscreen && mGeoTopLeft.latitude > latLng.latitude;
+         onscreen = onscreen && mGeoBottumRight.latitude < latLng.latitude;
+         if (mGeoTopLeft.longitude < mGeoBottumRight.longitude)
          {
-            onscreen = onscreen && mGeoTopLeft.getLongitudeE6() < geopoint.getLongitudeE6();
-            onscreen = onscreen && mGeoBottumRight.getLongitudeE6() > geopoint.getLongitudeE6();
+            onscreen = onscreen && mGeoTopLeft.longitude < latLng.longitude;
+            onscreen = onscreen && mGeoBottumRight.longitude > latLng.longitude;
          }
          else
          {
-            onscreen = onscreen && (mGeoTopLeft.getLongitudeE6() < geopoint.getLongitudeE6() || mGeoBottumRight.getLongitudeE6() > geopoint.getLongitudeE6());
+            onscreen = onscreen && (mGeoTopLeft.longitude < latLng.longitude || mGeoBottumRight.longitude > latLng.longitude);
          }
       }
       return onscreen;
    }
 
-   /**
+   *//**
     * Is a given coordinates are on the screen
     * 
     * @param eval
     * @return
-    */
+    *//*
    protected boolean isOnScreen(int x, int y)
    {
       boolean onscreen = x > 0 && y > 0 && x < mWidth && y < mHeight;
       return onscreen;
    }
 
-   /**
+   *//**
     * Calculates in which segment opposited to the projecting a geo point
     * resides
     * 
-    * @param p1
+    * @param mPrevGeoPoint2
     * @return
-    */
-   private int toSegment(GeoPoint p1)
+    *//*
+   private int toSegment(LatLng mPrevGeoPoint2)
    {
       //      Log.d( TAG, String.format( "Comparing %s to points TL %s and BR %s", p1, mTopLeft, mBottumRight )); 
       int nr;
-      if (p1.getLongitudeE6() < mGeoTopLeft.getLongitudeE6()) // left
+      if (mPrevGeoPoint2.latitude < mGeoTopLeft.longitude) // left
       {
          nr = 1;
       }
-      else if (p1.getLongitudeE6() > mGeoBottumRight.getLongitudeE6()) // right
+      else if (mPrevGeoPoint2.longitude > mGeoBottumRight.longitude) // right
       {
          nr = 3;
       }
@@ -1051,11 +1053,11 @@ public class SegmentRendering
          nr = 2;
       }
 
-      if (p1.getLatitudeE6() > mGeoTopLeft.getLatitudeE6()) // top
+      if (mPrevGeoPoint2.latitude > mGeoTopLeft.latitude) // top
       {
          nr = nr + 0;
       }
-      else if (p1.getLatitudeE6() < mGeoBottumRight.getLatitudeE6()) // bottom
+      else if (mPrevGeoPoint2.latitude < mGeoBottumRight.latitude) // bottom
       {
          nr = nr + 6;
       }
@@ -1067,13 +1069,13 @@ public class SegmentRendering
       return nr;
    }
 
-   private boolean possibleScreenPass(GeoPoint fromGeo, GeoPoint toGeo)
+   private boolean possibleScreenPass(LatLng mPrevGeoPoint2, LatLng evalPoint)
    {
       boolean safe = true;
-      if (fromGeo != null && toGeo != null)
+      if (mPrevGeoPoint2 != null && evalPoint != null)
       {
-         int from = toSegment(fromGeo);
-         int to = toSegment(toGeo);
+         int from = toSegment(mPrevGeoPoint2);
+         int to = toSegment(evalPoint);
 
          switch (from)
          {
@@ -1124,23 +1126,23 @@ public class SegmentRendering
       mAvgHeight = avgHeight;
    }
 
-   /**
+   *//**
     * For the current waypoint cursor returns the GeoPoint
     * 
     * @return
-    */
-   private GeoPoint extractGeoPoint()
+    *//*
+   private LatLng extractGeoPoint()
    {
       int microLatitude = (int) (mWaypointsCursor.getDouble(0) * 1E6d);
       int microLongitude = (int) (mWaypointsCursor.getDouble(1) * 1E6d);
-      return new GeoPoint(microLatitude, microLongitude);
+      return new LatLng(microLatitude, microLongitude);
    }
 
-   /**
+   *//**
     * @param startLocation
     * @param endLocation
     * @return speed in m/s between 2 locations
-    */
+    *//*
    private static double calculateSpeedBetweenLocations(Location startLocation, Location endLocation)
    {
       double speed = -1d;
@@ -1234,7 +1236,7 @@ public class SegmentRendering
       return false;
    }
 
-   public boolean commonOnTap(GeoPoint tappedGeoPoint)
+   public boolean commonOnTap(LatLng tappedGeoPoint)
    {
       List<Uri> tappedUri = new Vector<Uri>();
 
@@ -1302,7 +1304,7 @@ public class SegmentRendering
 
       public Integer bitmapKey;
       public Uri uri;
-      public GeoPoint geopoint;
+      public LatLng geopoint;
       public int x;
       public int y;
       public int w;
@@ -1370,8 +1372,9 @@ public class SegmentRendering
       }
    }
 
-   public void setBitmapHolder(AsyncOverlay bitmapOverlay)
+   public void setBitmapHolder(GoogleAsyncOverlay bitmapOverlay)
    {
       mAsyncOverlay = bitmapOverlay;
    }
 }
+*/

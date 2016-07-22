@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.maps.GeoPoint;
 import com.mapquest.android.maps.MapActivity;
 import com.mapquest.android.maps.MapView;

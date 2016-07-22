@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
-
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -25,7 +24,7 @@ public class SampleBC extends BroadcastReceiver
 		AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         // Checks if new records are inserted in Remote MySQL DB to proceed with Sync operation
-        client.post("http://localhost/potholespot/web/mysqlsqlitesync/getdbrowcount.php",params ,new AsyncHttpResponseHandler() {
+        client.post("http://192.232.238.118/~potholespot/synchronization/web/mysqlsqlitesync/getdbrowcount.php",params ,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 System.out.println(response);
@@ -37,7 +36,7 @@ public class SampleBC extends BroadcastReceiver
                     if(obj.getInt("count") != 0){
                     	final Intent intnt = new Intent(context, MyService.class);
                     	// Set unsynced count in intent data
-                    	intnt.putExtra("intntdata", "Unsynced Rows Count "+obj.getInt("count"));
+                    	intnt.putExtra("intntdata", "Unsynced Records Count "+obj.getInt("count"));
                     	// Call MyService
                     	context.startService(intnt);
                     }else{

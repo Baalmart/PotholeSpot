@@ -291,9 +291,10 @@ public class GPSLoggerService extends Service implements LocationListener, Senso
        
          storeLocation(filteredLocation);
          broadcastLocation(filteredLocation);
+         
+         //changed all below from filtered location to location
          mPreviousLocation = location;
-         setmLastRecordedLocation(location);
-       
+         setmLastRecordedLocation(location);       
          
       }
    }
@@ -1113,7 +1114,14 @@ This guarantees that changes to the state of the object are visible to all threa
       Intent notificationIntent = new Intent(this, CommonLoggerMap.class);
       notificationIntent.setData(ContentUris.withAppendedId(Tracks.CONTENT_URI, mTrackId));
       mNotification.contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
-      mNotification.setLatestEventInfo(this, contentTitle, contentText, mNotification.contentIntent);
+   /*   mNotification.setLatestEventInfo(this, contentTitle, contentText, mNotification.contentIntent);*/
+      
+      mNotification = new Notification.Builder(this)
+      .setContentTitle( contentTitle)
+      .setContentText(contentText)
+      .setContentIntent(mNotification.contentIntent)      
+      .build();
+      
       mNoticationManager.notify(R.layout.map_widgets, mNotification);
    }
 
@@ -1147,7 +1155,15 @@ This guarantees that changes to the state of the object are visible to all threa
       CharSequence contentTitle = getResources().getString(R.string.app_name);
       Intent notificationIntent = new Intent(this, CommonLoggerMap.class);
       PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
-      signalNotification.setLatestEventInfo(this, contentTitle, tickerText, contentIntent);
+     /* signalNotification.setLatestEventInfo(this, contentTitle, tickerText, contentIntent);*/
+      
+      signalNotification = new Notification.Builder(this)
+      .setContentTitle( contentTitle)
+      .setContentText(tickerText)
+      .setSmallIcon(icon)
+      .setContentIntent(contentIntent)      
+      .build();
+      
       signalNotification.flags |= Notification.FLAG_AUTO_CANCEL;
 
       mNoticationManager.notify(resId, signalNotification);
@@ -1166,8 +1182,15 @@ This guarantees that changes to the state of the object are visible to all threa
       Intent notificationIntent = new Intent(this, CommonLoggerMap.class);
       notificationIntent.setData(ContentUris.withAppendedId(Tracks.CONTENT_URI, mTrackId));
       PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
-      gpsNotification.setLatestEventInfo(this, contentTitle, contentText, contentIntent);
-
+      /*gpsNotification.setLatestEventInfo(this, contentTitle, contentText, contentIntent);*/
+      
+      gpsNotification = new Notification.Builder(this)
+      .setContentTitle( contentTitle)
+      .setContentText(contentText)
+      .setSmallIcon(icon)
+      .setContentIntent(contentIntent)      
+      .build();
+      
       mNoticationManager.notify(LOGGING_UNAVAILABLE, gpsNotification);
       mShowingGpsDisabled = true;
    }
@@ -1336,7 +1359,12 @@ This guarantees that changes to the state of the object are visible to all threa
       if (proposedLocation != null && (proposedLocation.getLatitude() == 0.0d || proposedLocation.getLongitude() == 0.0d))
       {
          Log.w(TAG, "A wrong location was received, 0.0 latitude and 0.0 longitude... ");
-         proposedLocation = null;
+        proposedLocation = null;
+         
+        /* Double lat = 0.348391;
+         Double lon = 32.577836;         
+         proposedLocation.setLatitude(lat);
+         proposedLocation.setLongitude(lon);*/
       }
 
       // Do not log a waypoint which is more inaccurate then is configured to be acceptable

@@ -38,6 +38,7 @@ public class NameRoute extends Activity
    private EditText mTrackNameView;
    private boolean paused;
    Uri mTrackUri;
+   Context mContext;
 
    private final DialogInterface.OnClickListener mTrackNameDialogListener = new DialogInterface.OnClickListener()
    {
@@ -95,8 +96,16 @@ public class NameRoute extends Activity
       notificationIntent.setData( mTrackUri );
       
       PendingIntent contentIntent = PendingIntent.getActivity( this, 0, notificationIntent, Intent.FLAG_ACTIVITY_NEW_TASK );
-      nameNotification.setLatestEventInfo( this, contentTitle, contentText, contentIntent );
+      //nameNotification.setLatestEventInfo( this, contentTitle, contentText, contentIntent );
       
+      //let me check this out:
+      nameNotification = new Notification.Builder(this)
+      .setContentTitle( contentTitle)
+      .setContentText(contentText)
+      .setSmallIcon(icon)
+      .setContentIntent(contentIntent)      
+      .build();
+   
       NotificationManager noticationManager = (NotificationManager) this.getSystemService( Context.NOTIFICATION_SERVICE );
       noticationManager.notify( R.layout.namedialog, nameNotification );
    }

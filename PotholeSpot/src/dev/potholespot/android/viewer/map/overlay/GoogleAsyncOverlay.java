@@ -1,4 +1,4 @@
-package dev.potholespot.android.viewer.map.overlay;
+/*package dev.potholespot.android.viewer.map.overlay;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,32 +9,38 @@ import android.graphics.Point;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
-
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
-
+import dev.potholespot.android.viewer.map.GoogleInterface;
+import dev.potholespot.android.viewer.map.GoogleLoggerMap;
 import dev.potholespot.android.viewer.map.LoggerMap;
+import dev.potholespot.android.viewer.map.MapQuestLoggerMap;
 
-public abstract class AsyncOverlay extends Overlay implements OverlayProvider
+public abstract class GoogleAsyncOverlay extends Overlay implements GoogleOverlayProvider
 {
    private static final int OFFSET = 20;
 
-   private static final String TAG = "PS.AsyncOverlay";
+   private static final String TAG = "PS.GoogleAsyncOverlay";
 
-   /**
+   *//**
     * Handler provided by the MapActivity to recalculate graphics
-    */
+    *//*
    
    private Handler mHandler;
 
    private GeoPoint mGeoTopLeft;
 
-   private GeoPoint mGeoBottumRight;
+   private GeoPoint
+   mGeoBottumRight;
 
    private int mWidth;
 
    private int mHeight;
+   
+   private int mW;
+   private int mH;
 
    private Bitmap mActiveBitmap;
 
@@ -46,7 +52,7 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
 
    private Paint mPaint;
 
-   private LoggerMap mLoggerMap;
+   private MapQuestLoggerMap mMapQuestLoggerMap;
 
    SegmentOsmOverlay mOsmOverlay;
 
@@ -61,10 +67,10 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
       {
          postedBitmapUpdater = false;
          mCalculationBitmap.eraseColor(Color.TRANSPARENT);
-         mGeoTopLeft = mLoggerMap.fromPixels(0, 0);
-         mGeoBottumRight = mLoggerMap.fromPixels(mWidth, mHeight);
+         //mGeoTopLeft = mLoggerMap.fromPixels(mW, mH);
+         mGeoBottumRight = mMapQuestLoggerMap.fromPixels(0, 0);
          Canvas calculationCanvas = new Canvas(mCalculationBitmap);
-         redrawOffscreen(calculationCanvas, mLoggerMap);
+         redrawOffscreen(calculationCanvas, mMapQuestLoggerMap);
          synchronized (mActiveBitmap)
          {
             Bitmap oldActiveBitmap = mActiveBitmap;
@@ -72,18 +78,20 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
             mActiveTopLeft = mGeoTopLeft;
             mCalculationBitmap = oldActiveBitmap;
          }
-         mLoggerMap.postInvalidate();
+         mMapQuestLoggerMap.postInvalidate();
       }
    };
 
    private boolean postedBitmapUpdater;
 
-   AsyncOverlay(LoggerMap loggermap, Handler handler)
+   GoogleAsyncOverlay(MapQuestLoggerMap mLoggerMap, Handler handler)
    {
-      mLoggerMap = loggermap;
+      mMapQuestLoggerMap = mLoggerMap;
       mHandler = handler;
       mWidth = 1;
       mHeight = 1;
+      mW = 0;
+      mH = 0;
       mPaint = new Paint();
       mActiveZoomLevel = -1;
       mActiveBitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
@@ -91,7 +99,7 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
       mActivePointTopLeft = new Point();
       mCalculationBitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
 
-      mOsmOverlay = new SegmentOsmOverlay(mLoggerMap.getActivity(), mLoggerMap, this);
+      mOsmOverlay = new SegmentOsmOverlay(mMapQuestLoggerMap.getActivity(), mMapQuestLoggerMap, this);
       mMapQuestOverlay = new SegmentMapQuestOverlay(this);
    }
 
@@ -107,7 +115,7 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
    protected void considerRedrawOffscreen()
   {
       int oldZoomLevel = mActiveZoomLevel;
-      mActiveZoomLevel = mLoggerMap.getZoomLevel();
+      mActiveZoomLevel = mMapQuestLoggerMap.getZoomLevel();
 
       boolean needNewCalculation = false;
 
@@ -129,7 +137,7 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
       Point screenPoint = new Point(0, 0);
       if (mGeoTopLeft != null)
       {
-         mLoggerMap.toPixels(mGeoTopLeft, screenPoint);
+         mMapQuestLoggerMap.toPixels(mGeoTopLeft, screenPoint);
       }
       return mGeoTopLeft == null || mGeoBottumRight == null || screenPoint.x > OFFSET || screenPoint.y > OFFSET || screenPoint.x < -OFFSET
             || screenPoint.y < -OFFSET;
@@ -144,13 +152,13 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
       }
    }
 
-   protected abstract void redrawOffscreen(Canvas asyncBuffer, LoggerMap loggermap);
+   protected abstract void redrawOffscreen(Canvas asyncBuffer, GoogleInterface mLoggerMap2);
 
    protected abstract void scheduleRecalculation();
 
-   /**
+   *//**
     * {@inheritDoc}
-    */
+    *//*
    @Override
    public void draw(Canvas canvas, MapView mapView, boolean shadow)
    {
@@ -170,7 +178,7 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
       {
          synchronized (mActiveBitmap)
          {
-            mLoggerMap.toPixels(mActiveTopLeft, mActivePointTopLeft);
+            mMapQuestLoggerMap.toPixels(mActiveTopLeft, mActivePointTopLeft);
             canvas.drawBitmap(mActiveBitmap, mActivePointTopLeft.x, mActivePointTopLeft.y, mPaint);
          }
       }
@@ -182,14 +190,14 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
    }
 
    @Override
-   public boolean onTap(GeoPoint tappedGeoPoint, MapView mapview)
+   public boolean onTap(LatLng tappedGeoPoint, MapView mapview)
    {
       return commonOnTap(tappedGeoPoint);
    }
    
-   /**************************************/
-   /** Multi map support **/
-   /**************************************/
+   *//**************************************//*
+   *//** Multi map support **//*
+   *//**************************************//*
 
    @Override
    public Overlay getGoogleOverlay()
@@ -209,21 +217,22 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
       return mMapQuestOverlay;
    }
 
-   protected abstract boolean commonOnTap(GeoPoint tappedGeoPoint);
+   protected abstract boolean commonOnTap(LatLng tappedGeoPoint);
 
    static class SegmentOsmOverlay extends org.osmdroid.views.overlay.Overlay
    {
-      AsyncOverlay mSegmentOverlay;
-      LoggerMap mLoggerMap;
+      GoogleAsyncOverlay mSegmentOverlay;
+      MapQuestLoggerMap mLoggerMap;
+      GoogleLoggerMap mGoogleLoggerMap;
 
-      public SegmentOsmOverlay(Context ctx, LoggerMap map, AsyncOverlay segmentOverlay)
+      public SegmentOsmOverlay(Context ctx, MapQuestLoggerMap mLoggerMap2, GoogleAsyncOverlay segmentOverlay)
       {
          super(ctx);
-         mLoggerMap = map;
+         mLoggerMap = mLoggerMap2;
          mSegmentOverlay = segmentOverlay;
       }
 
-      public AsyncOverlay getSegmentOverlay()
+      public GoogleAsyncOverlay getSegmentOverlay()
       {
          return mSegmentOverlay;
       }
@@ -234,7 +243,8 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
          int x = (int) e.getX();
          int y = (int) e.getY();
          GeoPoint tappedGeoPoint = mLoggerMap.fromPixels(x, y);
-         return mSegmentOverlay.commonOnTap(tappedGeoPoint);
+         LatLng tapppedLatLong = mGoogleLoggerMap.fromPixels(x, y);
+         return mSegmentOverlay.commonOnTap(tapppedLatLong);
       }
 
       @Override
@@ -249,15 +259,15 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
 
    static class SegmentMapQuestOverlay extends com.mapquest.android.maps.Overlay
    {
-      AsyncOverlay mSegmentOverlay;
+      GoogleAsyncOverlay mSegmentOverlay;
 
-      public SegmentMapQuestOverlay(AsyncOverlay segmentOverlay)
+      public SegmentMapQuestOverlay(GoogleAsyncOverlay segmentOverlay)
       {
          super();
          mSegmentOverlay = segmentOverlay;
       }
 
-      public AsyncOverlay getSegmentOverlay()
+      public GoogleAsyncOverlay getSegmentOverlay()
       {
          return mSegmentOverlay;
       }
@@ -265,7 +275,7 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
       @Override
       public boolean onTap(com.mapquest.android.maps.GeoPoint p, com.mapquest.android.maps.MapView mapView)
       {
-         GeoPoint tappedGeoPoint = new GeoPoint(p.getLatitudeE6(), p.getLongitudeE6());
+         LatLng tappedGeoPoint = new LatLng(p.getLatitudeE6(), p.getLongitudeE6());
          return mSegmentOverlay.commonOnTap(tappedGeoPoint);
       }
 
@@ -279,4 +289,17 @@ public abstract class AsyncOverlay extends Overlay implements OverlayProvider
       }
 
    }
+
+   protected void redrawOffscreen(Canvas asyncBuffer, LoggerMap loggermap)
+   {
+      // TODO Auto-generated method stub
+      
+   }
+
+   protected boolean commonOnTap(GeoPoint tappedGeoPoint)
+   {
+      // TODO Auto-generated method stub
+      return false;
+   }
 }
+*/
